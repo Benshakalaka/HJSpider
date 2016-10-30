@@ -9,7 +9,6 @@ import json
 import util
 import re
 import logging
-import sys
 
 # 两个问题
 # 1. 数据集合是否要限制大小？(listenArticles, usersAll, listenItemsDict)

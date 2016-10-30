@@ -56,7 +56,7 @@ class UserInfo(object):
         return self.__uid
 
     def __setattr__(self, key, value):
-        # 将性别以0，1存储，0为女，1为男
+        # 性别以0，1存储，0为女，1为男，-1为未填写
         if key == 'gender':
             if value != '':
                 object.__setattr__(self, key, 1) if value == '男' else object.__setattr__(self, key, 0)
