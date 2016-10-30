@@ -11,6 +11,10 @@ import re
 import logging
 import sys
 
+# 两个问题
+# 1. 数据集合是否要限制大小？(listenArticles, usersAll, listenItemsDict)
+# 2. 302页面如和再处理？
+
 class Spider(object):
     # 初始化
     def __init__(self, url, userName, userPass, listenItemsMax = 0, listenArticlesEachItem = 0, listenArticlesMax = 0, userLimit = 100):
@@ -70,13 +74,14 @@ class Spider(object):
         # 一个已经登陆的session，用于获取更丰富的个人信息页面
         self.session = None
 
-        # 访问的页
+        # 以下数据集合会不会过大呢？ 是否要限制大小? 因为在存储进数据库之前也会查询是否在数据库中已存在.
+        # 访问的页（没有必要限制）
         self.listenPages = []
-        # 访问的节目
+        # 访问的节目（没有必要限制）
         self.listenItems = set()
-        # 访问的文章
+        # 访问的文章（有必要限制）
         self.listenArticles = set()
-        # 访问的用户
+        # 访问的用户（有必要限制）
         self.usersAll = dict()
 
         # 用户个数, 虽然len(self.userAll)可以得到结果，但因为302重定向（用户设置隐私）导致太慢，索性也将302的用户假如userall
@@ -87,6 +92,7 @@ class Spider(object):
         # 节目与其对应的文章, key为节目url， value为数组[节目信息:object， 节目中的文章:array]
         # 即 {节目url : [节目信息， [节目文章1， 节目文章2， ... ]]}
         # 主要是为了初始化函数中的一个选项： 限制每个节目访问文章的数量
+        # （有必要限制大小,目前来看，一个节目访问完毕后数据就没用了）
         self.listenItemsDict = dict()
 
         # 文章相关host
@@ -385,8 +391,6 @@ class Spider(object):
             if thisItemArticleCountOver:
                 break
 
-
-
     # 通过ajax尽可能获取用户Uid
     def getUsersId(self, articleUrl):
         #根据传入的url获取ajax所需的参数
@@ -433,7 +437,7 @@ class Spider(object):
 
         self.logger.info('该文章听众数量：' + str(listenUserCount) + '; 页数: ' + str(totalPages))
         for i in range(1,totalPages+1):
-            self.logger.info('第 ' + str(i) + ' 页用户, 当前 ' + str(len(self.userCurrentCount)) + ' 用户(不包括302)')
+            self.logger.info('第 ' + str(i) + ' 页用户, 当前 ' + str(self.userCurrentCount) + ' 用户(不包括302)')
             form['param'][0] = i
 
             try:
@@ -461,6 +465,7 @@ class Spider(object):
 
             for user in userList:
                 uid = user.find('a')['userid']
+                # 太快容易引发大量虚假302
                 time.sleep(1.5)
                 self.getUserInfo(uid)
                 if self.userCurrentCount >= self.userLimit_Max:
@@ -470,8 +475,6 @@ class Spider(object):
 
             if self.isOverLimited:
                 break
-
-
 
     # 爬取用户信息
     # 获取 获取用户信息的 页面，如果没有登陆，有些信息不能完全显示，所以以后会携带cookie访问
@@ -637,8 +640,6 @@ class Spider(object):
 
         self.usersAll[uid] = user
 
-
-
     # 爬取节目信息
     def getListenItemInfo(self, soup, url):
 
@@ -682,8 +683,6 @@ class Spider(object):
             self.logger.error('存储节目信息失败')
 
         return item
-
-
 
     # 爬取文章信息
     def getListenArticleInfo(self, soup, url, oldurl):
@@ -758,6 +757,12 @@ class Spider(object):
 
         return article
 
+    # 重复爬取302（可能有的是虚假302）
+    # 1. 在达到一定数量后
+    # 2. 在所有文章遍历结束后
+    # 3. 此函数另开线程（进程）处理
+    def reAddress302(self):
+        pass
 
     # run
     def run(self):
@@ -782,7 +787,7 @@ class Spider(object):
 if __name__ == "__main__":
     timeStart = time.time()
     url = 'http://ting.hujiang.com/menu/en/'
-    spider = Spider(url, userName='15161195812', userPass='yuanhaitao', userLimit=5)
+    spider = Spider(url, userName='15161195812', userPass='yuanhaitao', userLimit=50)
     res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart

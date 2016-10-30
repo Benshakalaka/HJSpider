@@ -86,6 +86,8 @@ class UserInfo(object):
 
 
     def save(self, session):
+        if session.query(User).get(self.__uid) is not None:
+            return
 
         user = User(user_id=self.__uid, gender=self.gender, nickName=self.nickName, name=self.name,
                     signature=self.signature, introduction=self.selfIntroduction, city=self.city,
@@ -95,8 +97,8 @@ class UserInfo(object):
         session.add(user)
         try:
             session.commit()
-        except Exception as e:
-            print(e)
+        except Exception:
+            raise Exception
 
 
     # 获取留言列表
@@ -150,14 +152,17 @@ class ListenItemInfo(object):
             object.__setattr__(self, key, value)
 
     def save(self, session):
+        if session.query(Item).get(self.__item) is not None:
+            return
+
         item = Item(item=self.__item, title=self.title, imgUrl=self.itemImgUrl,
                     difficultLevel=self.difficult, updateRate=self.updateRate,
                     averageTime=self.averageComsume, averageScore=float(self.averageScore[0:-1]))
         session.add(item)
         try:
             session.commit()
-        except Exception as e:
-            print(e)
+        except Exception:
+            raise Exception
 
     def __str__(self):
         infoShow = '节目: '
@@ -220,6 +225,9 @@ class ListenArticleInfo(object):
 
 
     def save(self, session):
+        if session.query(Article).get(self.__uid) is not None:
+            return
+
         article = Article(article_id=self.__uid, item=self.item, type=self.type, title=self.title,
                           commentCount=self.commentCount, averageScore=self.averageScore,
                           timeLast=self.timeLast,
@@ -229,8 +237,8 @@ class ListenArticleInfo(object):
         session.add(article)
         try:
             session.commit()
-        except Exception as e:
-            print(e)
+        except Exception:
+            raise Exception
 
 
     def __str__(self):
