@@ -1,0 +1,14 @@
+2016-10-30 16:09:59,738 HJSpider.py[line:650] INFO:  spider running ...
+2016-10-30 16:10:01,036 HJSpider.py[line:137] INFO:  Login Token IS bc445aae54280177c2fa0ea7d9a2c650
+2016-10-30 16:10:01,421 HJSpider.py[line:197] INFO:  当前访问页面：http://ting.hujiang.com/menu/en/page1/
+2016-10-30 16:10:01,691 HJSpider.py[line:232] INFO:  当前访问节目：http://ting.hujiang.com/biaozhun/
+2016-10-30 16:10:02,418 HJSpider.py[line:271] DEBUG:  节目: name : biaozhun; title : 标准美音; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p558.jpg; introduction : 采用经典听力材料“美国之音”，纯正美语，磨练听力。每天听写1~1分半分钟，然后翻译、总结，巩固提高。; type : 实用; type : 美国; difficult : 中级; updateRate : 每天更新; averageComsume : 1367; averageScore : 75.34%; 
+2016-10-30 16:10:04,107 HJSpider.py[line:516] DEBUG:  用户: uid : 9418934; name : 淘淘啦; nickName : 淘淘◕_◕✿; gender : -1; city : 武汉; registDate : 2011/7/5 9:59:00; signinLast : 1876; lastSignin : 16小时前; selfIntroduction : [[[]]]
+2016-10-30 16:10:04,163 HJSpider.py[line:290] DEBUG:  文章: uid : 163707451920; type : 政治; title : 打击ISIL成效显著; commentCount : 2; averageScore : 78; timeLast : 81; listenCount : 103; publishTime : 2016/10/29 22:00:10; contributorId : 9418934; difficultLevel : 中级级别; rewards : 4; tags : ['ISIL', '伊斯兰国', '叙利亚', '标准美音']; 
+2016-10-30 16:10:04,163 HJSpider.py[line:295] INFO:  当前访问文章：http://ting.hujiang.com/biaozhun/163707451920/
+2016-10-30 16:10:04,438 HJSpider.py[line:348] INFO:  第 1 页用户, 当前 1
+2016-10-30 16:10:06,741 HJSpider.py[line:516] DEBUG:  用户: uid : 7359360; name : kerin0123; nickName : Kerin-在职; gender : 0; city : 苏州; registDate : 2011/1/23 13:48:00; signinLast : 716; lastSignin : 5小时前; selfIntroduction : [[[]]]
+2016-10-30 16:10:08,775 HJSpider.py[line:516] DEBUG:  用户: uid : 59987302; name : 懒癌今天打卡了么; nickName : ; gender : -1; city : ; registDate : 2016/9/26 19:01:00; signinLast : 0; lastSignin : 2小时前; selfIntroduction : [[[]]]
+2016-10-30 16:10:10,863 HJSpider.py[line:516] DEBUG:  用户: uid : 9242405; name : 涂小星; nickName : 涂小星; gender : -1; city : 北京; registDate : 2011/6/18 20:20:00; signinLast : 4; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-10-30 16:10:12,875 HJSpider.py[line:403] WARNING:  http://bulo.hujiang.com/u/2218344/: redirect 302
+2016-10-30 16:10:15,397 HJSpider.py[line:516] DEBUG:  用户: uid : 4464815; name : ninaca; nickName : ; gender : 0; city : 天津; registDate : 2010/3/4 0:54:00; signinLast : 1818; lastSignin : 6小时前; selfIntroduction : [[[]]]
