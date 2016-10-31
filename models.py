@@ -17,7 +17,7 @@ class User(Base):
     introduction = Column(String(100))
     city = Column(String(30))
     registDate = Column(DateTime)
-    lastSignin = Column(DateTime)
+    lastSignin = Column(DateTime, index=True)
     signlast = Column(Integer)
 
 
@@ -63,12 +63,12 @@ class UserListen(Base):
     __tablename__ = 'userlisten'
 
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    user = Column(String(10), ForeignKey('user.user_id'), nullable=False, index=True)
-    article = Column(String(15), ForeignKey('article.article_id'), nullable=False, index=True)
+    user = Column(String(10), ForeignKey('user.user_id'), nullable=False)
+    article = Column(String(15), ForeignKey('article.article_id'), nullable=False)
     time = Column(Integer)
     score = Column(Float)
     reward = Column(Integer)
-    listenDate = Column(Date)
+    listenDate = Column(Date, index=True)
 
 
 
