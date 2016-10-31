@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from HJ_Info import UserInfo, ListenItemInfo, ListenArticleInfo
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from urllib.parse import urlparse, unquote
 import requests
 import time
 import json
@@ -371,7 +372,7 @@ class Spider(object):
                     break
 
                 # 文章总数超出限制
-                if self.listenArticles >= self.listenArticlesMax:
+                if len(self.listenArticles) >= self.listenArticlesMax:
                     self.isOverLimited = True
                     self.logger.info('文章数量超出限制，退出！')
                     break
@@ -465,7 +466,7 @@ class Spider(object):
             for user in userList:
                 uid = user.find('a')['userid']
                 # 太快容易引发大量虚假302
-                time.sleep(1.5)
+                time.sleep(1)
                 self.getUserInfo(uid)
                 if self.userCurrentCount >= self.userLimit_Max:
                     self.isOverLimited = True
@@ -506,6 +507,8 @@ class Spider(object):
         # 有的人将部落设置为隐私，外部不能访问，页面会302转向error
         if content.status_code != 200:
             self.logger.warning(full_url + ': redirect ' + str(content.status_code))
+            responseText = urlparse(unquote(content.headers['Location'])).query.split('=', maxsplit=1)[1]
+            self.logger.warning('提示: ' + responseText)
             self.usersAll[uid] = None
             return
 
@@ -763,12 +766,22 @@ class Spider(object):
     def reAddress302(self):
         pass
 
+    # 302 可能情况
+    # 1. 私有不允许访问
+    # 2. 访问太频繁
+    def test302(self):
+        self.getUserInfo('1469913')
+
     # run
     def run(self):
         self.logger.info('spider running ...')
 
         # 先登录获取session
         self.userLogin()
+
+        # 测试区分302
+        # self.test302()
+        # return {}
 
         # 开始找
         self.getPagesHasItems()

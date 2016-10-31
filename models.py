@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer ,String, DateTime, Date, SmallInteger, Float, ForeignKey
+from sqlalchemy import Column, Integer ,String, DateTime, Date, SmallInteger, Float, ForeignKey, Index, UniqueConstraint
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -62,12 +62,14 @@ class ArticleTag(Base):
 class UserListen(Base):
     __tablename__ = 'userlisten'
 
-    user = Column(String(10), primary_key=True, nullable=False)
-    article = Column(String(15), primary_key=True, nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    user = Column(String(10), ForeignKey('user.user_id'), nullable=False, index=True)
+    article = Column(String(15), ForeignKey('article.article_id'), nullable=False, index=True)
     time = Column(Integer)
     score = Column(Float)
     reward = Column(Integer)
     listenDate = Column(Date)
+
 
 
 
@@ -101,9 +103,9 @@ class Models(object):
         self.session.commit()
 
 models = Models(Base, Engin)
-# models.createAll()
+models.createAll()
 # models.dropAll()
-models.clearAllData()
+# models.clearAllData()
 
 
 # 设置urf8哟，创建engin的时候最好也指定
