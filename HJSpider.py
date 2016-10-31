@@ -100,11 +100,18 @@ class Spider(object):
         # 用户相关host
         self.userHost = 'http://bulo.hujiang.com'
 
+        # 获取用户信息间隔
+        # 在网站返回"访问太频繁"的消息后，时间间隔乘2
+        self.tooFrequent = 0
+        self.timeIntervalBase = 0.5
+        # 返回太频繁消息的用户，之后需要再次访问
+        self.needReGain = []
+
         # 是否已经超出限制
         self.isOverLimited = False
 
         try:
-            # 统计几个节目, 0表示无限制
+            # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
             self.listenItems_Max = int(listenItemsMax)
             # 每个节目选取几篇文章， 0表示无限制
             self.listenArticlesEachItem_Max = int(listenArticlesEachItem)
@@ -293,7 +300,7 @@ class Spider(object):
             if self.isOverLimited:
                 break
 
-            if len(self.listenItems) >= self.listenItems_Max:
+            if len(self.listenItems) == self.listenItems_Max:
                 self.isOverLimited = True
                 self.logger.info('节目访问数量超出限制，退出！')
                 break
@@ -372,7 +379,7 @@ class Spider(object):
                     break
 
                 # 文章总数超出限制
-                if len(self.listenArticles) >= self.listenArticlesMax:
+                if len(self.listenArticles) == self.listenArticlesMax:
                     self.isOverLimited = True
                     self.logger.info('文章数量超出限制，退出！')
                     break
@@ -464,11 +471,21 @@ class Spider(object):
                 continue
 
             for user in userList:
+                getUserInfoStart = time.time()
                 uid = user.find('a')['userid']
+
+                time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
+                if time2sleep >= 2.0:
+                    self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
                 # 太快容易引发大量虚假302
-                time.sleep(1)
+                time.sleep(time2sleep)
+
                 self.getUserInfo(uid)
-                if self.userCurrentCount >= self.userLimit_Max:
+                getUserInfoEnd = time.time()
+
+                self.logger.info('访问此用户消耗时间（秒）：' + str(getUserInfoEnd - getUserInfoStart))
+
+                if self.userCurrentCount == self.userLimit_Max:
                     self.isOverLimited = True
                     self.logger.info('用户数量达到限制，退出！')
                     break
@@ -509,9 +526,27 @@ class Spider(object):
             self.logger.warning(full_url + ': redirect ' + str(content.status_code))
             responseText = urlparse(unquote(content.headers['Location'])).query.split('=', maxsplit=1)[1]
             self.logger.warning('提示: ' + responseText)
-            self.usersAll[uid] = None
+
+            # 若为私有，则存储进userAll
+            if responseText[0:2] == '用户':
+                self.usersAll[uid] = None
+                if self.tooFrequent > 0:
+                    self.tooFrequent -= 1
+            else:
+            # 否则， 不能存进userAll, 而是放进needReGain数组中等待重新访问的机会
+                self.needReGain.append(uid)
+                # 如果第一次遇到这种情况，最好睡眠时间快速增长，之后缓慢增长
+                if self.tooFrequent == 0:
+                    self.tooFrequent = 4
+                else:
+                    self.tooFrequent += 1
             return
 
+        # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
+        if self.tooFrequent > 0:
+                self.tooFrequent -= 1
+
+        # 已添加进数据库的数据量
         self.userCurrentCount += 1
 
         try:
@@ -747,6 +782,10 @@ class Spider(object):
                 article.contributorId = li.find('a')['href'].split('/')[1][1:]
                 # ***为了数据的一致性(外键的存在)，这里需要提前获取contributor用户,否则无法存储article
                 self.getUserInfo(article.contributorId)
+                if self.userCurrentCount == self.userLimit_Max:
+                    self.isOverLimited = True
+                    self.logger.info('用户数量达到限制，退出！')
+                    break
             # 登陆后才能下载
             #elif re.compile(r'下载').search(text):
             #    article.downloadUrl = self.listenHost + li.span.find_all('a')[0]['href']
@@ -799,16 +838,11 @@ class Spider(object):
 if __name__ == "__main__":
     timeStart = time.time()
     url = 'http://ting.hujiang.com/menu/en/'
-    spider = Spider(url, userName='15161195812', userPass='yuanhaitao', userLimit=50)
+    spider = Spider(url, userName='15161195812', userPass='yuanhaitao', userLimit=500)
     res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
     print('耗时：' + str(timeDelta) + ' 秒')
-
-    with open('result.txt', 'w', encoding='utf-8') as f:
-        pass
-        #for key,value in res.items():
-        #    f.write(str(value) + '\n')
 
 
     # body = requests.get('http://bulo.hujiang.com/u/54071261/', headers=headers, allow_redirects=False)
