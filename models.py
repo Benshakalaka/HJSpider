@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 Engin = create_engine('mysql+pymysql://ben:@localhost:3306/HJSpider', max_overflow=5)
 Base = declarative_base()
 
+# 用户
 class User(Base):
     __tablename__ = 'user'
 
@@ -20,7 +21,7 @@ class User(Base):
     lastSignin = Column(DateTime, index=True)
     signlast = Column(Integer)
 
-
+# 节目
 class Item(Base):
     __tablename__ = 'item'
 
@@ -33,7 +34,7 @@ class Item(Base):
     averageScore = Column(Float)
 
 
-
+# 文章
 class Article(Base):
     __tablename__ = 'article'
 
@@ -50,7 +51,7 @@ class Article(Base):
     rewards = Column(Integer)
     downloadUrl = Column(String(80))
 
-
+# 文章标签
 class ArticleTag(Base):
     __tablename__ = 'articletag'
 
@@ -58,7 +59,7 @@ class ArticleTag(Base):
     tagName = Column(String(10), nullable=False)
     article = Column(String(15), ForeignKey('article.article_id'), nullable=False)
 
-
+# 用户与文章
 class UserListen(Base):
     __tablename__ = 'userlisten'
 
