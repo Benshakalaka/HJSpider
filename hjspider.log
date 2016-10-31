@@ -1,14 +1,96 @@
-2016-10-30 16:09:59,738 HJSpider.py[line:650] INFO:  spider running ...
-2016-10-30 16:10:01,036 HJSpider.py[line:137] INFO:  Login Token IS bc445aae54280177c2fa0ea7d9a2c650
-2016-10-30 16:10:01,421 HJSpider.py[line:197] INFO:  当前访问页面：http://ting.hujiang.com/menu/en/page1/
-2016-10-30 16:10:01,691 HJSpider.py[line:232] INFO:  当前访问节目：http://ting.hujiang.com/biaozhun/
-2016-10-30 16:10:02,418 HJSpider.py[line:271] DEBUG:  节目: name : biaozhun; title : 标准美音; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p558.jpg; introduction : 采用经典听力材料“美国之音”，纯正美语，磨练听力。每天听写1~1分半分钟，然后翻译、总结，巩固提高。; type : 实用; type : 美国; difficult : 中级; updateRate : 每天更新; averageComsume : 1367; averageScore : 75.34%; 
-2016-10-30 16:10:04,107 HJSpider.py[line:516] DEBUG:  用户: uid : 9418934; name : 淘淘啦; nickName : 淘淘◕_◕✿; gender : -1; city : 武汉; registDate : 2011/7/5 9:59:00; signinLast : 1876; lastSignin : 16小时前; selfIntroduction : [[[]]]
-2016-10-30 16:10:04,163 HJSpider.py[line:290] DEBUG:  文章: uid : 163707451920; type : 政治; title : 打击ISIL成效显著; commentCount : 2; averageScore : 78; timeLast : 81; listenCount : 103; publishTime : 2016/10/29 22:00:10; contributorId : 9418934; difficultLevel : 中级级别; rewards : 4; tags : ['ISIL', '伊斯兰国', '叙利亚', '标准美音']; 
-2016-10-30 16:10:04,163 HJSpider.py[line:295] INFO:  当前访问文章：http://ting.hujiang.com/biaozhun/163707451920/
-2016-10-30 16:10:04,438 HJSpider.py[line:348] INFO:  第 1 页用户, 当前 1
-2016-10-30 16:10:06,741 HJSpider.py[line:516] DEBUG:  用户: uid : 7359360; name : kerin0123; nickName : Kerin-在职; gender : 0; city : 苏州; registDate : 2011/1/23 13:48:00; signinLast : 716; lastSignin : 5小时前; selfIntroduction : [[[]]]
-2016-10-30 16:10:08,775 HJSpider.py[line:516] DEBUG:  用户: uid : 59987302; name : 懒癌今天打卡了么; nickName : ; gender : -1; city : ; registDate : 2016/9/26 19:01:00; signinLast : 0; lastSignin : 2小时前; selfIntroduction : [[[]]]
-2016-10-30 16:10:10,863 HJSpider.py[line:516] DEBUG:  用户: uid : 9242405; name : 涂小星; nickName : 涂小星; gender : -1; city : 北京; registDate : 2011/6/18 20:20:00; signinLast : 4; lastSignin : 6小时前; selfIntroduction : [[[]]]
-2016-10-30 16:10:12,875 HJSpider.py[line:403] WARNING:  http://bulo.hujiang.com/u/2218344/: redirect 302
-2016-10-30 16:10:15,397 HJSpider.py[line:516] DEBUG:  用户: uid : 4464815; name : ninaca; nickName : ; gender : 0; city : 天津; registDate : 2010/3/4 0:54:00; signinLast : 1818; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:25,648 HJSpider.py[line:777] INFO:  spider running ...
+2016-10-31 12:52:26,019 HJSpider.py[line:145] INFO:  Login Token IS d8f91124ae0bee443fe03d5daad41e6a
+2016-10-31 12:52:26,436 HJSpider.py[line:241] INFO:  此次访问共有28页
+2016-10-31 12:52:26,436 HJSpider.py[line:248] INFO:  当前访问页面：http://ting.hujiang.com/menu/en/page1/
+2016-10-31 12:52:27,018 HJSpider.py[line:290] INFO:  当前访问节目：http://ting.hujiang.com/biaozhun/
+2016-10-31 12:52:27,265 HJSpider.py[line:329] INFO:  文章最大页数为：382; url is http://ting.hujiang.com/biaozhun/
+2016-10-31 12:52:27,340 HJSpider.py[line:334] DEBUG:  节目: name : biaozhun; title : 标准美音; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p558.jpg; introduction : 采用经典听力材料“美国之音”，纯正美语，磨练听力。每天听写1~1分半分钟，然后翻译、总结，巩固提高。; type : 实用; type : 美国; difficult : 中级; updateRate : 每天更新; averageComsume : 1367; averageScore : 75.34%; 
+2016-10-31 12:52:28,815 HJSpider.py[line:631] DEBUG:  用户: uid : 9418934; name : 淘淘啦; nickName : 淘淘◕_◕✿; gender : -1; city : 武汉; registDate : 2011/7/5 9:59:00; signinLast : 1876; lastSignin : 13小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:28,847 HJSpider.py[line:362] DEBUG:  文章: uid : 163708353656; type : 文化; title : 美国展会盛赞古兰经手稿之美 (1/2); commentCount : 9; averageScore : 79; timeLast : 68; listenCount : 91; publishTime : 2016/10/30 22:00:10; contributorId : 9418934; difficultLevel : 中级级别; rewards : 4; tags : ['古兰经', '土耳其', '美国', '标准美音']; 
+2016-10-31 12:52:28,847 HJSpider.py[line:367] INFO:  当前访问文章：http://ting.hujiang.com/biaozhun/163708353656/
+2016-10-31 12:52:29,060 HJSpider.py[line:438] INFO:  该文章听众数量：91; 页数: 13
+2016-10-31 12:52:29,060 HJSpider.py[line:440] INFO:  第 1 页用户, 当前 1 用户(不包括302)
+2016-10-31 12:52:31,062 HJSpider.py[line:631] DEBUG:  用户: uid : 12236941; name : 唔哈哈哈哈哈哈; nickName : 乔; gender : -1; city : 上海; registDate : 2012/3/13 21:53:00; signinLast : 700; lastSignin : 58分钟前; selfIntroduction : [[[静心，努力。]]]
+2016-10-31 12:52:32,317 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/1469913/: redirect 302
+2016-10-31 12:52:32,320 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:52:33,797 HJSpider.py[line:631] DEBUG:  用户: uid : 1542791; name : kakagloria; nickName : Gloria; gender : 0; city : 南京; registDate : 2007/8/2 9:04:00; signinLast : 29; lastSignin : 1小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:35,308 HJSpider.py[line:631] DEBUG:  用户: uid : 19498982; name : 公子诶就; nickName : ; gender : -1; city : 成都; registDate : 2013/5/12 1:54:00; signinLast : 10; lastSignin : 7分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:52:36,942 HJSpider.py[line:631] DEBUG:  用户: uid : 24181744; name : 禹crystal; nickName : 水水; gender : 0; city : 郑州; registDate : 2014/1/12 20:36:00; signinLast : 1016; lastSignin : 1小时前; selfIntroduction : [[[If I have nothing,I have nothing to lose.]]]
+2016-10-31 12:52:38,199 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/5730990/: redirect 302
+2016-10-31 12:52:38,200 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:52:39,816 HJSpider.py[line:631] DEBUG:  用户: uid : 9851562; name : YJHUYBMN; nickName : ; gender : -1; city : 武汉; registDate : 2011/8/9 10:33:00; signinLast : 908; lastSignin : 51分钟前; selfIntroduction : [[[屌丝。。。要努力  虽然成功之后还是屌丝 不能拼爹啊]]]
+2016-10-31 12:52:39,816 HJSpider.py[line:440] INFO:  第 2 页用户, 当前 6 用户(不包括302)
+2016-10-31 12:52:41,484 HJSpider.py[line:631] DEBUG:  用户: uid : 7602362; name : hlynrun; nickName : ; gender : 1; city : 上海; registDate : 2011/2/17 17:37:00; signinLast : 7; lastSignin : 7小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:42,766 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/172786/: redirect 302
+2016-10-31 12:52:42,766 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:52:44,167 HJSpider.py[line:631] DEBUG:  用户: uid : 16009414; name : t1311860767j; nickName : ; gender : -1; city : 丽水; registDate : 2012/11/20 8:46:00; signinLast : 1; lastSignin : 46分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:52:45,710 HJSpider.py[line:631] DEBUG:  用户: uid : 5125958; name : 溯空而上; nickName : 迷恋TOMA的我; gender : 0; city : 广州; registDate : 2010/6/27 9:13:00; signinLast : 2243; lastSignin : 2小时前; selfIntroduction : [[[toma,nino,free,夏目、变态一个、强迫症患者]]]
+2016-10-31 12:52:47,184 HJSpider.py[line:631] DEBUG:  用户: uid : 11958874; name : 未蓝天空; nickName : ; gender : -1; city : 北京; registDate : 2012/2/24 22:03:00; signinLast : 0; lastSignin : 2小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:48,953 HJSpider.py[line:631] DEBUG:  用户: uid : 5709981; name : hinatayuki; nickName : yuki; gender : 0; city : 南京; registDate : 2010/8/30 21:29:00; signinLast : 1991; lastSignin : 4小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:50,579 HJSpider.py[line:631] DEBUG:  用户: uid : 13895204; name : louise0502; nickName : 茜茜; gender : 0; city : 武汉; registDate : 2012/7/26 22:02:00; signinLast : 724; lastSignin : 5小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:50,579 HJSpider.py[line:440] INFO:  第 3 页用户, 当前 12 用户(不包括302)
+2016-10-31 12:52:54,094 HJSpider.py[line:631] DEBUG:  用户: uid : 19542633; name : zhmmyiqihu; nickName : 学海一小虫; gender : -1; city : 北京; registDate : 2013/5/14 16:59:00; signinLast : 0; lastSignin : 47分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:52:55,362 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/14346949/: redirect 302
+2016-10-31 12:52:55,362 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:52:57,481 HJSpider.py[line:631] DEBUG:  用户: uid : 39108770; name : 考拉考拉考拉; nickName : ; gender : -1; city : ; registDate : 2015/12/13 20:46:00; signinLast : 0; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-10-31 12:52:59,351 HJSpider.py[line:631] DEBUG:  用户: uid : 4464815; name : ninaca; nickName : ; gender : 0; city : 天津; registDate : 2010/3/4 0:54:00; signinLast : 1819; lastSignin : 2小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:00,857 HJSpider.py[line:631] DEBUG:  用户: uid : 3809486; name : akkomz; nickName : 小砺虾; gender : 1; city : 青岛; registDate : 2009/7/25 10:34:00; signinLast : 30; lastSignin : 5小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:02,299 HJSpider.py[line:631] DEBUG:  用户: uid : 8653961; name : xinghanxiao; nickName : ; gender : 0; city : 绍兴; registDate : 2011/5/7 21:39:00; signinLast : 20; lastSignin : 16分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:53:03,825 HJSpider.py[line:631] DEBUG:  用户: uid : 6240170; name : 夏天的积雨云; nickName : ; gender : 1; city : 成都; registDate : 2010/10/10 10:19:00; signinLast : 16; lastSignin : 60分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:53:03,825 HJSpider.py[line:440] INFO:  第 4 页用户, 当前 18 用户(不包括302)
+2016-10-31 12:53:05,542 HJSpider.py[line:631] DEBUG:  用户: uid : 42857665; name : 在曲折道路上平坦前行; nickName : 加菲猫; gender : -1; city : 宜宾; registDate : 2016/1/24 11:02:00; signinLast : 0; lastSignin : 1小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:06,843 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/4858349/: redirect 302
+2016-10-31 12:53:06,843 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:53:08,414 HJSpider.py[line:631] DEBUG:  用户: uid : 5124305; name : sapphire_c; nickName : Little C; gender : 0; city : 南京; registDate : 2010/6/26 20:38:00; signinLast : 333; lastSignin : 4小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:10,264 HJSpider.py[line:631] DEBUG:  用户: uid : 3368856; name : tonytan1982; nickName : ; gender : 1; city : ; registDate : 2009/3/26 6:14:00; signinLast : 373; lastSignin : 5小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:11,798 HJSpider.py[line:631] DEBUG:  用户: uid : 4569799; name : two丫头; nickName : ; gender : 0; city : 承德; registDate : 2010/3/24 16:20:00; signinLast : 248; lastSignin : 1小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:13,371 HJSpider.py[line:631] DEBUG:  用户: uid : 6162903; name : tyltyllove; nickName : 璐璐巴斯; gender : 0; city : 贵阳; registDate : 2010/10/3 18:43:00; signinLast : 1907; lastSignin : 2小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:14,974 HJSpider.py[line:631] DEBUG:  用户: uid : 6911465; name : olenjio; nickName : olenjio; gender : 1; city : 上海; registDate : 2010/12/5 22:47:00; signinLast : 1095; lastSignin : 2小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:14,974 HJSpider.py[line:440] INFO:  第 5 页用户, 当前 24 用户(不包括302)
+2016-10-31 12:53:16,419 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/2218344/: redirect 302
+2016-10-31 12:53:16,419 HJSpider.py[line:511] WARNING:  提示: 用户设定部落主页私有。
+2016-10-31 12:53:17,880 HJSpider.py[line:631] DEBUG:  用户: uid : 32368334; name : Talented012; nickName : 猫猫咪呀; gender : -1; city : 湖州; registDate : 2015/3/23 18:42:00; signinLast : 0; lastSignin : 4小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:19,409 HJSpider.py[line:631] DEBUG:  用户: uid : 6208175; name : annakayama; nickName : ; gender : -1; city : ; registDate : 2010/10/7 22:53:00; signinLast : 0; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-10-31 12:53:21,584 HJSpider.py[line:631] DEBUG:  用户: uid : 14444780; name : zydg2004; nickName : ; gender : -1; city : 上海; registDate : 2012/9/3 21:28:00; signinLast : 3; lastSignin : 48分钟前; selfIntroduction : [[[]]]
+2016-10-31 12:53:25,794 HJSpider.py[line:631] DEBUG:  用户: uid : 19011887; name : lightguang; nickName : ; gender : 1; city : 广州; registDate : 2013/4/16 9:15:00; signinLast : 629; lastSignin : 3小时前; selfIntroduction : [[[Success is not guaranteed. It is not handed to you. Success is earned.]]]
+2016-10-31 12:53:26,879 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/4768159/: redirect 302
+2016-10-31 12:53:26,880 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:28,895 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/51903284/: redirect 302
+2016-10-31 12:53:28,895 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:28,896 HJSpider.py[line:440] INFO:  第 6 页用户, 当前 28 用户(不包括302)
+2016-10-31 12:53:30,190 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/11269191/: redirect 302
+2016-10-31 12:53:30,191 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:31,262 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/47923886/: redirect 302
+2016-10-31 12:53:31,262 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:32,646 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/31216199/: redirect 302
+2016-10-31 12:53:32,646 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:34,977 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/13868640/: redirect 302
+2016-10-31 12:53:34,978 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:36,049 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/9057652/: redirect 302
+2016-10-31 12:53:36,049 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:37,151 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/2508142/: redirect 302
+2016-10-31 12:53:37,151 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:38,263 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/8521083/: redirect 302
+2016-10-31 12:53:38,264 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:38,264 HJSpider.py[line:440] INFO:  第 7 页用户, 当前 28 用户(不包括302)
+2016-10-31 12:53:39,563 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/1111117/: redirect 302
+2016-10-31 12:53:39,564 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:40,639 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/3021432/: redirect 302
+2016-10-31 12:53:40,639 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:41,706 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/4486731/: redirect 302
+2016-10-31 12:53:41,707 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:42,784 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/10004168/: redirect 302
+2016-10-31 12:53:42,784 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:43,860 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/33250593/: redirect 302
+2016-10-31 12:53:43,861 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:44,941 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/19883748/: redirect 302
+2016-10-31 12:53:44,941 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:46,023 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/36115640/: redirect 302
+2016-10-31 12:53:46,024 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:46,024 HJSpider.py[line:440] INFO:  第 8 页用户, 当前 28 用户(不包括302)
+2016-10-31 12:53:47,316 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/3515211/: redirect 302
+2016-10-31 12:53:47,317 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:48,419 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/33263558/: redirect 302
+2016-10-31 12:53:48,420 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-10-31 12:53:49,506 HJSpider.py[line:509] WARNING:  http://bulo.hujiang.com/u/61634810/: redirect 302
+2016-10-31 12:53:49,506 HJSpider.py[line:511] WARNING:  提示: 您的访问太过频繁，请稍候再试。
