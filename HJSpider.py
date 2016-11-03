@@ -10,6 +10,7 @@ import json
 import util
 import re
 import logging
+import configparser
 
 # 两个问题
 # 1. 数据集合是否要限制大小？(listenArticles, usersAll, listenItemsDict)
@@ -17,7 +18,11 @@ import logging
 
 class Spider(object):
     # 初始化
-    def __init__(self, url, userName, userPass, listenItemsMax = 0, listenArticlesEachItem = 0, listenArticlesMax = 0, userLimit = 100):
+    def __init__(self, userCode):
+        self.config = configparser.ConfigParser()
+        self.config_privacy = configparser.ConfigParser()
+        self.config_privacy.read('ConfigUser.conf', encoding='utf-8')
+        self.config.read('ConfigHJ.conf', encoding='utf-8')
 
         # 日志配置
         # 一般在简单的小脚本中才会用logging.basicConfig，因为稍大些每个模块的logger就需要分开
@@ -50,12 +55,12 @@ class Spider(object):
         self.logger.setLevel(logging.DEBUG)
 
         #数据库配置
-        self.mysql_user = 'ben'
-        self.mysql_password = ''
-        self.mysql_host = 'localhost'
-        self.mysql_port = '3306'
-        self.mysql_db_name = 'HJSpider'
-        self.mysql_max_overflow = 5
+        self.mysql_user = self.config.get('MYSQL', 'user')
+        self.mysql_password = self.config.get('MYSQL', 'password')
+        self.mysql_host = self.config.get('MYSQL', 'host')
+        self.mysql_port = self.config.get('MYSQL', 'port')
+        self.mysql_db_name = self.config.get('MYSQL', 'db_name')
+        self.mysql_max_overflow = int(self.config.get('MYSQL', 'max_overflow'))
 
         # echo为True表示每次执行操作会显示sql语句，可在生产环境关闭
         self.engin = create_engine('mysql+pymysql://' + self.mysql_user + ':' + self.mysql_password +
@@ -65,13 +70,14 @@ class Spider(object):
         self.mysql_session = (sessionmaker(bind=self.engin))()
 
         # 网站登陆所需配置
-        self.start_url = url
-        self.user_name = userName
-        self.user_pass = userPass
+        self.start_url = self.config.get('SPIDER', 'startUrl')
+        self.user_name = self.config_privacy.get(userCode, 'username')
+        self.user_pass = self.config_privacy.get(userCode, 'password')
+
+        # 工具类
         self.tools = util.Utils()
 
-
-        # 一个已经登陆的session，用于获取更丰富的个人信息页面
+        # 一个带登陆信息的session，用于获取更丰富的个人信息页面
         self.session = None
 
         # 以下数据集合会不会过大呢？ 是否要限制大小? 因为在存储进数据库之前也会查询是否在数据库中已存在.
@@ -102,11 +108,11 @@ class Spider(object):
 
         # 获取用户信息间隔
         # 在网站返回"访问太频繁"的消息后，时间间隔乘2
-        self.tooFrequent = 0
-        self.timeIntervalBase = 0.5
+        self.tooFrequent = int(self.config.get('SPIDER', 'tooFrequent'))
+        self.timeIntervalBase = float(self.config.get('SPIDER', 'timeIntervalBase'))
         # 等待时间缓慢增长，但是快速减少，但是要保证tooFrequent至少为0
-        self.frequentAdd = 1
-        self.frequentReduce = 2
+        self.frequentAdd = int(self.config.get('SPIDER', 'frequentAdd'))
+        self.frequentReduce = int(self.config.get('SPIDER', 'frequentReduce'))
         # 返回太频繁消息的用户，之后需要再次访问
         self.needReGain = []
 
@@ -115,13 +121,13 @@ class Spider(object):
 
         try:
             # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
-            self.listenItems_Max = int(listenItemsMax)
+            self.listenItems_Max = int(self.config.get('SPIDER', 'listenItemsMax'))
             # 每个节目选取几篇文章， 0表示无限制
-            self.listenArticlesEachItem_Max = int(listenArticlesEachItem)
+            self.listenArticlesEachItem_Max = int(self.config.get('SPIDER', 'listenArticlesEachItem'))
             # 统计的人数限制
-            self.userLimit_Max = int(userLimit)
+            self.userLimit_Max = int(self.config.get('SPIDER', 'userLimit'))
             # 已听文章数量限制
-            self.listenArticlesMax = int(listenArticlesMax)
+            self.listenArticlesMax = int(self.config.get('SPIDER', 'listenArticlesMax'))
         except Exception as e:
             self.logger.error('各种限制请使用整型或是整型字符串！')
             exit(-1)
@@ -848,8 +854,8 @@ class Spider(object):
 
 if __name__ == "__main__":
     timeStart = time.time()
-    url = 'http://ting.hujiang.com/menu/en/'
-    spider = Spider(url, userName='15161195812', userPass='yuanhaitao', userLimit=200)
+    # 使用那个账号登陆（一个编号对应一个账号）
+    spider = Spider(userCode='321')
     res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
