@@ -17,7 +17,7 @@ import configparser
 # 两个问题
 # 1. 数据集合是否要限制大小？(listenArticles, usersAll, listenItemsDict)
 # 2. 302页面如和再处理？
-
+#
 class Spider(object):
     # 初始化
     def __init__(self, userCode):
