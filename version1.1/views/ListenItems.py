@@ -13,8 +13,8 @@ class ListenItems(object):
     def __init__(self, mysql_session):
         # 获取很多节目页面的地址列表
         self.fromUrls = list()
-        # 当前正在访问传入的fromurls里的第n个
-        self.fromUrlsIndex = -1
+        # 下一个要访问的下标
+        self.fromUrlsIndex = 0
         # 已访问的节目url
         self.itemUrls = set()
         # 与数据库的连接
@@ -123,7 +123,7 @@ class ListenItems(object):
         if fromUrl in self.fromUrls:
             return False
         self.fromUrls.append(fromUrl)
-        self.fromUrlsIndex = 0 if self.fromUrlsIndex < 0 else self.fromUrlsIndex
+        return True
 
     # 当前节目属性初始化
     def currentItemInit(self):

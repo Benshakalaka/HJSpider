@@ -14,7 +14,7 @@ class ListenArticles(object):
         self.fromUrls = list()
         self.fromUrlsSoup = list()
         # 下次要访问的index
-        self.fromUrlsIndex = -1
+        self.fromUrlsIndex = 0
         # 已访问的文章url
         self.articleUrls = set()
         # 与数据库的连接
@@ -35,9 +35,9 @@ class ListenArticles(object):
             return False
         self.fromUrls.append(fromUrl)
         self.fromUrlsSoup.append(fromSoup)
-        self.fromUrlsIndex = 0 if self.fromUrlsIndex < 0 else self.fromUrlsIndex
+        return True
 
-    # 获取一个文章页面的soup对象
+    # 获取一个文章uid
     def getOneArticlePageSoup(self):
         try:
             while True:

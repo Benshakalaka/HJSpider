@@ -1,121 +1,307 @@
 from ..models.ListenUser import ListenUser
+from ..util import Utils
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse, unquote
+import requests
+import re
+import json
+import time
 
 class ListenUsers(object):
     '''
     input: 某文章的uid
-    output: 暂无
+    output: 用户的uid
     '''
-    def __init__(self):
+    def __init__(self, mysql_session, loginUser, loginPass):
         # 传入的要访问的文章uid
         self.fromUids = []
         # 下一个要访问的uid的下标
-        self.fromUidsIndex = -1
+        self.fromUidsIndex = 0
+        # 以访问的用户（包括私有用户）
+        self.userUids = set()
+        # 私有用户数量
+        self.privateUids = 0
+
+        # 当前的用户数组
+        self.currentUsersSoupList = []
+        # 下一次要访问的页数
+        self.currentPageIndex = 1
+        # 当前文章共有多少页用户
+        self.currentTotalPageCounts = 0
+        # 上一次访问的用户的信息
+        self.lastUserInfo = None
+
+        # 获取信息所需的登陆session
+        self.session = Utils.userLogin(loginUser, loginPass)
+        # 数据库
+        self.mysql_session = mysql_session
 
     # 添加文章uid
-    def appendFromUid(self):
-        pass
+    def appendFromUid(self, articleUid):
+        if articleUid in self.fromUids:
+            return False
+        self.fromUids.append(articleUid)
+        return True
 
-    # 根据传入的uid获取用户
-    def getUsersFromUid(self):
+    # 根据传入的uid获取用户数组（BeautifulSoup实例数组）
+    def getUsersFromUid(self, articleUid):
+        if self.currentPageIndex > self.currentTotalPageCounts:
+            return None
 
-
-        #根据传入的url获取ajax所需的参数
-        commentId = articleUid.split('/')[-2][2:8]
-
-        form = {}
+        #根据传入的uid获取ajax所需的参数
+        commentId = articleUid[2:8]
         postUrl = 'http://ting.hujiang.com/ajax.do'
-
-        headers = {
-            "Host": "ting.hujiang.com",
-            "Content-Length": "83",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36",
-            "Content-Type": "application/json; charset=UTF-8"
-        }
 
         form = {}
         form['classMethod'] = 'AjaxComs.GetListenedUserList'
-        form['param'] = [1, int(commentId), 0]
+        # 无论如何第一页总是有的
+        form['param'] = [int(self.currentPageIndex), int(commentId), 0]
         form['pageName'] = None
 
         try:
-            # 需要先走一个，看看总共多少个听众，可以分多少页，即多少次请求(每次7个人)
-            content = requests.post(postUrl, data=json.dumps(form), headers=headers)
-        except Exception:
-            self.logger.error('第一次获取某文章听众失败: ' + articleUrl)
-            return
-
-        try:
+            content = requests.post(postUrl, data=json.dumps(form), headers=Utils.headers)
             contentText = content.text
             contentJson = json.loads(contentText)
         except Exception:
-            self.logger.error('第一次json 解析文章听众失败: ' + articleUrl)
-            return
+            raise Exception
 
+        self.currentPageIndex += 1
+
+        # 获取总页数
+        if self.currentTotalPageCounts == 0:
+            try:
+                listenUserCount = int(contentJson['d'][1])
+            except:
+                listenUserCount = 0
+
+            self.currentTotalPageCounts = int(listenUserCount / 7)
+            if listenUserCount % 7 != 0:
+                self.currentTotalPageCounts += 1
+
+            self.currentTotalPageCounts = max(1, self.currentTotalPageCounts)
+
+        # 获取数组
         try:
-            listenUserCount = int(contentJson['d'][1])
-        except:
-            self.logger.error('第一次获取的ajax数据错误，该页用户未被获取: ' + articleUrl)
-            listenUserCount = 0
+            userInfoContainer = BeautifulSoup(contentJson['d'][2], "lxml")
+        except Exception:
+            # self.logger.error('BeautifulSoup解析文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(i) + '页失败！')
+            return None
 
-        totalPages = int(listenUserCount / 7)
-        if listenUserCount % 7 != 0:
-            totalPages += 1
+        return userInfoContainer.find_all(class_='userListItemIcon')
 
-        self.logger.info('该文章听众数量：' + str(listenUserCount) + '; 页数: ' + str(totalPages))
-        for i in range(1,totalPages+1):
-            self.logger.info('第 ' + str(i) + ' 页用户, 当前 ' + str(self.userCurrentCount) + ' 用户(不包括302)')
-            form['param'][0] = i
+        # for user in userList:
+        #     uid = user.find('a')['userid']
+        #     if uid in self.usersAll:
+        #         continue
+        #
+        #     getUserInfoStart = time.time()
+        #
+        #     time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
+        #     if time2sleep >= 2.0:
+        #         self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
+        #     # 太快容易引发大量虚假302
+        #     time.sleep(time2sleep)
+        #     # 更换代理地址
+        #
+        #     self.getUserInfo(uid)
+        #     getUserInfoEnd = time.time()
 
-            try:
-                content = requests.post(postUrl, data=json.dumps(form), headers=headers)
-            except Exception:
-                self.logger.error('获取文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(i) + '页失败！')
-                continue
 
-            try:
-                contentText = content.text
-                contentJson = json.loads(contentText)
-            except Exception:
-                self.logger.error('JSON解析文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(i) + '页失败！')
-                continue
-
-            try:
-                userInfoContainer = BeautifulSoup(contentJson['d'][2], "lxml")
-            except Exception:
-                self.logger.error('BeautifulSoup解析文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(i) + '页失败！')
-                continue
-
-            userList = userInfoContainer.find_all(class_='userListItemIcon')
-            if not userList:
-                continue
-
-            for user in userList:
-                uid = user.find('a')['userid']
-                if uid in self.usersAll:
-                    continue
-
-                getUserInfoStart = time.time()
-
-                time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
-                if time2sleep >= 2.0:
-                    self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
-                # 太快容易引发大量虚假302
-                time.sleep(time2sleep)
-                # 更换代理地址
-
-                self.getUserInfo(uid)
-                getUserInfoEnd = time.time()
-
-                self.logger.info('访问此用户消耗时间（秒）：' + str(getUserInfoEnd - getUserInfoStart))
-
-                if self.userCurrentCount == self.userLimit_Max:
-                    self.isOverLimited = True
-                    self.logger.info('用户数量达到限制，退出！')
+    # 获取单个用户的uid
+    def getOneUserUid(self):
+        try:
+            while True:
+                user = self.currentUsersSoupList.pop()
+                userUid = user.find('a')['userid']
+                if userUid not in self.userUids:
+                    self.userUids.add(userUid)
                     break
+        except Exception:
+            if self.fromUidsIndex >= len(self.fromUids):
+                return None
+            try:
+                articleUid = self.fromUids.pop()
+                self.currentUsersSoupList = self.getUsersFromUid(articleUid)
+                return self.getOneUserUid()
+            except Exception:
+                return None
 
-            if self.isOverLimited:
-                break
+        getUserInfoStart = time.time()
+        # time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
+        # if time2sleep >= 2.0:
+        #     self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
+        # 太快容易引发大量虚假302
+        # time.sleep(time2sleep)
+
+        self.getUserInfo(userUid)
+        getUserInfoEnd = time.time()
+
+        return userUid, getUserInfoEnd - getUserInfoStart
+
 
     # 获取用户信息
-    def getUserInfo(self):
-        pass
+    def getUserInfo(self, uid):
+        user = ListenUser(uid)
+
+        full_url = Utils.userHost + '/u/' + uid + '/'
+        try:
+            content = self.session.get(full_url, headers=Utils.headers, allow_redirects=False)
+        except Exception:
+            # self.logger.error('获取用户页面失败: ' + full_url)
+            return
+
+        # 有的人将部落设置为隐私，外部不能访问，页面会302转向error
+        if content.status_code != 200:
+            # self.logger.warning(full_url + ': redirect ' + str(content.status_code))
+            responseText = urlparse(unquote(content.headers['Location'])).query.split('=', maxsplit=1)[1]
+            # self.logger.warning('提示: ' + responseText)
+
+           # 若为过于频繁
+            if responseText[0:2] == '您的':
+                # 不能存进userAll, 而是放进needReGain数组中等待重新访问的机会
+                self.needReGain.append(uid)
+                # 如果第一次遇到这种情况，最好睡眠时间快速增长，之后缓慢增长
+                # if self.tooFrequent == 0:
+                #     self.tooFrequent = 4
+                # else:
+                #     self.tooFrequent += self.frequentAdd
+
+                # try:
+                #     item = self.proxies.get(block=False)
+                #     address = 'http://' + item[0] + ':' + item[1]
+                #     self.logger.info('更换代理地址为: ' + address)
+                #     self.proxy = {'http': address}
+                # except Exception:
+                #     self.proxy = None
+                #     self.logger.info('没有地址可用于代理!')
+
+            else:
+                # 若为私有，则存储进userAll
+                # self.usersAll[uid] = None
+                # if self.tooFrequent > 0:
+                #     self.tooFrequent -= self.frequentReduce
+                # self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
+                self.privateUids += 1
+
+            return
+
+        # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
+        # if self.tooFrequent > 0:
+        #     self.tooFrequent -= self.frequentReduce
+        # self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
+
+        try:
+            soup = BeautifulSoup(content.text, "lxml")
+        except Exception:
+            # self.logger.error('解析用户页面失败: ' + full_url)
+            return
+
+        # with open('file_0.txt', 'r', encoding='utf-8') as f:
+        #     content = f.read()
+        #
+        # soup = BeautifulSoup(content, "lxml")
+
+        # 统计
+        countList = soup.find(attrs={'id':'LeftCnt_divUserCount'})
+
+        # 处理一些数据
+        if countList:
+            # 访客数
+            viewCount = countList.find(attrs={'id':'li_viewCount'})
+            if viewCount and len(viewCount) != 0:
+                user.viewCount = viewCount.string
+
+            # 留言数
+            msgCount = countList.find(attrs={'id':'li_msgCount'})
+            if msgCount and len(msgCount) != 0:
+                user.msgCount = msgCount.find('a').string
+
+            # 碎碎数
+            ingCount = countList.find(attrs={'id':'li_ingCount'})
+            if ingCount and len(ingCount) != 0:
+                user.ingCount = ingCount.find('a').string
+
+            # 日志数
+            blogCount = countList.find(attrs={'id':'li_blogCount'})
+            if blogCount and len(blogCount) != 0:
+                user.blogCount = blogCount.find('a').string
+
+            # 听写数
+            listenCount = countList.find(attrs={'id':'li_listenCount'})
+            if listenCount and len(listenCount) != 0:
+                user.listenCount = listenCount.find('a').string
+
+            # 口语数
+            talkCount = countList.find(attrs={'id':'li_talkCount'})
+            if talkCount and len(talkCount) != 0:
+                user.talkCount = talkCount.find('a').string
+
+            # 礼物数
+            giftCount = countList.find(attrs={'id':'li_giftCount'})
+            if giftCount and len(giftCount) != 0:
+                user.giftCount = giftCount.find('a').string
+
+        # 个人信息
+        profileList = soup.find(id='u_profile').find('ul')
+
+        # 继续处理数据
+        if profileList:
+            for child in profileList.children:
+
+                if child.name != 'li':
+                    continue
+
+                text = child.get_text(strip=True)
+                if re.compile(r'性别').search(text):
+                    user.gender = child.find_all('span')[1].string
+
+                if re.compile(r'城市').search(text):
+                    user.city = child.find_all('span')[1].string
+
+                if re.compile(r'昵称').search(text):
+                    child.span.replace_with('')
+                    user.nickName = child.get_text(strip=True)
+
+                if re.compile(r'签名').search(text):
+                    child.span.replace_with('')
+                    user.signature = child.get_text(strip=True)
+
+                if re.compile(r'沪龄').search(text):
+                    # user.yearLast = child.find_all('span')[1].string
+                    user.registDate = child.find_all('span')[1]['title'][5:]
+
+                if re.compile(r'打卡').search(text):
+                    child.span.replace_with('')
+                    user.signinLast = int(child.get_text(strip=True)[0:-1])
+
+                if re.compile(r'登录').search(text):
+                    user.lastSignin = child.find_all('span')[1].string
+
+        # 自我介绍
+        selfIntroPre = soup.find(id='user_Profile_span_reportIt')
+        selfIntro = None
+
+        if selfIntroPre:
+            selfIntro = selfIntroPre.find_previous_sibling()
+
+        if selfIntro and selfIntro.name == 'div':
+            user.selfIntroduction = selfIntro.get_text(strip=True)
+
+        # 城市，因为该部分是注释，所以用bs4找不出来就用re了
+        cityMatch = re.compile(r'<li id="user_Profile_span_city.*?<span>(.*?)</span></li>', re.S).search(content.text)
+        if cityMatch:
+            user.city = cityMatch.group(1)
+
+        # 获取名称
+        userNameHtml = soup.find(id='cont_h1')
+        userNameHtml.a.replace_with('')
+        userNameHtml.span.replace_with('')
+        user.name = userNameHtml.get_text(strip=True)[0:-5].strip()
+
+        try:
+            user.save(self.mysql_session)
+        except Exception:
+            # self.logger.error('存储用户信息失败')
+            pass
+
+        # self.logger.debug(user)
