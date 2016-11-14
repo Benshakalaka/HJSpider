@@ -2,10 +2,10 @@
 from bs4 import BeautifulSoup
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from .views.ListenUsers import ListenUsers
-from .views.ListenArticles import ListenArticles
-from .views.ListenItems import ListenItems
-from .util import Utils
+from views.ListenUsers import ListenUsers
+from views.ListenArticles import ListenArticles
+from views.ListenItems import ListenItems
+from util import Utils
 import requests
 import time
 import logging

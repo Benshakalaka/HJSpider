@@ -1,5 +1,5 @@
-from ..models.ListenArticle import ListenArticle
-from ..util import Utils
+from models.ListenArticle import ListenArticle
+from util import Utils
 from bs4 import BeautifulSoup
 import requests
 import logging

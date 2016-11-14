@@ -1,5 +1,5 @@
-from ..models.ListenUser import ListenUser
-from ..util import Utils
+from models.ListenUser import ListenUser
+from util import Utils
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, unquote
 import requests

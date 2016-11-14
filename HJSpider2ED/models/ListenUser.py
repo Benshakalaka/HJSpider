@@ -1,5 +1,5 @@
 from .models import User
-from ..util import Utils
+from util import Utils
 from datetime import datetime
 
 # 处理多个用户
