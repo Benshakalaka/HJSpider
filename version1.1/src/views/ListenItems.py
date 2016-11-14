@@ -2,6 +2,7 @@ from ..models.ListenItem import ListenItem
 from ..util import Utils
 from bs4 import BeautifulSoup
 import requests
+import logging
 import re
 
 class ListenItems(object):
@@ -34,6 +35,9 @@ class ListenItems(object):
         # 保存当前访问节目的信息
         self.currentItemInfo = None
 
+        # 此模块日志
+        self.logger = logging.getLogger('hjspider.item')
+
     # 获取一个节目的第n页包含多个文章的页面soup对象
     # 是哪个节目无法确定
     # skilfail：表示是否跳过访问失败的页面
@@ -65,6 +69,7 @@ class ListenItems(object):
                     self.currentSoupList = self.getItemsFromUrl(currentFromUrl)
                     return self.getSomeArticlesPageSoup(index=index, skipfail=skipfail)
                 except Exception:
+                    self.logger.error('节目包含页面访问失败，地址： ' + currentFromUrl)
                     # 此页面访问失败后，若再次调用此函数，依旧访问此页面
                     if skipfail == False:
                         self.fromUrlsIndex -= 1
@@ -84,8 +89,8 @@ class ListenItems(object):
             articlesContent = requests.get(itemFullUrl, headers=Utils.headers)
             resSoup = BeautifulSoup(articlesContent.text, "lxml")
         except Exception as e:
-            # self.logger.error('获取某节目某页失败: ' + url)
-            return None
+            self.logger.error('获取某节目某页失败: ' + itemFullUrl)
+            raise Exception
 
         # 如果是第一次访问这个节目（无论哪一页）,那么要做一些被延迟处理的事
         # 1. 持久化节目信息
@@ -94,6 +99,7 @@ class ListenItems(object):
             try:
                 self.currentItemInfo = self.getListenItemInfo(resSoup, itemFullUrl)
             except Exception:
+                self.logger.error('节目信息存储失败: ' + itemFullUrl)
                 raise Exception
 
             self.hasBeenSaved = True
@@ -136,10 +142,12 @@ class ListenItems(object):
         try:
             itemsContent = requests.get(fromUrl, headers=Utils.headers)
             soup = BeautifulSoup(itemsContent.text, "lxml")
+            list = soup.find_all(class_="menu_img fl")
         except Exception:
+            self.logger.error('获取该页所有节目失败: ' + fromUrl)
             raise Exception
 
-        return soup.find_all(class_="menu_img fl")
+        return list
 
 
     # 爬取节目信息
@@ -182,6 +190,7 @@ class ListenItems(object):
         try:
             item.save(self.mysql_session)
         except Exception:
+            self.logger.error('数据库存储节目失败')
             raise Exception
 
         return item

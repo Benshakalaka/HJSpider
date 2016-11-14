@@ -3,6 +3,7 @@ from ..util import Utils
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, unquote
 import requests
+import logging
 import re
 import json
 import time
@@ -13,6 +14,9 @@ class ListenUsers(object):
     output: 用户的uid
     '''
     def __init__(self, mysql_session, loginUser, loginPass):
+        # 此模块日志
+        self.logger = logging.getLogger('hjspider.user')
+
         # 传入的要访问的文章uid
         self.fromUids = []
         # 下一个要访问的uid的下标
@@ -31,10 +35,15 @@ class ListenUsers(object):
         # 上一次访问的用户的信息
         self.lastUserInfo = None
 
-        # 获取信息所需的登陆session
-        self.session = Utils.userLogin(loginUser, loginPass)
+        try:
+            # 获取信息所需的登陆session
+            self.session = Utils.userLogin(loginUser, loginPass)
+        except Exception:
+            self.logger.error('登陆失败!')
         # 数据库
         self.mysql_session = mysql_session
+
+
 
     # 添加文章uid
     def appendFromUid(self, articleUid):
@@ -63,6 +72,7 @@ class ListenUsers(object):
             contentText = content.text
             contentJson = json.loads(contentText)
         except Exception:
+            self.logger.error('获取用户组失败: ' + postUrl)
             raise Exception
 
         self.currentPageIndex += 1
@@ -83,28 +93,12 @@ class ListenUsers(object):
         # 获取数组
         try:
             userInfoContainer = BeautifulSoup(contentJson['d'][2], "lxml")
+            userList = userInfoContainer.find_all(class_='userListItemIcon')
         except Exception:
-            # self.logger.error('BeautifulSoup解析文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(i) + '页失败！')
+            self.logger.error('BeautifulSoup解析文章id的2-8位为' + str(form['param'][1]) + ' 第' + str(self.currentPageIndex - 1) + '页失败！')
             return None
 
-        return userInfoContainer.find_all(class_='userListItemIcon')
-
-        # for user in userList:
-        #     uid = user.find('a')['userid']
-        #     if uid in self.usersAll:
-        #         continue
-        #
-        #     getUserInfoStart = time.time()
-        #
-        #     time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
-        #     if time2sleep >= 2.0:
-        #         self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
-        #     # 太快容易引发大量虚假302
-        #     time.sleep(time2sleep)
-        #     # 更换代理地址
-        #
-        #     self.getUserInfo(uid)
-        #     getUserInfoEnd = time.time()
+        return userList
 
 
     # 获取单个用户的uid
@@ -127,13 +121,12 @@ class ListenUsers(object):
                 return None
 
         getUserInfoStart = time.time()
-        # time2sleep = self.timeIntervalBase * 2 ** self.tooFrequent
-        # if time2sleep >= 2.0:
-        #     self.logger.warning('程序将沉睡'+str(time2sleep) + '秒以避免访问过于频繁')
-        # 太快容易引发大量虚假302
-        # time.sleep(time2sleep)
 
-        self.getUserInfo(userUid)
+        try:
+            self.getUserInfo(userUid)
+        except Exception:
+            raise Exception
+
         getUserInfoEnd = time.time()
 
         return userUid, getUserInfoEnd - getUserInfoStart
@@ -147,59 +140,19 @@ class ListenUsers(object):
         try:
             content = self.session.get(full_url, headers=Utils.headers, allow_redirects=False)
         except Exception:
-            # self.logger.error('获取用户页面失败: ' + full_url)
+            self.logger.error('获取用户页面失败: ' + full_url)
             return
 
         # 有的人将部落设置为隐私，外部不能访问，页面会302转向error
         if content.status_code != 200:
-            # self.logger.warning(full_url + ': redirect ' + str(content.status_code))
-            responseText = urlparse(unquote(content.headers['Location'])).query.split('=', maxsplit=1)[1]
-            # self.logger.warning('提示: ' + responseText)
-
-           # 若为过于频繁
-            if responseText[0:2] == '您的':
-                # 不能存进userAll, 而是放进needReGain数组中等待重新访问的机会
-                self.needReGain.append(uid)
-                # 如果第一次遇到这种情况，最好睡眠时间快速增长，之后缓慢增长
-                # if self.tooFrequent == 0:
-                #     self.tooFrequent = 4
-                # else:
-                #     self.tooFrequent += self.frequentAdd
-
-                # try:
-                #     item = self.proxies.get(block=False)
-                #     address = 'http://' + item[0] + ':' + item[1]
-                #     self.logger.info('更换代理地址为: ' + address)
-                #     self.proxy = {'http': address}
-                # except Exception:
-                #     self.proxy = None
-                #     self.logger.info('没有地址可用于代理!')
-
-            else:
-                # 若为私有，则存储进userAll
-                # self.usersAll[uid] = None
-                # if self.tooFrequent > 0:
-                #     self.tooFrequent -= self.frequentReduce
-                # self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
-                self.privateUids += 1
-
+            self.privateUids += 1
             return
-
-        # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
-        # if self.tooFrequent > 0:
-        #     self.tooFrequent -= self.frequentReduce
-        # self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
 
         try:
             soup = BeautifulSoup(content.text, "lxml")
         except Exception:
-            # self.logger.error('解析用户页面失败: ' + full_url)
+            self.logger.error('解析用户页面失败: ' + full_url)
             return
-
-        # with open('file_0.txt', 'r', encoding='utf-8') as f:
-        #     content = f.read()
-        #
-        # soup = BeautifulSoup(content, "lxml")
 
         # 统计
         countList = soup.find(attrs={'id':'LeftCnt_divUserCount'})
@@ -301,7 +254,7 @@ class ListenUsers(object):
         try:
             user.save(self.mysql_session)
         except Exception:
-            # self.logger.error('存储用户信息失败')
-            pass
+            self.logger.error('存储用户信息失败')
+            raise Exception
 
         # self.logger.debug(user)

@@ -3,6 +3,7 @@ import re
 import time
 import requests
 import json
+import logging
 from datetime import datetime, timedelta
 
 class Utils(object):
@@ -138,6 +139,7 @@ class Utils(object):
         except Exception:
             raise Exception
 
+        print('登陆成功啦')
         return session
 
     # 获取页数(几处有几页)

@@ -2,6 +2,7 @@ from ..models.ListenArticle import ListenArticle
 from ..util import Utils
 from bs4 import BeautifulSoup
 import requests
+import logging
 import re
 
 class ListenArticles(object):
@@ -27,6 +28,9 @@ class ListenArticles(object):
 
         # 上一次访问的文章的实例
         self.lastArticle = None
+
+        # 此模块日志
+        self.logger = logging.getLogger('hjspider.article')
 
     # 添加一个fromUrl（包含很多文章的一个页面）
     # 返回True表示添加成功，失败则表示重复
@@ -54,11 +58,13 @@ class ListenArticles(object):
                 self.fromUrlsIndex += 1
                 return self.getOneArticlePageSoup()
             except Exception:
+                self.logger.warning('获取文章失败，地址： ' + self.fromUrls[self.fromUrlsIndex])
                 return None
 
         try:
             self.lastArticle = self.getListenArticleInfo(article, articleFullUrl, self.fromUrls[self.fromUrlsIndex])
         except Exception:
+            self.logger.error('文章信息获取/存储失败，地址: ' + articleFullUrl)
             raise Exception
 
         return self.lastArticle.uid
@@ -67,7 +73,12 @@ class ListenArticles(object):
 
     # 根据传来的包含多文章页面的soup对象，获取此页的所有文章对象
     def getArticlesFromUrl(self):
-        return self.fromUrlsSoup[self.fromUrlsIndex].find_all(class_='article_list_item')
+        try:
+            list = self.fromUrlsSoup[self.fromUrlsIndex].find_all(class_='article_list_item')
+        except Exception:
+            raise Exception
+
+        return list
 
     # 爬取文章信息
     # 某文章对象的soup实s.例， 文章地址， 所属节目地址(地址包含某页信息)
@@ -129,6 +140,7 @@ class ListenArticles(object):
         try:
             article.save(self.mysql_session)
         except Exception:
+            self.logger.error('数据库存储文章失败!')
             raise Exception
 
         return article
