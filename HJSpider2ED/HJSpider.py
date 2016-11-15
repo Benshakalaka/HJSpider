@@ -42,6 +42,8 @@ class Spider(object):
 
         # 网站登陆所需配置
         self.start_url = self.config.get('SPIDER', 'startUrl')
+        self.currentTotalPageCounts = 0
+        self.currentPageIndex = 1
         self.user_name = self.config_privacy.get(userCode, 'username')
         self.user_pass = self.config_privacy.get(userCode, 'password')
 
@@ -53,7 +55,7 @@ class Spider(object):
         # 文章对象
         self.articles = ListenArticles(self.mysql_session)
         # 用户对象
-        self.users = ListenUsers(self.mysql_session, self.user_name, self.user_pass)
+        # self.users = ListenUsers(self.mysql_session, self.user_name, self.user_pass)
 
         try:
             # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
@@ -101,47 +103,49 @@ class Spider(object):
         self.logger.setLevel(logging.DEBUG)
 
 
-    # 获取有节目的所有页面
-    def getPagesHasItems(self):
+    # 获取某语种的某页, index可设置起始页，下一次重复调用index将不再可用
+    def getPagesHasItems(self, index=0):
+        if self.currentPageIndex != 1 and self.currentPageIndex > self.currentTotalPageCounts:
+            self.currentTotalPageCounts = 0
+            self.currentPageIndex = 1
+            return None
 
-        headers = {
-            "Host": "ting.hujiang.com",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Accept-Encoding": "gzip, deflate, sdch",
-            "Accept-Language": "zh-CN,zh;q=0.8"
-        }
+        if self.currentTotalPageCounts == 0:
+            try:
+                index = max(0, int(index))
+            except Exception:
+                self.logger.error('起始页为整数.')
+                exit(-1)
+            self.currentPageIndex = index if index is not 0 else self.currentPageIndex
 
+        fullUrl = self.start_url + 'page' + str(self.currentPageIndex) + '/'
         try:
-            mainPage = requests.get('http://ting.hujiang.com/menu/en/', headers=headers)
+            mainPage = requests.get(fullUrl, headers=Utils.headers)
             soup = BeautifulSoup(mainPage.text, "lxml")
+            self.currentPageIndex += 1
         except Exception:
             self.logger.error('节目页面获取失败!')
             return
 
-        try:
-            # 找几页
-            maxPageNum = Utils.getPageCount(soup)
-        except Exception as e:
-            self.logger.error('获取最大页数失败，默认只访问第一页！')
-            maxPageNum = 1
+        if self.currentTotalPageCounts == 0:
+            try:
+                # 找几页
+                self.currentTotalPageCounts = Utils.getPageCount(soup)
+            except Exception as e:
+                self.logger.error('获取最大页数失败，默认只访问第一页！')
+                self.currentTotalPageCounts = 1
+            self.logger.info('此次访问共有' + str(self.currentTotalPageCounts) + '页')
 
-        self.logger.info('此次访问共有' + str(maxPageNum) + '页')
+        return fullUrl
 
-        # 开始对每一页的节目收集
-        for i in range(int(maxPageNum)):
-            listenItemsPageUrl = Utils.listenHost + '/menu/en/page' + str(i + 1) + '/'
-            self.listenPages.append(listenItemsPageUrl)
-
-            self.logger.info('当前访问页面：' + listenItemsPageUrl)
-            self.getListenItems(listenItemsPageUrl)
-
-            if self.isOverLimited:
-                break
 
     # run
     def run(self):
         # flush logger
+        while True:
+            url = self.getPagesHasItems('5')
+            if url is not None:self.logger.info('地址为: ' + url)
+            else:break
         logging.shutdown()
         return None
 
