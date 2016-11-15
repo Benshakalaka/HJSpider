@@ -10,7 +10,7 @@ class ListenArticles(object):
     input: 包含许多文章的页面soup
     output: 某文章的uid
     '''
-    def __init__(self, mysql_session):
+    def __init__(self, mysql_session, limit):
         # 获取很多文章页面的地址列表与页面soup对象列表
         self.fromUrls = list()
         self.fromUrlsSoup = list()
@@ -20,6 +20,10 @@ class ListenArticles(object):
         self.articleUrls = set()
         # 与数据库的连接
         self.mysql_session = mysql_session
+        # 访问文章数量限制
+        self.limit = limit
+        # 判断是否已超出限制
+        self.isOverLimited = False
 
         # 存储的类型为beautifulsoup的函数find_all返回的文章对象列表
         self.currentSoupList = []
@@ -66,6 +70,9 @@ class ListenArticles(object):
         except Exception:
             self.logger.error('文章信息获取/存储失败，地址: ' + articleFullUrl)
             raise Exception
+
+        if self.getArticleSize() == self.limit:
+            self.isOverLimited = True
 
         return self.lastArticle.uid
 
@@ -152,3 +159,9 @@ class ListenArticles(object):
     # 获取上一次的文章实例以获取更多信息
     def getArticle(self):
         return self.lastArticle
+
+    # 文章数量是否超出限制
+    def articleIsOverLimited(self):
+        if self.isOverLimited is True:
+            self.logger.warning('文章数量超出限制！')
+        return self.isOverLimited

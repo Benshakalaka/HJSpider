@@ -79,3 +79,24 @@ class ListenUser(object):
             session.commit()
         except Exception:
             raise Exception
+
+    def __str__(self):
+        infoShow = '用户: '
+        infoShow += ('uid : ' + self.uid + '; ')
+        infoShow += ('name : ' + self.name + '; ')
+        infoShow += ('nickName : ' + self.nickName + '; ')
+        infoShow += ('gender : ' + str(self.gender) + '; ')
+        # infoShow += ('yearLast : ' + self.yearLast + '; ')
+        infoShow += ('city : ' + self.city + '; ')
+        infoShow += ('registDate : ' + self.registDate + '; ')
+        infoShow += ('signinLast : ' + str(self.signinLast) + '; ')
+        infoShow += ('lastSignin : ' + self.lastSignin + '; ')
+        # infoShow += ('viewCount : ' + str(self.viewCount) + '; ')
+        # infoShow += ('msgCount : ' + str(self.msgCount) + '; ')
+        # infoShow += ('ingCount : ' + str(self.ingCount) + '; ')
+        # infoShow += ('blogCount : ' + str(self.blogCount) + '; ')
+        # infoShow += ('listenCount : ' + str(self.listenCount) + '; ')
+        # infoShow += ('talkCount : ' + str(self.talkCount) + '; ')
+        # infoShow += ('giftCount : ' + str(self.giftCount) + '; ')
+        infoShow += ('selfIntroduction : [[[' + self.selfIntroduction + ']]]')
+        return infoShow

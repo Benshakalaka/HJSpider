@@ -50,13 +50,6 @@ class Spider(object):
         # 日志初始化
         self.loggerInit()
 
-        # 节目对象
-        self.items = ListenItems(self.mysql_session)
-        # 文章对象
-        self.articles = ListenArticles(self.mysql_session)
-        # 用户对象
-        # self.users = ListenUsers(self.mysql_session, self.user_name, self.user_pass)
-
         try:
             # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
             self.listenItems_Max = int(self.config.get('SPIDER', 'listenItemsMax'))
@@ -69,6 +62,15 @@ class Spider(object):
         except Exception as e:
             self.logger.error('各种限制请使用整型或是整型字符串！')
             exit(-1)
+
+        # 节目对象
+        self.items = ListenItems(self.mysql_session, self.listenItems_Max)
+        # 文章对象
+        self.articles = ListenArticles(self.mysql_session, self.listenArticlesMax)
+        # 用户对象
+        # self.users = ListenUsers(self.mysql_session, self.userLimit_Max, self.user_name, self.user_pass)
+
+        self.isOverLimited = False
 
     # 日志初始化
     def loggerInit(self):
@@ -141,11 +143,41 @@ class Spider(object):
 
     # run
     def run(self):
-        # flush logger
+        # loop: 获取某语种的包含节目的页面
         while True:
-            url = self.getPagesHasItems('5')
-            if url is not None:self.logger.info('地址为: ' + url)
-            else:break
+            url = self.getPagesHasItems(16)
+            if url is None:
+                break
+            self.logger.info('访问此语种页面：' + url)
+
+            # loop: 存储节目信息， 获取某节目包含文章的页面soup对象
+            self.items.appendFromUrl(url)
+            while True:
+                itemRet = self.items.getSomeArticlesPageSoup()
+                if itemRet is None:
+                    break
+                itemUrl, itemSoup = itemRet
+                self.logger.info('访问节目页面：' + itemUrl)
+
+                # loop: 存储文章信息， 获取该文章的uid
+                self.articles.appendFromUrl(itemUrl, itemSoup)
+                while True:
+                    articleUid = self.articles.getOneArticlePageSoup()
+                    if articleUid is None:
+                        break
+                    self.logger.info('正在访问文章的UID是：' + articleUid)
+
+                    if self.articles.articleIsOverLimited() is True:
+                        self.isOverLimited = True
+                        break
+
+                if self.isOverLimited is True or self.items.itemIsOverLimited() is True:
+                    self.isOverLimited = True
+                    break
+
+            if self.isOverLimited is True:
+                break
+
         logging.shutdown()
         return None
 

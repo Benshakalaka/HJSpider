@@ -31,7 +31,7 @@ class ListenItem(object):
     @property
     def item(self):
         '获取节目名称'
-        return self.url.split('/')[-2]
+        return self.url.split('/')[-3]
 
     def __setattr__(self, key, value):
         # 将x分x秒转换为秒
@@ -55,3 +55,18 @@ class ListenItem(object):
             session.commit()
         except Exception:
             raise Exception
+
+    def __str__(self):
+        infoShow = '节目: '
+        infoShow += ('name : ' + self.item + '; ')
+        infoShow += ('title : ' + self.title + '; ')
+        infoShow += ('itemImgUrl : ' + self.itemImgUrl + '; ')
+        infoShow += ('introduction : ' + self.introduction + '; ')
+        for t in self.type:
+            infoShow += ('type : ' + t + '; ')
+        infoShow += ('difficult : ' + self.difficult + '; ')
+        infoShow += ('updateRate : ' + self.updateRate + '; ')
+        infoShow += ('averageComsume : ' + str(self.averageComsume) + '; ')
+        infoShow += ('averageScore : ' + str(self.averageScore) + '; ')
+        # infoShow += ('articleAmount : ' + str(self.articleAmount) + '; ')
+        return infoShow

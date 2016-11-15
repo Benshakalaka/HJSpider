@@ -13,7 +13,7 @@ class ListenUsers(object):
     input: 某文章的uid
     output: 用户的uid
     '''
-    def __init__(self, mysql_session, loginUser, loginPass):
+    def __init__(self, mysql_session, limit, loginUser, loginPass):
         # 此模块日志
         self.logger = logging.getLogger('hjspider.user')
 
@@ -25,6 +25,8 @@ class ListenUsers(object):
         self.userUids = set()
         # 私有用户数量
         self.privateUids = 0
+        # 访问用户数量限制
+        self.limit = limit
 
         # 当前的用户数组
         self.currentUsersSoupList = []

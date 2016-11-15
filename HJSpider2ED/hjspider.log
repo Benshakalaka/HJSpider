@@ -1,0 +1,4 @@
+2016-11-15 23:09:09,826 HJSpider.py[line:139] INFO:  此次访问共有16页
+2016-11-15 23:09:09,827 HJSpider.py[line:151] INFO:  访问此语种页面：http://ting.hujiang.com/menu/jp/page16/
+2016-11-15 23:09:11,333 ListenItems.py[line:211] DEBUG:  节目: name : dmtxhgtzs; title : 滑头鬼之孙; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p9903.jpg; introduction : 主人公奴良陆生看似是普通的中学生，实际上是妖怪“滑头鬼”的孙子，继承了四分之一滑头鬼之血。但他就想过平静生活，不愿继承奴良组三代目。一天，陆生的人类朋友被妖怪袭击，为保护他们觉醒了自身的妖怪之血。四年后，陆生虽然仍希望作为人类生活，但是为了统率奴良组而与妖怪世界相对。; type : 娱乐; type : 动漫; difficult : 初中级; updateRate : 已经完结; averageComsume : 563; averageScore : 77.77%; 
+2016-11-15 23:09:11,414 HJSpider.py[line:160] INFO:  访问节目页面：http://ting.hujiang.com/dmtxhgtzs/page1/

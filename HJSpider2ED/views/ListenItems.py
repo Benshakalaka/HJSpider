@@ -11,7 +11,7 @@ class ListenItems(object):
     output: 包含多个文章的某个页面的soup对象实例
     '''
 
-    def __init__(self, mysql_session):
+    def __init__(self, mysql_session, limit):
         # 获取很多节目页面的地址列表
         self.fromUrls = list()
         # 下一个要访问的下标
@@ -20,6 +20,10 @@ class ListenItems(object):
         self.itemUrls = set()
         # 与数据库的连接
         self.mysql_session = mysql_session
+        # 访问节目数量限制
+        self.limit = limit
+        # 是否已经超时限制
+        self.isOverLimited = False
 
         # 存储的类型为beautifulsoup的函数find_all返回的列表
         self.currentSoupList = []
@@ -73,10 +77,12 @@ class ListenItems(object):
                     # 此页面访问失败后，若再次调用此函数，依旧访问此页面
                     if skipfail == False:
                         self.fromUrlsIndex -= 1
-                    return None
+                    raise Exception
 
             # 既然换了节目，就要初始化一些属性
             self.currentItemInit()
+        else:
+            itemUrl = Utils.listenHost + self.currentSoup["href"]
 
         # 已经获取到了节目首页，现在要根据传入的index获取页面
         # index为0则表示自增
@@ -119,7 +125,12 @@ class ListenItems(object):
         if self.currentPageIndex > self.currentTotalPageCounts:
             self.currentSoup = None
 
-        return itemFullUrl, resSoup
+        # 如果当前节目访问完毕，且数量达到限制，那么设置超出位
+        if self.currentSoup is None and self.getItemsSize() == self.limit:
+            self.isOverLimited = True
+
+        # 节目完整url（包含页码）， 该页的soup
+        return (itemFullUrl, resSoup)
 
 
 
@@ -179,6 +190,10 @@ class ListenItems(object):
                 attrLi.span.replace_with('')
                 item.updateRate = attrLi.get_text(strip=True)
 
+            if re.compile(r'状　态').search(text):
+                attrLi.span.replace_with('')
+                item.updateRate = attrLi.get_text(strip=True)
+
             if re.compile(r'均用时').search(text):
                 attrLi.span.replace_with('')
                 item.averageComsume = attrLi.get_text(strip=True)
@@ -193,6 +208,7 @@ class ListenItems(object):
             self.logger.error('数据库存储节目失败')
             raise Exception
 
+        self.logger.debug(item)
         return item
 
     # 已访问的节目数量
@@ -214,3 +230,9 @@ class ListenItems(object):
     # 获取当前访问节目信息
     def getItem(self):
         return self.currentItemInfo
+
+    # 节目数量是否超出限制
+    def itemIsOverLimited(self):
+        if self.isOverLimited is True:
+            self.logger.warning('节目数量超出限制！')
+        return self.isOverLimited

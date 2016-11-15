@@ -21,18 +21,6 @@ import configparser
 class Spider(object):
     # 初始化
     def __init__(self, userCode):
-        self.proxies = Queue()
-        with open('proxy.txt', 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-            for line in lines:
-                tup = line.split(':')
-                ip = tup[0]
-                port = tup[1][0:-1]
-                self.proxies.put((ip, port))
-
-        self.proxy = None
-
-
         self.config = configparser.ConfigParser()
         self.config_privacy = configparser.ConfigParser()
         # 用户名密码配置文件username,password两个属性
@@ -552,7 +540,7 @@ class Spider(object):
 
         full_url = self.userHost + '/u/' + uid + '/'
         try:
-            content = self.session.get(full_url, headers=headers, allow_redirects=False, proxies=self.proxy)
+            content = self.session.get(full_url, headers=headers, allow_redirects=False)
         except Exception:
             self.logger.error('获取用户页面失败: ' + full_url)
             return
@@ -572,15 +560,6 @@ class Spider(object):
                     self.tooFrequent = 4
                 else:
                     self.tooFrequent += self.frequentAdd
-
-                try:
-                    item = self.proxies.get(block=False)
-                    address = 'http://' + item[0] + ':' + item[1]
-                    self.logger.info('更换代理地址为: ' + address)
-                    self.proxy = {'http': address}
-                except Exception:
-                    self.proxy = None
-                    self.logger.info('没有地址可用于代理!')
 
             else:
                 # 若为私有，则存储进userAll

@@ -67,3 +67,21 @@ class ListenArticle(object,):
             session.commit()
         except Exception:
             raise Exception
+
+    def __str__(self):
+        infoShow = '文章: '
+        infoShow += ('uid : ' + self.uid + '; ')
+        infoShow += ('type : ' + self.type + '; ')
+        infoShow += ('title : ' + self.title + '; ')
+        infoShow += ('commentCount : ' + str(self.commentCount) + '; ')
+        infoShow += ('averageScore : ' + str(self.averageScore) + '; ')
+        infoShow += ('timeLast : ' + str(self.timeLast) + '; ')
+        # infoShow += ('listenCount : ' + str(self.listenCount) + '; ')
+        infoShow += ('publishTime : ' + self.publishTime + '; ')
+        infoShow += ('contributorId : ' + str(self.contributorId) + '; ')
+        infoShow += ('difficultLevel : ' + self.difficultLevel + '; ')
+        infoShow += ('rewards : ' + str(self.rewards) + '; ')
+        # infoShow += ('downloadUrl : ' + str(self.downloadUrl) + '; ')
+        infoShow += ('tags : ' + str(self.tags) + '; ')
+
+        return infoShow
