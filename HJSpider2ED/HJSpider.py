@@ -171,6 +171,7 @@ class Spider(object):
 
                     # loop: 存储用户信息， 获取该用户的uid
                     self.users.appendFromUid(articleUid)
+                    self.users.appendUidPriority(contributorId)
                     while True:
                         userRet = self.users.getOneUserUid()
                         if userRet is None:

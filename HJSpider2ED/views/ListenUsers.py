@@ -29,6 +29,8 @@ class ListenUsers(object):
         self.limit = limit
         # 判断是否已超出限制
         self.isOverLimited = False
+        # 因为某种原因添加进来的uid，需要提前访问（比如文章作者）
+        self.uidsPriority = []
 
         # 当前的用户数组
         self.currentUsersSoupList = []
@@ -108,22 +110,28 @@ class ListenUsers(object):
 
     # 获取单个用户的uid
     def getOneUserUid(self):
-        try:
-            while True:
-                user = self.currentUsersSoupList.pop()
-                userUid = user.find('a')['userid']
-                if userUid not in self.userUids:
-                    self.userUids.add(userUid)
-                    break
-        except Exception:
-            if self.fromUidsIndex >= len(self.fromUids):
-                return None
+
+        # 首先从这个列表获取uid，没有再去找
+        if len(self.uidsPriority) != 0:
+            userUid = self.uidsPriority.pop()
+            self.userUids.add(userUid)
+        else:
             try:
-                articleUid = self.fromUids.pop()
-                self.currentUsersSoupList = self.getUsersFromUid(articleUid)
-                return self.getOneUserUid()
+                while True:
+                    user = self.currentUsersSoupList.pop()
+                    userUid = user.find('a')['userid']
+                    if userUid not in self.userUids:
+                        self.userUids.add(userUid)
+                        break
             except Exception:
-                return None
+                if self.fromUidsIndex >= len(self.fromUids):
+                    return None
+                try:
+                    articleUid = self.fromUids.pop()
+                    self.currentUsersSoupList = self.getUsersFromUid(articleUid)
+                    return self.getOneUserUid()
+                except Exception:
+                    return None
 
         getUserInfoStart = time.time()
 
@@ -142,9 +150,9 @@ class ListenUsers(object):
 
     # 获取用户信息
     def getUserInfo(self, uid):
-        user = ListenUser(uid)
-
         full_url = Utils.userHost + '/u/' + uid + '/'
+        user = ListenUser(full_url)
+
         try:
             content = self.session.get(full_url, headers=Utils.headers, allow_redirects=False)
         except Exception:
@@ -268,9 +276,19 @@ class ListenUsers(object):
         self.logger.debug(user)
         return user
 
-    # 获取已访问用户数量
+    # 因为某种原因添加进来的uid，需要优先访问
+    def appendUidPriority(self, uid):
+        # 不重复添加
+        if uid in self.uidsPriority:
+            return
+        # 不添加已访问过的用户
+        if uid in self.userUids:
+            return
+        self.uidsPriority.append(uid)
+
+    # 获取已访问用户数量（不包括设置未隐私的用户）
     def getUserSize(self):
-        return len(self.userUids)
+        return len(self.userUids) - self.privateUids
 
     # 获取上一次访问的用户信息
     def getUser(self):

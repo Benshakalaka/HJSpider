@@ -53,7 +53,7 @@ class Utils(object):
         timeValue = int(re.compile(r'(\d+)').search(string).group(1))
         timeObj = None
 
-        for type in ['年', '月', '天', '小时', '分钟', '秒']:
+        for type in ['年', '月', '周','天', '小时', '分钟', '秒']:
             if string.find(type) != -1:
                 current = datetime.now()
 
@@ -61,6 +61,8 @@ class Utils(object):
                     timeObj = current - timedelta(days=(timeValue * 365))
                 elif type is '月':
                     timeObj = current - timedelta(days=(timeValue * 30))
+                elif type is '周':
+                    timeObj = current - timedelta(days=(timeValue * 7))
                 elif type is '天':
                     timeObj = current - timedelta(days=timeValue)
                 elif type is '小时':
