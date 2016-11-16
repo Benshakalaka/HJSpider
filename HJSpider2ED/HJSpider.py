@@ -68,7 +68,7 @@ class Spider(object):
         # 文章对象
         self.articles = ListenArticles(self.mysql_session, self.listenArticlesMax)
         # 用户对象
-        # self.users = ListenUsers(self.mysql_session, self.userLimit_Max, self.user_name, self.user_pass)
+        self.users = ListenUsers(self.mysql_session, self.userLimit_Max, self.user_name, self.user_pass)
 
         self.isOverLimited = False
 
@@ -162,12 +162,27 @@ class Spider(object):
                 # loop: 存储文章信息， 获取该文章的uid
                 self.articles.appendFromUrl(itemUrl, itemSoup)
                 while True:
-                    articleUid = self.articles.getOneArticlePageSoup()
-                    if articleUid is None:
+                    articleRet = self.articles.getOneArticlePageSoup()
+                    if articleRet is None:
                         break
-                    self.logger.info('正在访问文章的UID是：' + articleUid)
 
-                    if self.articles.articleIsOverLimited() is True:
+                    articleUid, contributorId = articleRet
+                    self.logger.info('正在访问文章的UID是：%s  贡献者为：%s' % (articleUid, contributorId))
+
+                    # loop: 存储用户信息， 获取该用户的uid
+                    self.users.appendFromUid(articleUid)
+                    while True:
+                        userRet = self.users.getOneUserUid()
+                        if userRet is None:
+                            break
+                        userUid, timeDelta = userRet
+                        self.logger.info('获取的用户uid为：%s  消耗时间：%s' % (str(userUid), str(timeDelta)))
+
+                        if self.users.userIsOverLimited() is True:
+                            self.isOverLimited = True
+                            break
+
+                    if self.isOverLimited is True or self.articles.articleIsOverLimited() is True:
                         self.isOverLimited = True
                         break
 

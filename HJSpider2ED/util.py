@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 
 class Utils(object):
 
+    logger = logging.getLogger('hjspider.utils')
+
     # 文章相关host
     listenHost = 'http://ting.hujiang.com'
     # 用户相关host
@@ -18,6 +20,13 @@ class Utils(object):
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate, sdch",
         "Accept-Language": "zh-CN,zh;q=0.8"
+    }
+    # json请求所需headers
+    jsonHeaders = {
+        "Host": "ting.hujiang.com",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36",
+        "Content-Type": "application/json; charset=UTF-8",
+        "Content - Length": "83"
     }
 
     # 获取md5加密后的值
@@ -102,18 +111,9 @@ class Utils(object):
 
         loginUrl = Utils.urlCreate(loginUrl, queryParams)
 
-        headers = {
-            'Host': 'pass.hujiang.com',
-            'Connection': 'keep-alive',
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate, sdch, br',
-            'Accept-Language': 'zh-CN,zh;q=0.8',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36'
-        }
-
         try:
             session = requests.session()
-            loginRespond = session.get(loginUrl, headers=headers)
+            loginRespond = session.get(loginUrl, headers=Utils.headers)
         except Exception:
             raise Exception
 
@@ -135,11 +135,11 @@ class Utils(object):
         syncUrl = Utils.urlCreate(syncUrl, syncParams)
 
         try:
-            session.get(syncUrl, headers=headers)
+            session.get(syncUrl, headers=Utils.headers)
         except Exception:
             raise Exception
 
-        print('登陆成功啦')
+        Utils.logger.info('登陆成功...')
         return session
 
     # 获取页数(几处有几页)

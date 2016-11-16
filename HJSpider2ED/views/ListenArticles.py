@@ -66,7 +66,7 @@ class ListenArticles(object):
                 return None
 
         try:
-            self.lastArticle = self.getListenArticleInfo(article, articleFullUrl, self.fromUrls[self.fromUrlsIndex])
+            self.lastArticle, contributorId = self.getListenArticleInfo(article, articleFullUrl, self.fromUrls[self.fromUrlsIndex - 1])
         except Exception:
             self.logger.error('文章信息获取/存储失败，地址: ' + articleFullUrl)
             raise Exception
@@ -74,7 +74,7 @@ class ListenArticles(object):
         if self.getArticleSize() == self.limit:
             self.isOverLimited = True
 
-        return self.lastArticle.uid
+        return self.lastArticle.uid, contributorId
 
 
 
@@ -134,10 +134,7 @@ class ListenArticles(object):
                 article.rewards = li.find_all('span')[1].get_text(strip=True)[0:-2]
 
             elif re.compile(r'贡献').search(text):
-                article.contributorId = li.find('a')['href'].split('/')[1][1:]
-                # ***为了数据的一致性(外键的存在)，这里需要提前获取contributor用户,否则无法存储article
-                if article.contributorId not in self.usersAll:
-                    self.getUserInfo(article.contributorId)
+                contributorId = li.find('a')['href'].split('/')[1][1:]
 
             # 登陆后才能下载
             #elif re.compile(r'下载').search(text):
@@ -150,7 +147,9 @@ class ListenArticles(object):
             self.logger.error('数据库存储文章失败!')
             raise Exception
 
-        return article
+        self.logger.debug(article)
+
+        return article, contributorId
 
     # 获取当前已访问的文章
     def getArticleSize(self):

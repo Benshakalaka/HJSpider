@@ -27,6 +27,8 @@ class ListenUsers(object):
         self.privateUids = 0
         # 访问用户数量限制
         self.limit = limit
+        # 判断是否已超出限制
+        self.isOverLimited = False
 
         # 当前的用户数组
         self.currentUsersSoupList = []
@@ -42,6 +44,7 @@ class ListenUsers(object):
             self.session = Utils.userLogin(loginUser, loginPass)
         except Exception:
             self.logger.error('登陆失败!')
+            exit(-1)
         # 数据库
         self.mysql_session = mysql_session
 
@@ -56,11 +59,11 @@ class ListenUsers(object):
 
     # 根据传入的uid获取用户数组（BeautifulSoup实例数组）
     def getUsersFromUid(self, articleUid):
-        if self.currentPageIndex > self.currentTotalPageCounts:
+        if self.currentPageIndex != 1 and self.currentPageIndex > self.currentTotalPageCounts:
             return None
 
         #根据传入的uid获取ajax所需的参数
-        commentId = articleUid[2:8]
+        commentId = articleUid[2:len(articleUid)-4]
         postUrl = 'http://ting.hujiang.com/ajax.do'
 
         form = {}
@@ -70,7 +73,7 @@ class ListenUsers(object):
         form['pageName'] = None
 
         try:
-            content = requests.post(postUrl, data=json.dumps(form), headers=Utils.headers)
+            content = requests.post(postUrl, data=json.dumps(form), headers=Utils.jsonHeaders)
             contentText = content.text
             contentJson = json.loads(contentText)
         except Exception:
@@ -125,11 +128,14 @@ class ListenUsers(object):
         getUserInfoStart = time.time()
 
         try:
-            self.getUserInfo(userUid)
+            self.lastUserInfo = self.getUserInfo(userUid)
         except Exception:
             raise Exception
 
         getUserInfoEnd = time.time()
+
+        if self.getUserSize() == self.limit:
+            self.isOverLimited = True
 
         return userUid, getUserInfoEnd - getUserInfoStart
 
@@ -259,4 +265,19 @@ class ListenUsers(object):
             self.logger.error('存储用户信息失败')
             raise Exception
 
-        # self.logger.debug(user)
+        self.logger.debug(user)
+        return user
+
+    # 获取已访问用户数量
+    def getUserSize(self):
+        return len(self.userUids)
+
+    # 获取上一次访问的用户信息
+    def getUser(self):
+        return self.lastUserInfo
+
+    # 判断是否超出限制
+    def userIsOverLimited(self):
+        if self.isOverLimited is True:
+            self.logger.warning('用户数量超出限制！')
+        return self.isOverLimited

@@ -39,14 +39,14 @@ class Article(Base):
     __tablename__ = 'article'
 
     article_id = Column(String(15), primary_key=True, nullable=False)
-    item = Column(String(30), ForeignKey('item.item'))
+    item = Column(String(30))
     type = Column(String(10))
     title = Column(String(100))
     commentCount = Column(Integer)
     averageScore = Column(Float)
     timeLast = Column(Integer)
     publishTime = Column(DateTime)
-    contributor = Column(String(10), ForeignKey('user.user_id'))
+    contributor = Column(String(10))
     difficultLevel = Column(String(10))
     rewards = Column(Integer)
     downloadUrl = Column(String(80))
@@ -106,8 +106,8 @@ class Models(object):
 
 if __name__ == '__main__':
     models = Models(Base, Engin)
-    # models.createAll()
     # models.dropAll()
+    # models.createAll()
     # models.clearAllData()
 
 
