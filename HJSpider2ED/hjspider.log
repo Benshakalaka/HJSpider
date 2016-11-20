@@ -1,7 +1,521 @@
-2016-11-16 17:03:41,255 util.py[line:142] INFO:  登陆成功...
-2016-11-16 17:03:41,608 HJSpider.py[line:139] INFO:  此次访问共有16页
-2016-11-16 17:03:41,608 HJSpider.py[line:151] INFO:  访问此语种页面：http://ting.hujiang.com/menu/jp/page16/
-2016-11-16 17:03:42,541 ListenItems.py[line:211] DEBUG:  节目: name : dmtxhgtzs; title : 滑头鬼之孙; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p9903.jpg; introduction : 主人公奴良陆生看似是普通的中学生，实际上是妖怪“滑头鬼”的孙子，继承了四分之一滑头鬼之血。但他就想过平静生活，不愿继承奴良组三代目。一天，陆生的人类朋友被妖怪袭击，为保护他们觉醒了自身的妖怪之血。四年后，陆生虽然仍希望作为人类生活，但是为了统率奴良组而与妖怪世界相对。; type : 娱乐; type : 动漫; difficult : 初中级; updateRate : 已经完结; averageComsume : 563; averageScore : 77.77%; 
-2016-11-16 17:03:42,567 HJSpider.py[line:160] INFO:  访问节目页面：http://ting.hujiang.com/dmtxhgtzs/page1/
-2016-11-16 17:03:43,188 ListenArticles.py[line:150] DEBUG:  文章: uid : 15465892001; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第六回（1）; commentCount : 1; averageScore : 87; timeLast : 87; publishTime : 2012/7/17 9:00:10; contributorId : ; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
-2016-11-16 17:03:43,188 HJSpider.py[line:170] INFO:  正在访问文章的UID是：15465892001  贡献者为：4397380
+2016-11-20 16:24:01,430 util.py[line:144] INFO:  登陆成功...
+2016-11-20 16:24:01,893 HJSpider.py[line:159] INFO:  此次访问共有16页
+2016-11-20 16:24:01,893 HJSpider.py[line:171] INFO:  **************************************************访问此语种页面：http://ting.hujiang.com/menu/jp/page16/
+2016-11-20 16:24:02,919 ListenItems.py[line:211] DEBUG:  节目: name : dmtxhgtzs; title : 滑头鬼之孙; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p9903.jpg; introduction : 主人公奴良陆生看似是普通的中学生，实际上是妖怪“滑头鬼”的孙子，继承了四分之一滑头鬼之血。但他就想过平静生活，不愿继承奴良组三代目。一天，陆生的人类朋友被妖怪袭击，为保护他们觉醒了自身的妖怪之血。四年后，陆生虽然仍希望作为人类生活，但是为了统率奴良组而与妖怪世界相对。; type : 娱乐; type : 动漫; difficult : 初中级; updateRate : 已经完结; averageComsume : 563; averageScore : 77.77%; 
+2016-11-20 16:24:02,926 HJSpider.py[line:180] INFO:  ******************************访问节目页面：http://ting.hujiang.com/dmtxhgtzs/page1/
+2016-11-20 16:24:03,475 ListenArticles.py[line:151] DEBUG:  文章: uid : 15465892001; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第六回（1）; commentCount : 1; averageScore : 87; timeLast : 87; publishTime : 2012/7/17 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:24:03,475 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15465892001  贡献者为：4397380
+2016-11-20 16:24:04,620 ListenUsers.py[line:355] DEBUG:  用户: uid : 4397380; name : korota; nickName : 大头; gender : 0; city : 上海; registDate : 2010/2/3 23:05:00; signinLast : 453; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:24:04,620 HJSpider.py[line:201] INFO:  获取的用户uid为：4397380  消耗时间：1.1444060802459717
+2016-11-20 16:24:06,120 ListenUsers.py[line:355] DEBUG:  用户: uid : 13694062; name : Otsui; nickName : 企鹅; gender : 0; city : 上海; registDate : 2012/7/12 9:40:00; signinLast : 322; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:24:06,120 HJSpider.py[line:201] INFO:  获取的用户uid为：13694062  消耗时间：1.2609949111938477
+2016-11-20 16:24:07,187 ListenUsers.py[line:355] DEBUG:  用户: uid : 4773705; name : 红茶小杨; nickName : 一只小禽兽; gender : 1; city : 南京; registDate : 2010/4/27 18:43:00; signinLast : 1455; lastSignin : 2年前; selfIntroduction : [[[人無癖不可與交，以其無深情也。
+人無疵不可與交，以其無真氣也。]]]
+2016-11-20 16:24:07,187 HJSpider.py[line:201] INFO:  获取的用户uid为：4773705  消耗时间：1.0664525032043457
+2016-11-20 16:24:08,187 ListenUsers.py[line:355] DEBUG:  用户: uid : 8933663; name : 夏忧莲; nickName : ; gender : 0; city : 大连; registDate : 2011/5/27 9:30:00; signinLast : 954; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:24:08,187 HJSpider.py[line:201] INFO:  获取的用户uid为：8933663  消耗时间：1.0000052452087402
+2016-11-20 16:24:09,276 ListenUsers.py[line:355] DEBUG:  用户: uid : 4079008; name : 小五卅; nickName : SA(●'◡'●)ﾉ; gender : -1; city : 大连; registDate : 2009/10/17 20:09:00; signinLast : 1600; lastSignin : 1天前; selfIntroduction : [[[书控、颜控、声控、文字控、咖啡控、兔纸控、提琴控、绵羊控、肉食控........٩(๑•̀ᴗ•́๑)۶]]]
+2016-11-20 16:24:09,276 HJSpider.py[line:201] INFO:  获取的用户uid为：4079008  消耗时间：1.0886249542236328
+2016-11-20 16:24:10,784 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/6616516/: redirect 302
+2016-11-20 16:24:10,785 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:24:10,785 HJSpider.py[line:201] INFO:  获取的用户uid为：6616516  消耗时间：1.5089950561523438
+2016-11-20 16:24:11,943 ListenUsers.py[line:355] DEBUG:  用户: uid : 6080189; name : 亭芷; nickName : 亭芷; gender : 0; city : 杭州; registDate : 2010/9/25 20:45:00; signinLast : 1206; lastSignin : 4天前; selfIntroduction : [[[]]]
+2016-11-20 16:24:11,943 HJSpider.py[line:201] INFO:  获取的用户uid为：6080189  消耗时间：1.1577363014221191
+2016-11-20 16:24:13,166 ListenUsers.py[line:355] DEBUG:  用户: uid : 16078920; name : 花様作死少女; nickName : seraph88; gender : 0; city : 日本; registDate : 2012/11/22 20:00:00; signinLast : 302; lastSignin : 3个月前; selfIntroduction : [[[就只是一株小小的broccoli。。刚刚长大，还未开花。。。求勾搭~]]]
+2016-11-20 16:24:13,166 HJSpider.py[line:201] INFO:  获取的用户uid为：16078920  消耗时间：1.2222235202789307
+2016-11-20 16:24:14,654 ListenUsers.py[line:355] DEBUG:  用户: uid : 13452951; name : lscenterjp; nickName : ; gender : -1; city : 天津; registDate : 2012/6/22 15:10:00; signinLast : 25; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:24:14,655 HJSpider.py[line:201] INFO:  获取的用户uid为：13452951  消耗时间：1.2421000003814697
+2016-11-20 16:24:18,035 ListenUsers.py[line:355] DEBUG:  用户: uid : 4814343; name : dayigaku; nickName : ; gender : 0; city : 长沙; registDate : 2010/5/5 15:40:00; signinLast : 466; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:24:18,035 HJSpider.py[line:201] INFO:  获取的用户uid为：4814343  消耗时间：3.3800711631774902
+2016-11-20 16:24:19,635 ListenUsers.py[line:355] DEBUG:  用户: uid : 8801932; name : 蔡丽娟; nickName : ; gender : -1; city : 漳州; registDate : 2011/5/17 21:56:00; signinLast : 443; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:24:19,635 HJSpider.py[line:201] INFO:  获取的用户uid为：8801932  消耗时间：1.5998711585998535
+2016-11-20 16:24:20,969 ListenUsers.py[line:355] DEBUG:  用户: uid : 1963952; name : 森林果子; nickName : ; gender : 0; city : 北京; registDate : 2008/3/15 23:03:00; signinLast : 1070; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:24:20,969 HJSpider.py[line:201] INFO:  获取的用户uid为：1963952  消耗时间：1.3333895206451416
+2016-11-20 16:24:22,113 ListenUsers.py[line:355] DEBUG:  用户: uid : 1646158; name : miao3581237; nickName : 澪(miao); gender : -1; city : 深圳; registDate : 2007/9/21 17:45:00; signinLast : 1691; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:24:22,114 HJSpider.py[line:201] INFO:  获取的用户uid为：1646158  消耗时间：1.1441900730133057
+2016-11-20 16:24:23,247 ListenUsers.py[line:355] DEBUG:  用户: uid : 20230516; name : 1575029789Q; nickName : yoyo; gender : 0; city : 大连; registDate : 2013/6/22 9:46:00; signinLast : 566; lastSignin : 5小时前; selfIntroduction : [[[喜欢就是动力吧~相信天道酬勤~要继续加油哦！！！]]]
+2016-11-20 16:24:23,247 HJSpider.py[line:201] INFO:  获取的用户uid为：20230516  消耗时间：1.133194923400879
+2016-11-20 16:24:27,170 ListenUsers.py[line:355] DEBUG:  用户: uid : 10592911; name : 不行还不能笑要忍住; nickName : Light; gender : -1; city : 其他; registDate : 2011/10/16 1:43:00; signinLast : 543; lastSignin : 12小时前; selfIntroduction : [[[だ・・・駄目だ まだ笑うな・・・ こらえるんだ・・・ し・・・ しかし・・・・]]]
+2016-11-20 16:24:27,170 HJSpider.py[line:201] INFO:  获取的用户uid为：10592911  消耗时间：3.922748565673828
+2016-11-20 16:24:28,592 ListenUsers.py[line:355] DEBUG:  用户: uid : 2384617; name : 某仙女; nickName : 仙女姐姐; gender : 0; city : 上海; registDate : 2008/8/28 14:39:00; signinLast : 2247; lastSignin : 30分钟前; selfIntroduction : [[[]]]
+2016-11-20 16:24:28,592 HJSpider.py[line:201] INFO:  获取的用户uid为：2384617  消耗时间：1.1413092613220215
+2016-11-20 16:24:33,237 ListenUsers.py[line:355] DEBUG:  用户: uid : 10455216; name : AmberKanako; nickName : かな; gender : 0; city : 杭州; registDate : 2011/10/1 14:03:00; signinLast : 118; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:24:33,237 HJSpider.py[line:201] INFO:  获取的用户uid为：10455216  消耗时间：4.644801139831543
+2016-11-20 16:24:36,449 ListenUsers.py[line:355] DEBUG:  用户: uid : 2286632; name : ryuyou61; nickName : 哈路卡; gender : 0; city : 北京; registDate : 2008/8/6 15:39:00; signinLast : 2254; lastSignin : 7小时前; selfIntroduction : [[[]]]
+2016-11-20 16:24:36,449 HJSpider.py[line:201] INFO:  获取的用户uid为：2286632  消耗时间：3.2113606929779053
+2016-11-20 16:24:37,727 ListenUsers.py[line:355] DEBUG:  用户: uid : 14376819; name : LaToMa; nickName : 可以叫我小蕃茄~; gender : -1; city : 天津; registDate : 2012/8/30 23:40:00; signinLast : 85; lastSignin : 2年前; selfIntroduction : [[[「諸仏世尊は唯一大事の因縁を以ての故に世に出現す」とあります（『法華経』）。その目的と仕事とは、「開示悟入」です。]]]
+2016-11-20 16:24:37,727 HJSpider.py[line:201] INFO:  获取的用户uid为：14376819  消耗时间：1.277843952178955
+2016-11-20 16:24:39,394 ListenUsers.py[line:355] DEBUG:  用户: uid : 4226441; name : nancy813; nickName : ; gender : 0; city : 杭州; registDate : 2009/12/5 16:35:00; signinLast : 0; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:24:39,394 HJSpider.py[line:201] INFO:  获取的用户uid为：4226441  消耗时间：1.6666700839996338
+2016-11-20 16:24:40,021 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/6634273/: redirect 302
+2016-11-20 16:24:40,021 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:24:40,022 HJSpider.py[line:201] INFO:  获取的用户uid为：6634273  消耗时间：0.627190113067627
+2016-11-20 16:24:40,022 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:24:48,134 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/6634273/: redirect 302
+2016-11-20 16:24:48,134 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:24:48,134 HJSpider.py[line:201] INFO:  获取的用户uid为：6634273  消耗时间：8.112311601638794
+2016-11-20 16:24:48,134 ListenUsers.py[line:169] WARNING:  程序将沉睡16.0秒以避免访问过于频繁
+2016-11-20 16:25:06,608 ListenUsers.py[line:355] DEBUG:  用户: uid : 6634273; name : stratosphere; nickName : (｡◕∀◕｡)ﾉ⋆(㋗✿㋺❀㋙✿㋡❀㋠❤; gender : -1; city : 南昌; registDate : 2010/11/13 20:37:00; signinLast : 857; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:06,608 HJSpider.py[line:201] INFO:  获取的用户uid为：6634273  消耗时间：18.474079132080078
+2016-11-20 16:25:06,608 ListenUsers.py[line:169] WARNING:  程序将沉睡4.0秒以避免访问过于频繁
+2016-11-20 16:25:17,020 ListenUsers.py[line:355] DEBUG:  用户: uid : 11295111; name : Lynn1818; nickName : 二姑娘; gender : 0; city : 南京; registDate : 2011/12/20 16:01:00; signinLast : 1224; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:25:17,021 HJSpider.py[line:201] INFO:  获取的用户uid为：11295111  消耗时间：10.412254095077515
+2016-11-20 16:25:19,110 ListenUsers.py[line:355] DEBUG:  用户: uid : 2724052; name : wuyanwuke; nickName : ; gender : 0; city : 上海; registDate : 2008/11/5 9:46:00; signinLast : 1; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:19,110 HJSpider.py[line:201] INFO:  获取的用户uid为：2724052  消耗时间：1.8560113906860352
+2016-11-20 16:25:21,677 ListenUsers.py[line:355] DEBUG:  用户: uid : 7384067; name : chuiniao; nickName : ; gender : 0; city : 上海; registDate : 2011/1/26 12:21:00; signinLast : 16; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-11-20 16:25:21,677 HJSpider.py[line:201] INFO:  获取的用户uid为：7384067  消耗时间：2.5669987201690674
+2016-11-20 16:25:23,510 ListenUsers.py[line:355] DEBUG:  用户: uid : 5715020; name : 关子如月78; nickName : ; gender : 0; city : 深圳; registDate : 2010/8/31 11:02:00; signinLast : 24; lastSignin : 6天前; selfIntroduction : [[[]]]
+2016-11-20 16:25:23,511 HJSpider.py[line:201] INFO:  获取的用户uid为：5715020  消耗时间：1.8334259986877441
+2016-11-20 16:25:26,578 ListenUsers.py[line:355] DEBUG:  用户: uid : 4428561; name : forever8938; nickName : -; gender : 1; city : 厦门; registDate : 2010/2/20 19:23:00; signinLast : 1587; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:25:26,578 HJSpider.py[line:201] INFO:  获取的用户uid为：4428561  消耗时间：3.0668978691101074
+2016-11-20 16:25:28,427 ListenUsers.py[line:355] DEBUG:  用户: uid : 4928005; name : brenda152; nickName : ; gender : 0; city : 上海; registDate : 2010/5/25 9:38:00; signinLast : 148; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:25:28,428 HJSpider.py[line:201] INFO:  获取的用户uid为：4928005  消耗时间：1.849379301071167
+2016-11-20 16:25:29,700 ListenUsers.py[line:355] DEBUG:  用户: uid : 11367664; name : tb6899275; nickName : ; gender : 0; city : 台州; registDate : 2011/12/29 18:23:00; signinLast : 540; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:29,701 HJSpider.py[line:201] INFO:  获取的用户uid为：11367664  消耗时间：1.2728898525238037
+2016-11-20 16:25:32,779 ListenUsers.py[line:355] DEBUG:  用户: uid : 11165624; name : ericat625; nickName : 艾利猫; gender : -1; city : 上海; registDate : 2011/12/9 23:25:00; signinLast : 596; lastSignin : 1年前; selfIntroduction : [[[透明的飘来，然后又透明的飘走。喵的，难道我是鬼啊！！！]]]
+2016-11-20 16:25:32,779 HJSpider.py[line:201] INFO:  获取的用户uid为：11165624  消耗时间：3.0780675411224365
+2016-11-20 16:25:34,401 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/11488579/: redirect 302
+2016-11-20 16:25:34,402 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:25:34,402 HJSpider.py[line:201] INFO:  获取的用户uid为：11488579  消耗时间：1.3370506763458252
+2016-11-20 16:25:35,901 ListenUsers.py[line:355] DEBUG:  用户: uid : 4261501; name : recreation; nickName : 不玩了，おさらば; gender : 1; city : 重庆; registDate : 2009/12/14 17:05:00; signinLast : 311; lastSignin : 3年前; selfIntroduction : [[[夢という夢がなかったぼくに夢を与えてくれたのは貴女だけです]]]
+2016-11-20 16:25:35,902 HJSpider.py[line:201] INFO:  获取的用户uid为：4261501  消耗时间：1.4999232292175293
+2016-11-20 16:25:37,213 ListenUsers.py[line:355] DEBUG:  用户: uid : 12981572; name : 忘之忆之; nickName : 忘之忆之; gender : 0; city : 宁德; registDate : 2012/5/12 12:55:00; signinLast : 355; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:25:37,213 HJSpider.py[line:201] INFO:  获取的用户uid为：12981572  消耗时间：1.3109698295593262
+2016-11-20 16:25:39,135 ListenUsers.py[line:355] DEBUG:  用户: uid : 7167289; name : warritme; nickName : ; gender : 1; city : 青岛; registDate : 2010/12/27 20:53:00; signinLast : 1038; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:25:39,136 HJSpider.py[line:201] INFO:  获取的用户uid为：7167289  消耗时间：1.9223382472991943
+2016-11-20 16:25:41,169 ListenUsers.py[line:355] DEBUG:  用户: uid : 1756628; name : chizuru520; nickName : ; gender : 1; city : 武汉; registDate : 2007/10/28 12:10:00; signinLast : 6; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:41,169 HJSpider.py[line:201] INFO:  获取的用户uid为：1756628  消耗时间：2.0334882736206055
+2016-11-20 16:25:42,769 ListenUsers.py[line:355] DEBUG:  用户: uid : 3716688; name : w185567059; nickName : ; gender : 0; city : 上海; registDate : 2009/6/27 14:21:00; signinLast : 62; lastSignin : 2个月前; selfIntroduction : [[[感無量！]]]
+2016-11-20 16:25:42,770 HJSpider.py[line:201] INFO:  获取的用户uid为：3716688  消耗时间：1.5999729633331299
+2016-11-20 16:25:43,847 ListenUsers.py[line:355] DEBUG:  用户: uid : 3280263; name : g7220505; nickName : ; gender : 1; city : 海宁; registDate : 2009/3/10 17:01:00; signinLast : 2140; lastSignin : 8小时前; selfIntroduction : [[[]]]
+2016-11-20 16:25:43,848 HJSpider.py[line:201] INFO:  获取的用户uid为：3280263  消耗时间：1.0776352882385254
+2016-11-20 16:25:45,082 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/6978548/: redirect 302
+2016-11-20 16:25:45,082 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:25:45,083 HJSpider.py[line:201] INFO:  获取的用户uid为：6978548  消耗时间：0.9677982330322266
+2016-11-20 16:25:47,870 ListenUsers.py[line:355] DEBUG:  用户: uid : 3754239; name : ronniegxq; nickName : ; gender : 0; city : 上海; registDate : 2009/7/9 10:35:00; signinLast : 36; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:47,870 HJSpider.py[line:201] INFO:  获取的用户uid为：3754239  消耗时间：2.787562847137451
+2016-11-20 16:25:51,215 ListenUsers.py[line:355] DEBUG:  用户: uid : 10911012; name : 风中摇曳着凌乱的狗尾巴; nickName : えのころぐさ; gender : -1; city : 德阳; registDate : 2011/11/18 19:29:00; signinLast : 333; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:51,215 HJSpider.py[line:201] INFO:  获取的用户uid为：10911012  消耗时间：3.344698905944824
+2016-11-20 16:25:53,104 ListenUsers.py[line:355] DEBUG:  用户: uid : 6990160; name : jyz_ou2; nickName : 吾假沪威; gender : 1; city : 天津; registDate : 2010/12/11 16:07:00; signinLast : 700; lastSignin : 5个月前; selfIntroduction : [[[]]]
+2016-11-20 16:25:53,105 HJSpider.py[line:201] INFO:  获取的用户uid为：6990160  消耗时间：1.889096975326538
+2016-11-20 16:25:53,714 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/5168825/: redirect 302
+2016-11-20 16:25:53,715 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:25:53,715 HJSpider.py[line:201] INFO:  获取的用户uid为：5168825  消耗时间：0.6098062992095947
+2016-11-20 16:25:53,715 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:26:25,174 ListenUsers.py[line:355] DEBUG:  用户: uid : 5168825; name : zaizhonglike; nickName : ; gender : -1; city : 南昌; registDate : 2010/7/5 13:57:00; signinLast : 527; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:26:25,175 HJSpider.py[line:201] INFO:  获取的用户uid为：5168825  消耗时间：31.459686040878296
+2016-11-20 16:26:25,175 ListenUsers.py[line:169] WARNING:  程序将沉睡2.0秒以避免访问过于频繁
+2016-11-20 16:26:33,442 ListenUsers.py[line:355] DEBUG:  用户: uid : 2289413; name : 特务的帽子; nickName : 帽帽; gender : 1; city : 广州; registDate : 2008/8/6 23:27:00; signinLast : 480; lastSignin : 1个月前; selfIntroduction : [[[漫道星辉凉
+寒丘剑舞霜
+恨别昔日梦
+无悔少年郎]]]
+2016-11-20 16:26:33,442 HJSpider.py[line:201] INFO:  获取的用户uid为：2289413  消耗时间：8.267333745956421
+2016-11-20 16:26:35,253 ListenUsers.py[line:355] DEBUG:  用户: uid : 2566617; name : suyime; nickName : suyime; gender : -1; city : 深圳; registDate : 2008/10/3 3:29:00; signinLast : 1264; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:26:35,254 HJSpider.py[line:201] INFO:  获取的用户uid为：2566617  消耗时间：1.8113689422607422
+2016-11-20 16:26:35,654 ListenArticles.py[line:151] DEBUG:  文章: uid : 15465882001; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第六回（2）; commentCount : 2; averageScore : 80; timeLast : 92; publishTime : 2012/7/18 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:26:35,654 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15465882001  贡献者为：4397380
+2016-11-20 16:26:37,743 ListenUsers.py[line:355] DEBUG:  用户: uid : 11476205; name : 大野natsu; nickName : ; gender : -1; city : 上海; registDate : 2012/1/13 10:19:00; signinLast : 111; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:26:37,743 HJSpider.py[line:201] INFO:  获取的用户uid为：11476205  消耗时间：1.6247141361236572
+2016-11-20 16:27:20,927 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/9609407/: redirect 302
+2016-11-20 16:27:20,927 ListenUsers.py[line:202] WARNING:  提示: /newbulo/user/home.aspx
+2016-11-20 16:27:20,928 HJSpider.py[line:201] INFO:  获取的用户uid为：9609407  消耗时间：42.728877544403076
+2016-11-20 16:27:20,928 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:27:30,293 ListenUsers.py[line:355] DEBUG:  用户: uid : 9609407; name : curarpikt29; nickName : ; gender : 1; city : 无锡; registDate : 2011/7/21 17:18:00; signinLast : 346; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:27:30,293 HJSpider.py[line:201] INFO:  获取的用户uid为：9609407  消耗时间：9.365188598632812
+2016-11-20 16:27:30,900 ListenUsers.py[line:169] WARNING:  程序将沉睡2.0秒以避免访问过于频繁
+2016-11-20 16:27:34,327 ListenUsers.py[line:355] DEBUG:  用户: uid : 13606755; name : Bunnywen1218; nickName : ; gender : -1; city : 上海; registDate : 2012/7/5 11:54:00; signinLast : 0; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:27:34,327 HJSpider.py[line:201] INFO:  获取的用户uid为：13606755  消耗时间：3.4270825386047363
+2016-11-20 16:27:36,560 ListenUsers.py[line:355] DEBUG:  用户: uid : 5131011; name : 绿豆稀饭; nickName : ; gender : 0; city : 重庆; registDate : 2010/6/28 8:59:00; signinLast : 76; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:27:36,561 HJSpider.py[line:201] INFO:  获取的用户uid为：5131011  消耗时间：2.2335376739501953
+2016-11-20 16:27:37,016 ListenArticles.py[line:151] DEBUG:  文章: uid : 15476991792; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第十二回（2）; commentCount : 1; averageScore : 79; timeLast : 96; publishTime : 2012/7/30 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:27:37,016 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15476991792  贡献者为：4397380
+2016-11-20 16:27:38,938 ListenUsers.py[line:355] DEBUG:  用户: uid : 3536368; name : 543682177; nickName : ; gender : 0; city : 宁波; registDate : 2009/5/9 16:19:00; signinLast : 130; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:27:38,939 HJSpider.py[line:201] INFO:  获取的用户uid为：3536368  消耗时间：1.3793692588806152
+2016-11-20 16:27:40,828 ListenUsers.py[line:355] DEBUG:  用户: uid : 30720146; name : 豆沙的豆; nickName : ; gender : 0; city : 鞍山; registDate : 2014/12/24 23:34:00; signinLast : 1; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:27:40,828 HJSpider.py[line:201] INFO:  获取的用户uid为：30720146  消耗时间：1.6546216011047363
+2016-11-20 16:27:42,506 ListenUsers.py[line:355] DEBUG:  用户: uid : 11582758; name : 蓝雪柠檬草; nickName : Shelly蓝雪; gender : -1; city : 运城; registDate : 2012/1/27 17:40:00; signinLast : 174; lastSignin : 3小时前; selfIntroduction : [[[]]]
+2016-11-20 16:27:42,506 HJSpider.py[line:201] INFO:  获取的用户uid为：11582758  消耗时间：1.3959193229675293
+2016-11-20 16:27:43,427 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/3427386/: redirect 302
+2016-11-20 16:27:43,428 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:27:43,428 HJSpider.py[line:201] INFO:  获取的用户uid为：3427386  消耗时间：0.9213812351226807
+2016-11-20 16:27:45,295 ListenUsers.py[line:355] DEBUG:  用户: uid : 11105894; name : 武猫; nickName : ; gender : 1; city : 信阳固始县; registDate : 2011/12/4 14:31:00; signinLast : 107; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:27:45,296 HJSpider.py[line:201] INFO:  获取的用户uid为：11105894  消耗时间：1.612098217010498
+2016-11-20 16:27:48,762 ListenUsers.py[line:355] DEBUG:  用户: uid : 9508655; name : 紅一葉; nickName : 青苔; gender : -1; city : 上海; registDate : 2011/7/13 21:30:00; signinLast : 623; lastSignin : 5个月前; selfIntroduction : [[[過去に負けない「私」に出逢いたい。
+過去に負けない「今」を創りたい。]]]
+2016-11-20 16:27:48,763 HJSpider.py[line:201] INFO:  获取的用户uid为：9508655  消耗时间：3.466829776763916
+2016-11-20 16:27:50,741 ListenUsers.py[line:355] DEBUG:  用户: uid : 13771918; name : sairu3; nickName : ; gender : -1; city : 上海; registDate : 2012/7/17 22:58:00; signinLast : 0; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:27:50,741 HJSpider.py[line:201] INFO:  获取的用户uid为：13771918  消耗时间：1.7202696800231934
+2016-11-20 16:27:52,652 ListenUsers.py[line:355] DEBUG:  用户: uid : 13370049; name : 张2012222; nickName : ; gender : -1; city : 石家庄; registDate : 2012/6/15 10:58:00; signinLast : 100; lastSignin : 8个月前; selfIntroduction : [[[]]]
+2016-11-20 16:27:52,653 HJSpider.py[line:201] INFO:  获取的用户uid为：13370049  消耗时间：1.9114532470703125
+2016-11-20 16:27:54,430 ListenUsers.py[line:355] DEBUG:  用户: uid : 12747775; name : PennyPan228; nickName : ; gender : -1; city : 日本; registDate : 2012/4/21 16:18:00; signinLast : 0; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:27:54,431 HJSpider.py[line:201] INFO:  获取的用户uid为：12747775  消耗时间：1.77777099609375
+2016-11-20 16:27:56,131 ListenUsers.py[line:355] DEBUG:  用户: uid : 10170809; name : zmzaihujiang; nickName : ; gender : -1; city : 武汉; registDate : 2011/9/4 20:34:00; signinLast : 106; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:27:56,131 HJSpider.py[line:201] INFO:  获取的用户uid为：10170809  消耗时间：1.6999683380126953
+2016-11-20 16:27:56,519 ListenArticles.py[line:151] DEBUG:  文章: uid : 15487822035; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第十七回（1）; commentCount : 0; averageScore : 77; timeLast : 93; publishTime : 2012/8/11 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:27:56,520 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15487822035  贡献者为：4397380
+2016-11-20 16:27:59,264 ListenUsers.py[line:355] DEBUG:  用户: uid : 7265463; name : haohao0811; nickName : ; gender : 1; city : 上海; registDate : 2011/1/10 21:24:00; signinLast : 596; lastSignin : 5天前; selfIntroduction : [[[]]]
+2016-11-20 16:27:59,265 HJSpider.py[line:201] INFO:  获取的用户uid为：7265463  消耗时间：1.9211814403533936
+2016-11-20 16:28:01,076 ListenUsers.py[line:355] DEBUG:  用户: uid : 4628242; name : fang_zai; nickName : fang_zai; gender : 0; city : 其它城市; registDate : 2010/4/3 22:16:00; signinLast : 408; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:28:01,076 HJSpider.py[line:201] INFO:  获取的用户uid为：4628242  消耗时间：1.811042070388794
+2016-11-20 16:28:03,054 ListenUsers.py[line:355] DEBUG:  用户: uid : 4473882; name : youthchild; nickName : ; gender : 0; city : 海口; registDate : 2010/3/5 21:30:00; signinLast : 25; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:03,054 HJSpider.py[line:201] INFO:  获取的用户uid为：4473882  消耗时间：1.9780261516571045
+2016-11-20 16:28:04,754 ListenUsers.py[line:355] DEBUG:  用户: uid : 24567056; name : AIYTBTBT; nickName : ; gender : 0; city : 北京; registDate : 2014/2/11 10:14:00; signinLast : 230; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:28:04,755 HJSpider.py[line:201] INFO:  获取的用户uid为：24567056  消耗时间：1.3165571689605713
+2016-11-20 16:28:05,199 ListenArticles.py[line:151] DEBUG:  文章: uid : 15492338452; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第十八回（1）; commentCount : 0; averageScore : 82; timeLast : 88; publishTime : 2012/8/13 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:28:05,199 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15492338452  贡献者为：4397380
+2016-11-20 16:28:07,388 ListenUsers.py[line:355] DEBUG:  用户: uid : 9594075; name : 日语楚楚; nickName : ; gender : -1; city : ; registDate : 2011/7/20 16:46:00; signinLast : 23; lastSignin : 5个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:07,389 HJSpider.py[line:201] INFO:  获取的用户uid为：9594075  消耗时间：1.6676077842712402
+2016-11-20 16:28:09,389 ListenUsers.py[line:355] DEBUG:  用户: uid : 14043212; name : KevinTony; nickName : 青月; gender : 0; city : 澳大利亚; registDate : 2012/8/8 8:08:00; signinLast : 5; lastSignin : 2年前; selfIntroduction : [[[=w=]]]
+2016-11-20 16:28:09,389 HJSpider.py[line:201] INFO:  获取的用户uid为：14043212  消耗时间：1.7358243465423584
+2016-11-20 16:28:11,534 ListenUsers.py[line:355] DEBUG:  用户: uid : 8249296; name : 忘忧谷618; nickName : 忘忧谷618; gender : 0; city : 广州; registDate : 2011/4/5 17:32:00; signinLast : 486; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:11,534 HJSpider.py[line:201] INFO:  获取的用户uid为：8249296  消耗时间：1.899886131286621
+2016-11-20 16:28:13,156 ListenUsers.py[line:355] DEBUG:  用户: uid : 11732497; name : 为栗子学日语; nickName : ; gender : -1; city : 成都; registDate : 2012/2/9 16:02:00; signinLast : 182; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:13,156 HJSpider.py[line:201] INFO:  获取的用户uid为：11732497  消耗时间：1.6222047805786133
+2016-11-20 16:28:14,934 ListenUsers.py[line:355] DEBUG:  用户: uid : 12907718; name : 绯花苏萝; nickName : ; gender : -1; city : 苏州; registDate : 2012/5/5 18:58:00; signinLast : 504; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:14,935 HJSpider.py[line:201] INFO:  获取的用户uid为：12907718  消耗时间：1.7779359817504883
+2016-11-20 16:28:15,368 ListenArticles.py[line:151] DEBUG:  文章: uid : 15495374990; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第十九回（1）; commentCount : 0; averageScore : 74; timeLast : 89; publishTime : 2012/8/15 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:28:15,368 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15495374990  贡献者为：4397380
+2016-11-20 16:28:17,868 ListenUsers.py[line:355] DEBUG:  用户: uid : 4835594; name : 云雀骸; nickName : 云雀骸; gender : 0; city : 成都; registDate : 2010/5/9 2:58:00; signinLast : 1210; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:28:17,868 HJSpider.py[line:201] INFO:  获取的用户uid为：4835594  消耗时间：1.9569463729858398
+2016-11-20 16:28:21,435 ListenUsers.py[line:355] DEBUG:  用户: uid : 2210026; name : 永暗; nickName : 永暗; gender : 0; city : 天津; registDate : 2008/7/11 22:52:00; signinLast : 543; lastSignin : 2年前; selfIntroduction : [[[言語道断]]]
+2016-11-20 16:28:21,436 HJSpider.py[line:201] INFO:  获取的用户uid为：2210026  消耗时间：3.5669407844543457
+2016-11-20 16:28:25,069 ListenUsers.py[line:355] DEBUG:  用户: uid : 4683064; name : 中山優希; nickName : 王子; gender : 1; city : 大理白族自治州; registDate : 2010/4/13 16:37:00; signinLast : 596; lastSignin : 1个月前; selfIntroduction : [[[「無一物...」仏に遭えば仏をころせ、祖に遭えば祖をころせ、何物にも捕らわれず、ただ　あるがままの、己を生きること...]]]
+2016-11-20 16:28:25,070 HJSpider.py[line:201] INFO:  获取的用户uid为：4683064  消耗时间：3.2163028717041016
+2016-11-20 16:28:26,925 ListenUsers.py[line:355] DEBUG:  用户: uid : 4640511; name : zenobi; nickName : ; gender : 0; city : 长沙; registDate : 2010/4/6 12:20:00; signinLast : 1; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:28:26,926 HJSpider.py[line:201] INFO:  获取的用户uid为：4640511  消耗时间：1.610522985458374
+2016-11-20 16:28:28,638 ListenUsers.py[line:355] DEBUG:  用户: uid : 7582070; name : nacimei; nickName : ; gender : 0; city : 北京; registDate : 2011/2/15 20:44:00; signinLast : 4; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:28:28,639 HJSpider.py[line:201] INFO:  获取的用户uid为：7582070  消耗时间：1.7128915786743164
+2016-11-20 16:28:29,150 ListenArticles.py[line:151] DEBUG:  文章: uid : 15501421916; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第二十一回（1）; commentCount : 0; averageScore : 73; timeLast : 93; publishTime : 2012/8/20 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:28:29,150 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15501421916  贡献者为：4397380
+2016-11-20 16:28:32,206 ListenUsers.py[line:355] DEBUG:  用户: uid : 8408970; name : wangtt0901; nickName : ; gender : 0; city : 北京; registDate : 2011/4/18 16:58:00; signinLast : 10; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:28:32,206 HJSpider.py[line:201] INFO:  获取的用户uid为：8408970  消耗时间：2.3600165843963623
+2016-11-20 16:28:33,862 ListenUsers.py[line:355] DEBUG:  用户: uid : 3748764; name : nemesise; nickName : 斑; gender : 1; city : 北京; registDate : 2009/7/7 17:12:00; signinLast : 449; lastSignin : 2年前; selfIntroduction : [[[来自青岛，面向世界]]]
+2016-11-20 16:28:33,862 HJSpider.py[line:201] INFO:  获取的用户uid为：3748764  消耗时间：1.6552581787109375
+2016-11-20 16:28:35,531 ListenUsers.py[line:355] DEBUG:  用户: uid : 14177733; name : feicuizhang; nickName : ; gender : -1; city : 局域网; registDate : 2012/8/17 10:43:00; signinLast : 2; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:28:35,531 HJSpider.py[line:201] INFO:  获取的用户uid为：14177733  消耗时间：1.6690373420715332
+2016-11-20 16:28:37,318 ListenUsers.py[line:355] DEBUG:  用户: uid : 837698; name : tracy4724; nickName : ; gender : 0; city : ; registDate : 2006/3/7 8:21:00; signinLast : 51; lastSignin : 3天前; selfIntroduction : [[[]]]
+2016-11-20 16:28:37,318 HJSpider.py[line:201] INFO:  获取的用户uid为：837698  消耗时间：1.7868499755859375
+2016-11-20 16:28:37,662 ListenArticles.py[line:151] DEBUG:  文章: uid : 15501441916; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第二十一回（2）; commentCount : 0; averageScore : 72; timeLast : 90; publishTime : 2012/8/21 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:28:37,663 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15501441916  贡献者为：4397380
+2016-11-20 16:28:39,985 ListenUsers.py[line:355] DEBUG:  用户: uid : 4103730; name : sennya; nickName : ; gender : 0; city : 宁波; registDate : 2009/10/25 20:52:00; signinLast : 53; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:28:39,985 HJSpider.py[line:201] INFO:  获取的用户uid为：4103730  消耗时间：1.7910103797912598
+2016-11-20 16:28:43,574 ListenUsers.py[line:355] DEBUG:  用户: uid : 2662205; name : 爻辷; nickName : 小1; gender : 0; city : ; registDate : 2008/10/23 19:51:00; signinLast : 127; lastSignin : 5天前; selfIntroduction : [[[]]]
+2016-11-20 16:28:43,575 HJSpider.py[line:201] INFO:  获取的用户uid为：2662205  消耗时间：3.2898638248443604
+2016-11-20 16:28:43,997 ListenArticles.py[line:151] DEBUG:  文章: uid : 15504771698; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第二十三回（1）; commentCount : 3; averageScore : 73; timeLast : 88; publishTime : 2012/8/24 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:28:43,997 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15504771698  贡献者为：4397380
+2016-11-20 16:29:27,557 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/2380343/: redirect 302
+2016-11-20 16:29:27,557 ListenUsers.py[line:202] WARNING:  提示: /newbulo/user/home.aspx
+2016-11-20 16:29:27,557 HJSpider.py[line:201] INFO:  获取的用户uid为：2380343  消耗时间：42.74667835235596
+2016-11-20 16:29:27,557 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:29:36,858 ListenUsers.py[line:355] DEBUG:  用户: uid : 2380343; name : 鳞伤; nickName : ; gender : 0; city : 武汉; registDate : 2008/8/27 18:49:00; signinLast : 54; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:29:36,858 HJSpider.py[line:201] INFO:  获取的用户uid为：2380343  消耗时间：9.300645589828491
+2016-11-20 16:29:36,858 ListenUsers.py[line:169] WARNING:  程序将沉睡2.0秒以避免访问过于频繁
+2016-11-20 16:29:41,770 ListenUsers.py[line:355] DEBUG:  用户: uid : 3704433; name : yokotian; nickName : 零妖妖; gender : -1; city : 宁波; registDate : 2009/6/23 12:03:00; signinLast : 1373; lastSignin : 3天前; selfIntroduction : [[[]]]
+2016-11-20 16:29:41,770 HJSpider.py[line:201] INFO:  获取的用户uid为：3704433  消耗时间：4.911448240280151
+2016-11-20 16:29:43,881 ListenUsers.py[line:355] DEBUG:  用户: uid : 7201219; name : abc唯; nickName : ; gender : 1; city : 上海; registDate : 2011/1/1 1:45:00; signinLast : 0; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:29:43,881 HJSpider.py[line:201] INFO:  获取的用户uid为：7201219  消耗时间：1.8511583805084229
+2016-11-20 16:29:47,082 ListenUsers.py[line:355] DEBUG:  用户: uid : 6311056; name : jnflsyc0217; nickName : 慕容飞逸; gender : 1; city : 济南; registDate : 2010/10/15 19:46:00; signinLast : 162; lastSignin : 1年前; selfIntroduction : [[[何かを決めたら、必ず最後までやり遂げる人だ！]]]
+2016-11-20 16:29:47,082 HJSpider.py[line:201] INFO:  获取的用户uid为：6311056  消耗时间：3.200213670730591
+2016-11-20 16:29:48,737 ListenUsers.py[line:355] DEBUG:  用户: uid : 2608961; name : youally; nickName : youally; gender : 0; city : 上海; registDate : 2008/10/11 15:31:00; signinLast : 876; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:29:48,738 HJSpider.py[line:201] INFO:  获取的用户uid为：2608961  消耗时间：1.6556177139282227
+2016-11-20 16:29:51,927 ListenUsers.py[line:355] DEBUG:  用户: uid : 10351408; name : ld520lidan; nickName : 洋芋豆; gender : 0; city : 深圳; registDate : 2011/9/19 21:55:00; signinLast : 256; lastSignin : 6个月前; selfIntroduction : [[[洋芋豆要积极向上每一天，頑張ろう～～～！]]]
+2016-11-20 16:29:51,927 HJSpider.py[line:201] INFO:  获取的用户uid为：10351408  消耗时间：3.1890709400177
+2016-11-20 16:29:52,427 ListenArticles.py[line:151] DEBUG:  文章: uid : 15504821838; type : 娱乐; title : 【滑头鬼之孙·千年魔京】第二十四回 最终回（2...; commentCount : 0; averageScore : 76; timeLast : 91; publishTime : 2012/8/27 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '千年魔京', '日本动漫', '动漫日语']; 
+2016-11-20 16:29:52,427 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15504821838  贡献者为：4397380
+2016-11-20 16:29:55,650 ListenUsers.py[line:355] DEBUG:  用户: uid : 12345505; name : gintokii; nickName : 大炮炮; gender : -1; city : 深圳; registDate : 2012/3/21 19:41:00; signinLast : 98; lastSignin : 3个月前; selfIntroduction : [[[深夜番組担当( *՞ਊ՞*)ﾉ（ちゃう]]]
+2016-11-20 16:29:55,650 HJSpider.py[line:201] INFO:  获取的用户uid为：12345505  消耗时间：2.990669012069702
+2016-11-20 16:29:58,339 ListenUsers.py[line:355] DEBUG:  用户: uid : 11416840; name : 清丽舞韵; nickName : 清丽/酱油妹; gender : -1; city : 清远; registDate : 2012/1/5 17:58:00; signinLast : 1289; lastSignin : 2天前; selfIntroduction : [[[]]]
+2016-11-20 16:29:58,339 HJSpider.py[line:201] INFO:  获取的用户uid为：11416840  消耗时间：2.689086437225342
+2016-11-20 16:30:00,673 ListenUsers.py[line:355] DEBUG:  用户: uid : 11894983; name : LOVEMOOD001; nickName : 小梦; gender : 0; city : 酒泉; registDate : 2012/2/21 14:27:00; signinLast : 661; lastSignin : 10个月前; selfIntroduction : [[[腐女，漫党，声优党，各种党...0.0]]]
+2016-11-20 16:30:00,673 HJSpider.py[line:201] INFO:  获取的用户uid为：11894983  消耗时间：2.333448648452759
+2016-11-20 16:30:03,951 ListenUsers.py[line:355] DEBUG:  用户: uid : 1679776; name : pu111even; nickName : ; gender : 0; city : 上海; registDate : 2007/10/3 6:54:00; signinLast : 898; lastSignin : 8个月前; selfIntroduction : [[[尽快练好日语口语]]]
+2016-11-20 16:30:03,951 HJSpider.py[line:201] INFO:  获取的用户uid为：1679776  消耗时间：3.0198774337768555
+2016-11-20 16:30:05,807 ListenUsers.py[line:355] DEBUG:  用户: uid : 10308478; name : 了了城; nickName : 了〒_〒城; gender : -1; city : 黄冈; registDate : 2011/9/15 20:27:00; signinLast : 512; lastSignin : 1周前; selfIntroduction : [[[感受到那种温暖，他就甘心平凡。]]]
+2016-11-20 16:30:05,807 HJSpider.py[line:201] INFO:  获取的用户uid为：10308478  消耗时间：1.4333021640777588
+2016-11-20 16:30:07,518 ListenUsers.py[line:355] DEBUG:  用户: uid : 14139546; name : 可爱韵韵; nickName : ; gender : -1; city : 香港; registDate : 2012/8/14 14:50:00; signinLast : 122; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:30:07,519 HJSpider.py[line:201] INFO:  获取的用户uid为：14139546  消耗时间：1.445422887802124
+2016-11-20 16:30:08,848 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/16852208/: redirect 302
+2016-11-20 16:30:08,849 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:30:08,849 HJSpider.py[line:201] INFO:  获取的用户uid为：16852208  消耗时间：1.3298728466033936
+2016-11-20 16:30:10,663 ListenUsers.py[line:355] DEBUG:  用户: uid : 11722499; name : xymxym1995; nickName : ; gender : -1; city : 济南; registDate : 2012/2/8 18:28:00; signinLast : 15; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:30:10,664 HJSpider.py[line:201] INFO:  获取的用户uid为：11722499  消耗时间：1.8146936893463135
+2016-11-20 16:30:12,519 ListenUsers.py[line:355] DEBUG:  用户: uid : 17115772; name : joker桑; nickName : ; gender : 0; city : 重庆; registDate : 2013/1/16 11:50:00; signinLast : 234; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:30:12,519 HJSpider.py[line:201] INFO:  获取的用户uid为：17115772  消耗时间：1.639045238494873
+2016-11-20 16:30:36,755 ListenUsers.py[line:355] DEBUG:  用户: uid : 8293470; name : 颜色女孩; nickName : ななみ; gender : 0; city : 其他; registDate : 2011/4/8 22:16:00; signinLast : 109; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:30:36,755 HJSpider.py[line:201] INFO:  获取的用户uid为：8293470  消耗时间：24.235655546188354
+2016-11-20 16:30:37,010 HJSpider.py[line:180] INFO:  ******************************访问节目页面：http://ting.hujiang.com/dmtxhgtzs/page2/
+2016-11-20 16:30:37,633 ListenArticles.py[line:151] DEBUG:  文章: uid : 15408002141; type : 娱乐; title : 【动漫】滑头鬼之孙 第一回（1）; commentCount : 1; averageScore : 70; timeLast : 83; publishTime : 2012/5/14 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:30:37,633 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15408002141  贡献者为：4397380
+2016-11-20 16:30:40,722 ListenUsers.py[line:355] DEBUG:  用户: uid : 11168780; name : 孙恩恩; nickName : 孙恩恩; gender : 0; city : 天津; registDate : 2011/12/10 11:16:00; signinLast : 330; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:30:40,723 HJSpider.py[line:201] INFO:  获取的用户uid为：11168780  消耗时间：2.8528177738189697
+2016-11-20 16:30:43,612 ListenUsers.py[line:355] DEBUG:  用户: uid : 8315701; name : 甘興霸; nickName : 兴霸; gender : 1; city : 重庆; registDate : 2011/4/10 15:40:00; signinLast : 242; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:30:43,612 HJSpider.py[line:201] INFO:  获取的用户uid为：8315701  消耗时间：2.888732433319092
+2016-11-20 16:30:46,801 ListenUsers.py[line:355] DEBUG:  用户: uid : 4265567; name : 貴司; nickName : ,,Ծ‸Ծ,,; gender : 1; city : 南京; registDate : 2009/12/15 16:47:00; signinLast : 1267; lastSignin : 4个月前; selfIntroduction : [[[※柴废................]]]
+2016-11-20 16:30:46,801 HJSpider.py[line:201] INFO:  获取的用户uid为：4265567  消耗时间：3.189404249191284
+2016-11-20 16:30:49,257 ListenUsers.py[line:355] DEBUG:  用户: uid : 12085015; name : 夜微凉丶湮染浅墨漪涟逝; nickName : 伏狸; gender : 1; city : 宁波; registDate : 2012/3/3 18:43:00; signinLast : 1122; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:30:49,257 HJSpider.py[line:201] INFO:  获取的用户uid为：12085015  消耗时间：2.4556784629821777
+2016-11-20 16:30:52,947 ListenUsers.py[line:355] DEBUG:  用户: uid : 5124802; name : Yukiluacyoo; nickName : 嘘嘘~です！; gender : 0; city : 南京; registDate : 2010/6/26 21:58:00; signinLast : 554; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:30:52,947 HJSpider.py[line:201] INFO:  获取的用户uid为：5124802  消耗时间：3.411604881286621
+2016-11-20 16:30:56,214 ListenUsers.py[line:355] DEBUG:  用户: uid : 11661087; name : 线团猫咪; nickName : ヽ(*´∀｀)ノ소원♥のぞみ♥wendy; gender : 0; city : 韩国; registDate : 2012/2/3 14:32:00; signinLast : 505; lastSignin : 1周前; selfIntroduction : [[[皆さん～今晩は、こんにちは、おはようございまーす～島風です！！まだいろいろな不足があるかも。。これから♥( ^ω^)_凵　どうぞ❀よろしくね]]]
+2016-11-20 16:30:56,214 HJSpider.py[line:201] INFO:  获取的用户uid为：11661087  消耗时间：3.2667834758758545
+2016-11-20 16:30:59,759 ListenUsers.py[line:355] DEBUG:  用户: uid : 6248476; name : 纳宁1213; nickName : 右右/柚子; gender : 0; city : 上海; registDate : 2010/10/10 20:11:00; signinLast : 2121; lastSignin : 3天前; selfIntroduction : [[[右！上！下！左！
+ぐるぐるぐるぐるぐるぐるぐるぐるぐる
+Don't touch me！！]]]
+2016-11-20 16:30:59,759 HJSpider.py[line:201] INFO:  获取的用户uid为：6248476  消耗时间：3.544614315032959
+2016-11-20 16:31:02,681 ListenUsers.py[line:355] DEBUG:  用户: uid : 4494967; name : Eyki2; nickName : Eyki2; gender : -1; city : 日本; registDate : 2010/3/9 21:34:00; signinLast : 805; lastSignin : 3周前; selfIntroduction : [[[学問の道には終わりがないっす。]]]
+2016-11-20 16:31:02,682 HJSpider.py[line:201] INFO:  获取的用户uid为：4494967  消耗时间：2.9222936630249023
+2016-11-20 16:31:08,816 ListenUsers.py[line:355] DEBUG:  用户: uid : 7836065; name : darwn; nickName : 柚子; gender : 0; city : 南京; registDate : 2011/3/6 19:26:00; signinLast : 1655; lastSignin : 2个月前; selfIntroduction : [[[柚子と申します]]]
+2016-11-20 16:31:08,816 HJSpider.py[line:201] INFO:  获取的用户uid为：7836065  消耗时间：5.513540029525757
+2016-11-20 16:31:12,205 ListenUsers.py[line:355] DEBUG:  用户: uid : 13442864; name : 星野奈奈; nickName : 奈々~♪; gender : 0; city : 北京; registDate : 2012/6/21 14:35:00; signinLast : 107; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:31:12,205 HJSpider.py[line:201] INFO:  获取的用户uid为：13442864  消耗时间：3.38905668258667
+2016-11-20 16:31:15,894 ListenUsers.py[line:355] DEBUG:  用户: uid : 862221; name : xiya521; nickName : 熊熊; gender : 1; city : ; registDate : 2006/3/24 13:20:00; signinLast : 1456; lastSignin : 2天前; selfIntroduction : [[[一生懸命頑張ります！！そして、自分がやりたいことをやる！夢を叶う！！]]]
+2016-11-20 16:31:15,895 HJSpider.py[line:201] INFO:  获取的用户uid为：862221  消耗时间：3.6891705989837646
+2016-11-20 16:31:19,584 ListenUsers.py[line:355] DEBUG:  用户: uid : 3830739; name : 简翎; nickName : ; gender : 0; city : 上海; registDate : 2009/7/31 13:23:00; signinLast : 1320; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:31:19,584 HJSpider.py[line:201] INFO:  获取的用户uid为：3830739  消耗时间：3.689059257507324
+2016-11-20 16:31:21,595 ListenUsers.py[line:355] DEBUG:  用户: uid : 33900774; name : 达比; nickName : 达比; gender : -1; city : 上海; registDate : 2015/7/4 13:12:00; signinLast : 0; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:31:21,596 HJSpider.py[line:201] INFO:  获取的用户uid为：33900774  消耗时间：1.739060878753662
+2016-11-20 16:31:23,507 ListenUsers.py[line:355] DEBUG:  用户: uid : 6372568; name : hjkery; nickName : ; gender : 1; city : 北京; registDate : 2010/10/20 23:21:00; signinLast : 678; lastSignin : 6个月前; selfIntroduction : [[[]]]
+2016-11-20 16:31:23,507 HJSpider.py[line:201] INFO:  获取的用户uid为：6372568  消耗时间：1.9111921787261963
+2016-11-20 16:31:24,763 ListenUsers.py[line:355] DEBUG:  用户: uid : 7383675; name : frostking; nickName : ; gender : 1; city : 上海; registDate : 2011/1/26 11:22:00; signinLast : 541; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:31:24,763 HJSpider.py[line:201] INFO:  获取的用户uid为：7383675  消耗时间：1.2555265426635742
+2016-11-20 16:31:27,941 ListenUsers.py[line:355] DEBUG:  用户: uid : 4831637; name : 我筱邪; nickName : melody; gender : 0; city : 北京; registDate : 2010/5/8 13:33:00; signinLast : 142; lastSignin : 22小时前; selfIntroduction : [[[]]]
+2016-11-20 16:31:27,941 HJSpider.py[line:201] INFO:  获取的用户uid为：4831637  消耗时间：3.17794132232666
+2016-11-20 16:31:29,752 ListenUsers.py[line:355] DEBUG:  用户: uid : 31033890; name : yoyo_0812; nickName : 零奈レイナ; gender : 0; city : 武汉; registDate : 2015/1/10 20:03:00; signinLast : 98; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:31:29,753 HJSpider.py[line:201] INFO:  获取的用户uid为：31033890  消耗时间：1.8111095428466797
+2016-11-20 16:31:33,153 ListenUsers.py[line:355] DEBUG:  用户: uid : 6443480; name : maomaowywy; nickName : 猫儿～♪; gender : -1; city : 天津; registDate : 2010/10/27 12:34:00; signinLast : 1501; lastSignin : 2周前; selfIntroduction : [[[昨日に笑われないように、明日もっと笑えるように。]]]
+2016-11-20 16:31:33,153 HJSpider.py[line:201] INFO:  获取的用户uid为：6443480  消耗时间：3.1522271633148193
+2016-11-20 16:31:57,650 ListenUsers.py[line:355] DEBUG:  用户: uid : 3710875; name : sounbi; nickName : 莫莫; gender : 0; city : 成都; registDate : 2009/6/25 11:30:00; signinLast : 1695; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:31:57,651 HJSpider.py[line:201] INFO:  获取的用户uid为：3710875  消耗时间：24.497130155563354
+2016-11-20 16:32:02,445 ListenUsers.py[line:355] DEBUG:  用户: uid : 6284181; name : ye7436; nickName : 野郎でござる; gender : 1; city : 上海; registDate : 2010/10/13 16:21:00; signinLast : 390; lastSignin : 1个月前; selfIntroduction : [[[声優になりたい駄目な野郎で、無理なんですけど！]]]
+2016-11-20 16:32:02,445 HJSpider.py[line:201] INFO:  获取的用户uid为：6284181  消耗时间：3.1988611221313477
+2016-11-20 16:32:05,957 ListenUsers.py[line:355] DEBUG:  用户: uid : 4577780; name : _尐七; nickName : ドービー; gender : 1; city : 梧州; registDate : 2010/3/25 22:47:00; signinLast : 918; lastSignin : 1周前; selfIntroduction : [[[いざ、尋常に。]]]
+2016-11-20 16:32:05,957 HJSpider.py[line:201] INFO:  获取的用户uid为：4577780  消耗时间：3.5113565921783447
+2016-11-20 16:32:07,690 ListenUsers.py[line:355] DEBUG:  用户: uid : 1515810; name : 云破月; nickName : ; gender : 0; city : 上海; registDate : 2007/7/12 11:07:00; signinLast : 223; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:07,691 HJSpider.py[line:201] INFO:  获取的用户uid为：1515810  消耗时间：1.7334496974945068
+2016-11-20 16:32:09,524 ListenUsers.py[line:355] DEBUG:  用户: uid : 2626310; name : 萝卜123321; nickName : ╰＇萝ˇ卜; gender : 0; city : 苏州; registDate : 2008/10/14 15:23:00; signinLast : 1001; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:32:09,524 HJSpider.py[line:201] INFO:  获取的用户uid为：2626310  消耗时间：1.8333771228790283
+2016-11-20 16:32:10,913 ListenUsers.py[line:355] DEBUG:  用户: uid : 5239447; name : masamunene; nickName : ; gender : -1; city : 厦门; registDate : 2010/7/15 19:46:00; signinLast : 867; lastSignin : 3个月前; selfIntroduction : [[[KinKiKids脑残粉。爱他们一辈子。]]]
+2016-11-20 16:32:10,913 HJSpider.py[line:201] INFO:  获取的用户uid为：5239447  消耗时间：1.3887948989868164
+2016-11-20 16:32:12,669 ListenUsers.py[line:355] DEBUG:  用户: uid : 10285660; name : 九天璃盃; nickName : ; gender : -1; city : 上海; registDate : 2011/9/13 21:46:00; signinLast : 336; lastSignin : 10个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:12,669 HJSpider.py[line:201] INFO:  获取的用户uid为：10285660  消耗时间：1.7557578086853027
+2016-11-20 16:32:14,414 ListenUsers.py[line:355] DEBUG:  用户: uid : 16565013; name : a642144518; nickName : 两生之罪; gender : -1; city : 上海; registDate : 2012/12/14 22:09:00; signinLast : 16; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:14,414 HJSpider.py[line:201] INFO:  获取的用户uid为：16565013  消耗时间：1.7442846298217773
+2016-11-20 16:32:17,848 ListenUsers.py[line:355] DEBUG:  用户: uid : 8482640; name : 许佳玥; nickName : 超高校級の狛枝マニア; gender : -1; city : 深圳; registDate : 2011/4/24 22:02:00; signinLast : 1111; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-11-20 16:32:17,848 HJSpider.py[line:201] INFO:  获取的用户uid为：8482640  消耗时间：3.198970079421997
+2016-11-20 16:32:21,004 ListenUsers.py[line:355] DEBUG:  用户: uid : 13880782; name : 鱼鹿123; nickName : ; gender : 0; city : 广州; registDate : 2012/7/25 20:31:00; signinLast : 259; lastSignin : 9个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:21,004 HJSpider.py[line:201] INFO:  获取的用户uid为：13880782  消耗时间：3.156003952026367
+2016-11-20 16:32:22,570 ListenUsers.py[line:355] DEBUG:  用户: uid : 4490400; name : vincit; nickName : MFA356; gender : 0; city : 加拿大; registDate : 2010/3/8 22:27:00; signinLast : 2058; lastSignin : 3小时前; selfIntroduction : [[[]]]
+2016-11-20 16:32:22,571 HJSpider.py[line:201] INFO:  获取的用户uid为：4490400  消耗时间：1.5662808418273926
+2016-11-20 16:32:26,638 ListenUsers.py[line:355] DEBUG:  用户: uid : 4258960; name : YOEI; nickName : 哟酱; gender : 0; city : 长沙; registDate : 2009/12/13 22:32:00; signinLast : 659; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:32:26,638 HJSpider.py[line:201] INFO:  获取的用户uid为：4258960  消耗时间：4.066634893417358
+2016-11-20 16:32:28,471 ListenUsers.py[line:355] DEBUG:  用户: uid : 3074519; name : sonkoku; nickName : ; gender : 0; city : ; registDate : 2009/1/24 12:00:00; signinLast : 7; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:32:28,472 HJSpider.py[line:201] INFO:  获取的用户uid为：3074519  消耗时间：1.5619242191314697
+2016-11-20 16:32:33,117 ListenUsers.py[line:355] DEBUG:  用户: uid : 5108910; name : 祁七格格; nickName : ; gender : -1; city : 日本; registDate : 2010/6/23 22:22:00; signinLast : 320; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:32:33,117 HJSpider.py[line:201] INFO:  获取的用户uid为：5108910  消耗时间：4.6449294090271
+2016-11-20 16:32:34,906 ListenUsers.py[line:355] DEBUG:  用户: uid : 11802565; name : lujuanbing; nickName : ; gender : -1; city : 大连; registDate : 2012/2/15 14:52:00; signinLast : 234; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:32:34,906 HJSpider.py[line:201] INFO:  获取的用户uid为：11802565  消耗时间：1.7889513969421387
+2016-11-20 16:32:38,329 ListenUsers.py[line:355] DEBUG:  用户: uid : 12512902; name : 我只是一个疯子; nickName : ; gender : -1; city : 北京; registDate : 2012/4/4 7:32:00; signinLast : 155; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:32:38,329 HJSpider.py[line:201] INFO:  获取的用户uid为：12512902  消耗时间：3.422555446624756
+2016-11-20 16:32:40,073 ListenUsers.py[line:355] DEBUG:  用户: uid : 2789738; name : yangjie1986; nickName : ; gender : 0; city : ; registDate : 2008/11/18 20:45:00; signinLast : 1498; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:40,074 HJSpider.py[line:201] INFO:  获取的用户uid为：2789738  消耗时间：1.7444307804107666
+2016-11-20 16:32:41,995 ListenUsers.py[line:355] DEBUG:  用户: uid : 8047651; name : 蔚木兰端; nickName : ; gender : 0; city : 大连; registDate : 2011/3/19 22:21:00; signinLast : 7; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:32:41,995 HJSpider.py[line:201] INFO:  获取的用户uid为：8047651  消耗时间：1.6738920211791992
+2016-11-20 16:32:45,187 ListenUsers.py[line:355] DEBUG:  用户: uid : 4269934; name : 陈鱼77; nickName : 陈鱼77; gender : 0; city : 大连; registDate : 2009/12/16 18:35:00; signinLast : 628; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:32:45,187 HJSpider.py[line:201] INFO:  获取的用户uid为：4269934  消耗时间：3.1922357082366943
+2016-11-20 16:32:48,254 ListenUsers.py[line:355] DEBUG:  用户: uid : 18037783; name : 买醉卜醒; nickName : 买醉卜醒; gender : 0; city : 苏州; registDate : 2013/3/5 13:32:00; signinLast : 233; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:48,255 HJSpider.py[line:201] INFO:  获取的用户uid为：18037783  消耗时间：3.0668528079986572
+2016-11-20 16:32:51,588 ListenUsers.py[line:355] DEBUG:  用户: uid : 9235682; name : jinxue11000; nickName : 小尾巴狼; gender : 1; city : 青岛; registDate : 2011/6/18 15:01:00; signinLast : 679; lastSignin : 4个月前; selfIntroduction : [[[俺はくそジジィと呼ばれる男だ！]]]
+2016-11-20 16:32:51,589 HJSpider.py[line:201] INFO:  获取的用户uid为：9235682  消耗时间：3.333733081817627
+2016-11-20 16:32:53,311 ListenUsers.py[line:355] DEBUG:  用户: uid : 21562097; name : 宇智波波球; nickName : 宇智波波球; gender : 0; city : ; registDate : 2013/8/31 17:36:00; signinLast : 4; lastSignin : 8个月前; selfIntroduction : [[[]]]
+2016-11-20 16:32:53,311 HJSpider.py[line:201] INFO:  获取的用户uid为：21562097  消耗时间：1.7221579551696777
+2016-11-20 16:32:53,933 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/11314144/: redirect 302
+2016-11-20 16:32:53,933 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:32:53,933 HJSpider.py[line:201] INFO:  获取的用户uid为：11314144  消耗时间：0.6220765113830566
+2016-11-20 16:32:53,934 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:33:03,168 ListenUsers.py[line:355] DEBUG:  用户: uid : 11314144; name : Haokb; nickName : ; gender : 0; city : 上海; registDate : 2011/12/22 14:34:00; signinLast : 196; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:33:03,168 HJSpider.py[line:201] INFO:  获取的用户uid为：11314144  消耗时间：9.23418664932251
+2016-11-20 16:33:03,168 ListenUsers.py[line:169] WARNING:  程序将沉睡2.0秒以避免访问过于频繁
+2016-11-20 16:33:06,446 ListenUsers.py[line:355] DEBUG:  用户: uid : 5642590; name : 豹的速度; nickName : ; gender : 1; city : 北京; registDate : 2010/8/25 12:24:00; signinLast : 458; lastSignin : 6个月前; selfIntroduction : [[[]]]
+2016-11-20 16:33:06,446 HJSpider.py[line:201] INFO:  获取的用户uid为：5642590  消耗时间：3.2779717445373535
+2016-11-20 16:33:08,391 ListenUsers.py[line:355] DEBUG:  用户: uid : 16967506; name : 陈ting94; nickName : ; gender : -1; city : 九江; registDate : 2013/1/8 17:53:00; signinLast : 229; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:33:08,391 HJSpider.py[line:201] INFO:  获取的用户uid为：16967506  消耗时间：1.6405079364776611
+2016-11-20 16:33:10,035 ListenUsers.py[line:355] DEBUG:  用户: uid : 17099097; name : 日月旋飞; nickName : 昀之晛，サン; gender : 0; city : 天津; registDate : 2013/1/15 13:27:00; signinLast : 48; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:33:10,035 HJSpider.py[line:201] INFO:  获取的用户uid为：17099097  消耗时间：1.6441638469696045
+2016-11-20 16:33:11,358 ListenUsers.py[line:355] DEBUG:  用户: uid : 695756; name : appleyhc; nickName : 水清望月; gender : 0; city : 哈尔滨; registDate : 2005/10/3 17:53:00; signinLast : 684; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:33:11,358 HJSpider.py[line:201] INFO:  获取的用户uid为：695756  消耗时间：1.3225562572479248
+2016-11-20 16:33:13,025 ListenUsers.py[line:355] DEBUG:  用户: uid : 5132052; name : 小叮当78; nickName : ; gender : 0; city : 深圳; registDate : 2010/6/28 12:21:00; signinLast : 388; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:33:13,025 HJSpider.py[line:201] INFO:  获取的用户uid为：5132052  消耗时间：1.6664307117462158
+2016-11-20 16:33:16,881 ListenUsers.py[line:355] DEBUG:  用户: uid : 11757288; name : WPK_New; nickName : 小起; gender : 0; city : 日本; registDate : 2012/2/11 19:46:00; signinLast : 1059; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:33:16,881 HJSpider.py[line:201] INFO:  获取的用户uid为：11757288  消耗时间：3.855719566345215
+2016-11-20 16:33:18,903 ListenUsers.py[line:355] DEBUG:  用户: uid : 13004660; name : hjkjkjj; nickName : ; gender : -1; city : 重庆; registDate : 2012/5/14 13:00:00; signinLast : 0; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:33:18,904 HJSpider.py[line:201] INFO:  获取的用户uid为：13004660  消耗时间：1.7332608699798584
+2016-11-20 16:33:22,271 ListenUsers.py[line:355] DEBUG:  用户: uid : 3414725; name : coldplay1106; nickName : 坂本　月風; gender : 1; city : 苏州; registDate : 2009/4/4 14:11:00; signinLast : 420; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:33:22,271 HJSpider.py[line:201] INFO:  获取的用户uid为：3414725  消耗时间：3.3667519092559814
+2016-11-20 16:33:26,793 ListenUsers.py[line:355] DEBUG:  用户: uid : 11408107; name : yst1993; nickName : yst; gender : 1; city : 合肥; registDate : 2012/1/4 16:43:00; signinLast : 634; lastSignin : 9个月前; selfIntroduction : [[[日语半吊子一个，英语连半吊子都没有存在感超级弱的小透明一只。]]]
+2016-11-20 16:33:26,794 HJSpider.py[line:201] INFO:  获取的用户uid为：11408107  消耗时间：4.522581577301025
+2016-11-20 16:33:30,538 ListenUsers.py[line:355] DEBUG:  用户: uid : 6579155; name : 白牙一护; nickName : 阿白~; gender : 0; city : 西安; registDate : 2010/11/8 23:42:00; signinLast : 1006; lastSignin : 1周前; selfIntroduction : [[[嗜吃嗜睡嗜音乐嗜电影]]]
+2016-11-20 16:33:30,539 HJSpider.py[line:201] INFO:  获取的用户uid为：6579155  消耗时间：3.479184627532959
+2016-11-20 16:33:32,383 ListenUsers.py[line:355] DEBUG:  用户: uid : 16334200; name : 1945495082; nickName : 夏米; gender : 0; city : ; registDate : 2012/12/3 12:10:00; signinLast : 76; lastSignin : 3周前; selfIntroduction : [[[]]]
+2016-11-20 16:33:32,383 HJSpider.py[line:201] INFO:  获取的用户uid为：16334200  消耗时间：1.844388723373413
+2016-11-20 16:33:54,684 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/12585735/: redirect 302
+2016-11-20 16:33:54,684 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:33:54,684 HJSpider.py[line:201] INFO:  获取的用户uid为：12585735  消耗时间：22.300602674484253
+2016-11-20 16:34:23,700 ListenUsers.py[line:355] DEBUG:  用户: uid : 13195363; name : sd8092987; nickName : Lavi541; gender : -1; city : ; registDate : 2012/5/31 0:04:00; signinLast : 0; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:23,700 HJSpider.py[line:201] INFO:  获取的用户uid为：13195363  消耗时间：29.01537299156189
+2016-11-20 16:34:25,455 ListenUsers.py[line:355] DEBUG:  用户: uid : 4014264; name : 我是兔仔; nickName : 回音兔子; gender : 0; city : 上海; registDate : 2009/9/25 19:31:00; signinLast : 688; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:25,456 HJSpider.py[line:201] INFO:  获取的用户uid为：4014264  消耗时间：1.7553632259368896
+2016-11-20 16:34:27,044 ListenUsers.py[line:355] DEBUG:  用户: uid : 12455803; name : yang821215; nickName : ; gender : 0; city : 广州; registDate : 2012/3/30 13:41:00; signinLast : 1611; lastSignin : 2天前; selfIntroduction : [[[]]]
+2016-11-20 16:34:27,045 HJSpider.py[line:201] INFO:  获取的用户uid为：12455803  消耗时间：1.5887682437896729
+2016-11-20 16:34:28,956 ListenUsers.py[line:355] DEBUG:  用户: uid : 12720798; name : yjj150519957; nickName : ; gender : -1; city : 日本; registDate : 2012/4/19 12:52:00; signinLast : 81; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:34:28,956 HJSpider.py[line:201] INFO:  获取的用户uid为：12720798  消耗时间：1.670999526977539
+2016-11-20 16:34:30,790 ListenUsers.py[line:355] DEBUG:  用户: uid : 4394449; name : 心妍妈妈; nickName : 繁星; gender : 0; city : 苏州; registDate : 2010/2/2 22:09:00; signinLast : 1; lastSignin : 7个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:30,790 HJSpider.py[line:201] INFO:  获取的用户uid为：4394449  消耗时间：1.8333520889282227
+2016-11-20 16:34:32,601 ListenUsers.py[line:355] DEBUG:  用户: uid : 11247616; name : nn22njnj; nickName : ; gender : 0; city : 北京; registDate : 2011/12/16 20:33:00; signinLast : 33; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:32,601 HJSpider.py[line:201] INFO:  获取的用户uid为：11247616  消耗时间：1.8110947608947754
+2016-11-20 16:34:35,212 ListenUsers.py[line:355] DEBUG:  用户: uid : 965279; name : niki1984; nickName : ; gender : 0; city : ; registDate : 2006/5/30 14:53:00; signinLast : 4; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:34:35,213 HJSpider.py[line:201] INFO:  获取的用户uid为：965279  消耗时间：2.611271858215332
+2016-11-20 16:34:37,791 ListenUsers.py[line:355] DEBUG:  用户: uid : 14897139; name : 小石沉大海; nickName : 面無表情心花怒放; gender : -1; city : 台湾; registDate : 2012/9/28 11:53:00; signinLast : 880; lastSignin : 3天前; selfIntroduction : [[[認真學習，不進則退！]]]
+2016-11-20 16:34:37,791 HJSpider.py[line:201] INFO:  获取的用户uid为：14897139  消耗时间：2.5779411792755127
+2016-11-20 16:34:39,469 ListenUsers.py[line:355] DEBUG:  用户: uid : 1059415; name : yolcano; nickName : ; gender : 1; city : ; registDate : 2006/8/13 14:06:00; signinLast : 0; lastSignin : 5年前; selfIntroduction : [[[]]]
+2016-11-20 16:34:39,469 HJSpider.py[line:201] INFO:  获取的用户uid为：1059415  消耗时间：1.6778388023376465
+2016-11-20 16:34:41,080 ListenUsers.py[line:355] DEBUG:  用户: uid : 34610341; name : e31109x5; nickName : ; gender : -1; city : 其他; registDate : 2015/8/9 15:10:00; signinLast : 0; lastSignin : 5天前; selfIntroduction : [[[]]]
+2016-11-20 16:34:41,081 HJSpider.py[line:201] INFO:  获取的用户uid为：34610341  消耗时间：1.6112446784973145
+2016-11-20 16:34:43,003 ListenUsers.py[line:355] DEBUG:  用户: uid : 11992459; name : lonelness111; nickName : ; gender : -1; city : 杭州; registDate : 2012/2/26 22:34:00; signinLast : 42; lastSignin : 12个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:43,003 HJSpider.py[line:201] INFO:  获取的用户uid为：11992459  消耗时间：1.6603336334228516
+2016-11-20 16:34:45,026 ListenUsers.py[line:355] DEBUG:  用户: uid : 20541268; name : miny1123; nickName : ; gender : 0; city : ; registDate : 2013/7/10 8:57:00; signinLast : 8; lastSignin : 6个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:45,026 HJSpider.py[line:201] INFO:  获取的用户uid为：20541268  消耗时间：2.0221965312957764
+2016-11-20 16:34:46,815 ListenUsers.py[line:355] DEBUG:  用户: uid : 12017583; name : 199321xyz; nickName : ; gender : 0; city : 芜湖; registDate : 2012/2/28 16:47:00; signinLast : 77; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:34:46,815 HJSpider.py[line:201] INFO:  获取的用户uid为：12017583  消耗时间：1.7888894081115723
+2016-11-20 16:34:48,737 ListenUsers.py[line:355] DEBUG:  用户: uid : 17968685; name : cyokenn; nickName : ; gender : 1; city : 福州; registDate : 2013/3/2 21:58:00; signinLast : 16; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:34:48,738 HJSpider.py[line:201] INFO:  获取的用户uid为：17968685  消耗时间：1.9223856925964355
+2016-11-20 16:34:52,060 ListenUsers.py[line:355] DEBUG:  用户: uid : 25969526; name : 小妖精z; nickName : 小妖; gender : 0; city : 昆明; registDate : 2014/4/27 13:13:00; signinLast : 194; lastSignin : 1个月前; selfIntroduction : [[[太多的事，慢慢地就不能做了；太多的人，渐渐地就不见了。成长似乎是一个丢失的过程。]]]
+2016-11-20 16:34:52,060 HJSpider.py[line:201] INFO:  获取的用户uid为：25969526  消耗时间：3.322402000427246
+2016-11-20 16:34:54,138 ListenUsers.py[line:355] DEBUG:  用户: uid : 16735236; name : juiiii; nickName : ; gender : -1; city : 娄底; registDate : 2012/12/24 13:57:00; signinLast : 235; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:54,139 HJSpider.py[line:201] INFO:  获取的用户uid为：16735236  消耗时间：1.8405141830444336
+2016-11-20 16:34:55,794 ListenUsers.py[line:355] DEBUG:  用户: uid : 2257920; name : superst3411; nickName : ; gender : 0; city : 日本; registDate : 2008/7/31 13:03:00; signinLast : 131; lastSignin : 6个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:55,794 HJSpider.py[line:201] INFO:  获取的用户uid为：2257920  消耗时间：1.6553466320037842
+2016-11-20 16:34:57,583 ListenUsers.py[line:355] DEBUG:  用户: uid : 18205102; name : 123s1234; nickName : ; gender : -1; city : ; registDate : 2013/3/12 1:43:00; signinLast : 0; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:57,583 HJSpider.py[line:201] INFO:  获取的用户uid为：18205102  消耗时间：1.788832426071167
+2016-11-20 16:34:59,206 ListenUsers.py[line:355] DEBUG:  用户: uid : 34084399; name : 战场花; nickName : ; gender : -1; city : 唐山; registDate : 2015/7/13 17:26:00; signinLast : 9; lastSignin : 9个月前; selfIntroduction : [[[]]]
+2016-11-20 16:34:59,206 HJSpider.py[line:201] INFO:  获取的用户uid为：34084399  消耗时间：1.6224141120910645
+2016-11-20 16:35:01,128 ListenUsers.py[line:355] DEBUG:  用户: uid : 4958552; name : yeziyang2010; nickName : 葉さん; gender : 1; city : 深圳; registDate : 2010/5/30 10:24:00; signinLast : 488; lastSignin : 4周前; selfIntroduction : [[[]]]
+2016-11-20 16:35:01,129 HJSpider.py[line:201] INFO:  获取的用户uid为：4958552  消耗时间：1.922135591506958
+2016-11-20 16:35:03,084 ListenUsers.py[line:355] DEBUG:  用户: uid : 9101693; name : 安静的木棉树; nickName : ; gender : 0; city : 芜湖; registDate : 2011/6/8 20:34:00; signinLast : 217; lastSignin : 3周前; selfIntroduction : [[[]]]
+2016-11-20 16:35:03,084 HJSpider.py[line:201] INFO:  获取的用户uid为：9101693  消耗时间：1.9556207656860352
+2016-11-20 16:35:05,785 ListenUsers.py[line:355] DEBUG:  用户: uid : 9986802; name : ceng20125; nickName : ; gender : -1; city : 广东省; registDate : 2011/8/20 16:28:00; signinLast : 35; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:35:05,785 HJSpider.py[line:201] INFO:  获取的用户uid为：9986802  消耗时间：2.456434488296509
+2016-11-20 16:35:06,251 ListenArticles.py[line:151] DEBUG:  文章: uid : 15409456085; type : 娱乐; title : 【动漫】滑头鬼之孙 第二回（1）; commentCount : 2; averageScore : 79; timeLast : 89; publishTime : 2012/5/16 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:35:06,252 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15409456085  贡献者为：4397380
+2016-11-20 16:35:07,511 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/8628800/: redirect 302
+2016-11-20 16:35:07,512 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:35:07,512 HJSpider.py[line:201] INFO:  获取的用户uid为：8628800  消耗时间：0.8349344730377197
+2016-11-20 16:35:09,741 ListenUsers.py[line:355] DEBUG:  用户: uid : 11857305; name : 浴浴兮; nickName : 幼教部绅士; gender : -1; city : 上海; registDate : 2012/2/19 12:53:00; signinLast : 47; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:09,741 HJSpider.py[line:201] INFO:  获取的用户uid为：11857305  消耗时间：1.685105800628662
+2016-11-20 16:35:11,786 ListenUsers.py[line:355] DEBUG:  用户: uid : 4526462; name : hlloki; nickName : EMMA; gender : -1; city : 广州; registDate : 2010/3/16 15:17:00; signinLast : 1006; lastSignin : 1周前; selfIntroduction : [[[]]]
+2016-11-20 16:35:11,786 HJSpider.py[line:201] INFO:  获取的用户uid为：4526462  消耗时间：1.733931541442871
+2016-11-20 16:35:13,197 ListenUsers.py[line:355] DEBUG:  用户: uid : 6600922; name : Eternity陌; nickName : 淡〃抹; gender : 1; city : 武汉; registDate : 2010/11/10 21:32:00; signinLast : 482; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:13,197 HJSpider.py[line:201] INFO:  获取的用户uid为：6600922  消耗时间：1.4109351634979248
+2016-11-20 16:35:15,764 ListenUsers.py[line:355] DEBUG:  用户: uid : 2736479; name : oojimakun; nickName : 胖哒; gender : 0; city : 西安; registDate : 2008/11/7 15:01:00; signinLast : 629; lastSignin : 1周前; selfIntroduction : [[[無職状態です！]]]
+2016-11-20 16:35:15,764 HJSpider.py[line:201] INFO:  获取的用户uid为：2736479  消耗时间：1.781590223312378
+2016-11-20 16:35:17,909 ListenUsers.py[line:355] DEBUG:  用户: uid : 8414162; name : takanoo; nickName : ; gender : 1; city : 上海; registDate : 2011/4/19 8:55:00; signinLast : 94; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:35:17,909 HJSpider.py[line:201] INFO:  获取的用户uid为：8414162  消耗时间：1.8373432159423828
+2016-11-20 16:35:18,509 ListenArticles.py[line:151] DEBUG:  文章: uid : 15411604489; type : 娱乐; title : 【动漫】滑头鬼之孙 第三回（2）; commentCount : 2; averageScore : 80; timeLast : 89; publishTime : 2012/5/19 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:35:18,509 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15411604489  贡献者为：4397380
+2016-11-20 16:35:19,965 ListenUsers.py[line:355] DEBUG:  用户: uid : 2706804; name : iamyoutow; nickName : ; gender : 1; city : ; registDate : 2008/11/1 20:39:00; signinLast : 41; lastSignin : 1年前; selfIntroduction : [[[]]]
+2016-11-20 16:35:19,965 HJSpider.py[line:201] INFO:  获取的用户uid为：2706804  消耗时间：1.1435096263885498
+2016-11-20 16:35:21,298 ListenUsers.py[line:355] DEBUG:  用户: uid : 5306707; name : 岁岁丰玉; nickName : 岁岁⊙ω⊙; gender : 0; city : 杭州; registDate : 2010/7/23 8:38:00; signinLast : 847; lastSignin : 6天前; selfIntroduction : [[[]]]
+2016-11-20 16:35:21,299 HJSpider.py[line:201] INFO:  获取的用户uid为：5306707  消耗时间：1.3331522941589355
+2016-11-20 16:35:24,277 ListenUsers.py[line:355] DEBUG:  用户: uid : 5214338; name : 出走的桃太郎; nickName : 桃太郎; gender : 0; city : 上海; registDate : 2010/7/12 15:54:00; signinLast : 1482; lastSignin : 1个月前; selfIntroduction : [[[不需要介绍。]]]
+2016-11-20 16:35:24,277 HJSpider.py[line:201] INFO:  获取的用户uid为：5214338  消耗时间：2.977947235107422
+2016-11-20 16:35:28,711 ListenUsers.py[line:355] DEBUG:  用户: uid : 4214990; name : wendywung; nickName : maomao; gender : 0; city : 上海; registDate : 2009/12/2 15:06:00; signinLast : 1038; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:28,711 HJSpider.py[line:201] INFO:  获取的用户uid为：4214990  消耗时间：3.3531181812286377
+2016-11-20 16:35:30,911 ListenUsers.py[line:355] DEBUG:  用户: uid : 8011897; name : cao770212; nickName : ; gender : 1; city : 武汉; registDate : 2011/3/17 12:21:00; signinLast : 1; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:30,911 HJSpider.py[line:201] INFO:  获取的用户uid为：8011897  消耗时间：1.9687671661376953
+2016-11-20 16:35:33,045 ListenUsers.py[line:355] DEBUG:  用户: uid : 11734200; name : 浅蓝与深蓝; nickName : ; gender : 0; city : 浙江省; registDate : 2012/2/9 18:34:00; signinLast : 138; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:33,045 HJSpider.py[line:201] INFO:  获取的用户uid为：11734200  消耗时间：1.869826316833496
+2016-11-20 16:35:34,701 ListenUsers.py[line:355] DEBUG:  用户: uid : 4542850; name : 周里; nickName : ; gender : 0; city : 湘潭; registDate : 2010/3/19 18:28:00; signinLast : 329; lastSignin : 8个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:34,701 HJSpider.py[line:201] INFO:  获取的用户uid为：4542850  消耗时间：1.6556041240692139
+2016-11-20 16:35:36,223 ListenUsers.py[line:355] DEBUG:  用户: uid : 7804953; name : viwells; nickName : ; gender : 0; city : 其它城市; registDate : 2011/3/4 18:27:00; signinLast : 128; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:35:36,223 HJSpider.py[line:201] INFO:  获取的用户uid为：7804953  消耗时间：1.2601778507232666
+2016-11-20 16:35:36,688 ListenArticles.py[line:151] DEBUG:  文章: uid : 15416364501; type : 娱乐; title : 【动漫】滑头鬼之孙 第五回（1）; commentCount : 1; averageScore : 87; timeLast : 91; publishTime : 2012/5/22 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:35:36,688 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15416364501  贡献者为：4397380
+2016-11-20 16:35:43,368 ListenUsers.py[line:355] DEBUG:  用户: uid : 5115488; name : solocats; nickName : 凯特; gender : 0; city : 无锡; registDate : 2010/6/25 8:44:00; signinLast : 2330; lastSignin : 6小时前; selfIntroduction : [[[]]]
+2016-11-20 16:35:43,369 HJSpider.py[line:201] INFO:  获取的用户uid为：5115488  消耗时间：6.211364030838013
+2016-11-20 16:35:44,777 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/10865073/: redirect 302
+2016-11-20 16:35:44,778 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:35:44,778 HJSpider.py[line:201] INFO:  获取的用户uid为：10865073  消耗时间：1.4088680744171143
+2016-11-20 16:35:46,724 ListenUsers.py[line:355] DEBUG:  用户: uid : 7850176; name : yyqcnx; nickName : ; gender : -1; city : ; registDate : 2011/3/7 18:37:00; signinLast : 293; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:46,725 HJSpider.py[line:201] INFO:  获取的用户uid为：7850176  消耗时间：1.632828950881958
+2016-11-20 16:35:49,092 ListenUsers.py[line:355] DEBUG:  用户: uid : 7832697; name : 千里追風; nickName : 千里追風; gender : -1; city : 马鞍山; registDate : 2011/3/6 16:14:00; signinLast : 988; lastSignin : 6个月前; selfIntroduction : [[[]]]
+2016-11-20 16:35:49,092 HJSpider.py[line:201] INFO:  获取的用户uid为：7832697  消耗时间：1.8686275482177734
+2016-11-20 16:35:49,947 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/10308634/: redirect 302
+2016-11-20 16:35:49,948 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:35:49,948 HJSpider.py[line:201] INFO:  获取的用户uid为：10308634  消耗时间：0.6256723403930664
+2016-11-20 16:35:49,948 ListenUsers.py[line:169] WARNING:  程序将沉睡8.0秒以避免访问过于频繁
+2016-11-20 16:35:58,092 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/10308634/: redirect 302
+2016-11-20 16:35:58,092 ListenUsers.py[line:202] WARNING:  提示: 您的访问太过频繁，请稍候再试。
+2016-11-20 16:35:58,092 HJSpider.py[line:201] INFO:  获取的用户uid为：10308634  消耗时间：8.144169092178345
+2016-11-20 16:35:58,092 ListenUsers.py[line:169] WARNING:  程序将沉睡16.0秒以避免访问过于频繁
+2016-11-20 16:36:15,317 ListenUsers.py[line:355] DEBUG:  用户: uid : 10308634; name : 蔡俊俊; nickName : ; gender : -1; city : 十堰; registDate : 2011/9/15 20:40:00; signinLast : 0; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:36:15,317 HJSpider.py[line:201] INFO:  获取的用户uid为：10308634  消耗时间：17.224524974822998
+2016-11-20 16:36:15,574 ListenUsers.py[line:169] WARNING:  程序将沉睡4.0秒以避免访问过于频繁
+2016-11-20 16:36:20,873 ListenUsers.py[line:355] DEBUG:  用户: uid : 5267828; name : 月下箫声; nickName : りん; gender : 0; city : 广州; registDate : 2010/7/18 22:23:00; signinLast : 323; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:36:20,873 HJSpider.py[line:201] INFO:  获取的用户uid为：5267828  消耗时间：5.298930644989014
+2016-11-20 16:36:22,833 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/11265307/: redirect 302
+2016-11-20 16:36:22,834 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:36:22,834 HJSpider.py[line:201] INFO:  获取的用户uid为：11265307  消耗时间：1.960338830947876
+2016-11-20 16:36:24,807 ListenUsers.py[line:355] DEBUG:  用户: uid : 12998366; name : jansydan; nickName : ; gender : -1; city : 无锡; registDate : 2012/5/13 20:52:00; signinLast : 0; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:36:24,807 HJSpider.py[line:201] INFO:  获取的用户uid为：12998366  消耗时间：1.7355666160583496
+2016-11-20 16:36:25,396 ListenArticles.py[line:151] DEBUG:  文章: uid : 15418163374; type : 娱乐; title : 【动漫】滑头鬼之孙 第六回（2）; commentCount : 1; averageScore : 82; timeLast : 88; publishTime : 2012/5/25 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:36:25,396 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15418163374  贡献者为：4397380
+2016-11-20 16:36:30,241 ListenUsers.py[line:355] DEBUG:  用户: uid : 9329474; name : Noahyan; nickName : 维尼尼~; gender : 0; city : 佛山; registDate : 2011/6/25 20:27:00; signinLast : 428; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:36:30,241 HJSpider.py[line:201] INFO:  获取的用户uid为：9329474  消耗时间：3.554720640182495
+2016-11-20 16:36:32,064 ListenUsers.py[line:355] DEBUG:  用户: uid : 4318838; name : chenxiulan; nickName : ; gender : 0; city : 珠海; registDate : 2010/1/5 11:18:00; signinLast : 13; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:36:32,064 HJSpider.py[line:201] INFO:  获取的用户uid为：4318838  消耗时间：1.822178602218628
+2016-11-20 16:36:34,153 ListenUsers.py[line:355] DEBUG:  用户: uid : 3162330; name : kitty0371; nickName : ; gender : 0; city : 上海; registDate : 2009/2/18 13:25:00; signinLast : 43; lastSignin : 8个月前; selfIntroduction : [[[]]]
+2016-11-20 16:36:34,153 HJSpider.py[line:201] INFO:  获取的用户uid为：3162330  消耗时间：1.814969778060913
+2016-11-20 16:36:35,753 ListenUsers.py[line:355] DEBUG:  用户: uid : 7910619; name : CKVENKI; nickName : 楊豐華; gender : 1; city : 上海; registDate : 2011/3/10 23:19:00; signinLast : 1588; lastSignin : 2个月前; selfIntroduction : [[[]]]
+2016-11-20 16:36:35,753 HJSpider.py[line:201] INFO:  获取的用户uid为：7910619  消耗时间：1.599714756011963
+2016-11-20 16:36:37,731 ListenUsers.py[line:355] DEBUG:  用户: uid : 5656567; name : momo8320; nickName : ; gender : 0; city : 上海; registDate : 2010/8/26 15:18:00; signinLast : 591; lastSignin : 6天前; selfIntroduction : [[[]]]
+2016-11-20 16:36:37,732 HJSpider.py[line:201] INFO:  获取的用户uid为：5656567  消耗时间：1.6751625537872314
+2016-11-20 16:37:02,134 ListenUsers.py[line:355] DEBUG:  用户: uid : 8166058; name : nanaaik; nickName : Arika; gender : 0; city : 上海; registDate : 2011/3/28 21:23:00; signinLast : 173; lastSignin : 1天前; selfIntroduction : [[[]]]
+2016-11-20 16:37:02,134 HJSpider.py[line:201] INFO:  获取的用户uid为：8166058  消耗时间：24.40204119682312
+2016-11-20 16:37:04,247 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/5544736/: redirect 302
+2016-11-20 16:37:04,248 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:37:04,248 HJSpider.py[line:201] INFO:  获取的用户uid为：5544736  消耗时间：1.8701181411743164
+2016-11-20 16:37:08,290 ListenUsers.py[line:355] DEBUG:  用户: uid : 6567143; name : 誩笶晏晏; nickName : ; gender : 0; city : 上海; registDate : 2010/11/7 23:41:00; signinLast : 93; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:37:08,290 HJSpider.py[line:201] INFO:  获取的用户uid为：6567143  消耗时间：4.042237758636475
+2016-11-20 16:37:09,743 ListenUsers.py[line:200] WARNING:  http://bulo.hujiang.com/u/12807323/: redirect 302
+2016-11-20 16:37:09,743 ListenUsers.py[line:202] WARNING:  提示: 用户设定部落主页私有。
+2016-11-20 16:37:09,744 HJSpider.py[line:201] INFO:  获取的用户uid为：12807323  消耗时间：1.4528532028198242
+2016-11-20 16:37:14,260 ListenUsers.py[line:355] DEBUG:  用户: uid : 13137000; name : fukudaakiko; nickName : ; gender : -1; city : 日本; registDate : 2012/5/25 23:35:00; signinLast : 0; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:37:14,260 HJSpider.py[line:201] INFO:  获取的用户uid为：13137000  消耗时间：4.21415376663208
+2016-11-20 16:37:18,560 ListenUsers.py[line:355] DEBUG:  用户: uid : 13103935; name : chuluxin; nickName : ; gender : -1; city : 济南; registDate : 2012/5/22 22:58:00; signinLast : 44; lastSignin : 2周前; selfIntroduction : [[[]]]
+2016-11-20 16:37:18,560 HJSpider.py[line:201] INFO:  获取的用户uid为：13103935  消耗时间：4.300154685974121
+2016-11-20 16:37:22,205 ListenUsers.py[line:355] DEBUG:  用户: uid : 3926150; name : ding6814875; nickName : 小U; gender : 0; city : 广州; registDate : 2009/8/30 18:33:00; signinLast : 1332; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:37:22,205 HJSpider.py[line:201] INFO:  获取的用户uid为：3926150  消耗时间：3.644723653793335
+2016-11-20 16:37:24,072 ListenUsers.py[line:355] DEBUG:  用户: uid : 2317853; name : unayyl; nickName : ; gender : 0; city : 中山; registDate : 2008/8/13 15:54:00; signinLast : 565; lastSignin : 1个月前; selfIntroduction : [[[]]]
+2016-11-20 16:37:24,073 HJSpider.py[line:201] INFO:  获取的用户uid为：2317853  消耗时间：1.8670005798339844
+2016-11-20 16:37:25,895 ListenUsers.py[line:355] DEBUG:  用户: uid : 11462103; name : 布什0; nickName : ; gender : 0; city : 山东省; registDate : 2012/1/11 17:04:00; signinLast : 43; lastSignin : 4个月前; selfIntroduction : [[[]]]
+2016-11-20 16:37:25,895 HJSpider.py[line:201] INFO:  获取的用户uid为：11462103  消耗时间：1.8219757080078125
+2016-11-20 16:37:26,362 ListenArticles.py[line:151] DEBUG:  文章: uid : 15426137201; type : 娱乐; title : 【动漫】滑头鬼之孙 第十回（1）; commentCount : 3; averageScore : 77; timeLast : 81; publishTime : 2012/6/1 9:00:10; contributorId : 4397380; difficultLevel : 初中级级别; rewards : 3; tags : ['滑头鬼之孙', '日本动漫', '动漫日语']; 
+2016-11-20 16:37:26,362 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：15426137201  贡献者为：4397380
+2016-11-20 16:37:29,240 ListenUsers.py[line:355] DEBUG:  用户: uid : 3635571; name : 唯宇奇; nickName : 宇奇; gender : 0; city : 大连; registDate : 2009/6/8 19:15:00; signinLast : 172; lastSignin : 2个月前; selfIntroduction : [[[声控    每天以想念媳妇，注视媳妇，和媳妇说话为中心]]]
+2016-11-20 16:37:29,240 HJSpider.py[line:201] INFO:  获取的用户uid为：3635571  消耗时间：1.880922794342041
+2016-11-20 16:37:31,040 ListenUsers.py[line:355] DEBUG:  用户: uid : 10016218; name : 曹志强77; nickName : ; gender : -1; city : 武汉; registDate : 2011/8/23 10:20:00; signinLast : 0; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:37:31,040 HJSpider.py[line:201] INFO:  获取的用户uid为：10016218  消耗时间：1.7995071411132812
+2016-11-20 16:37:33,085 ListenUsers.py[line:355] DEBUG:  用户: uid : 2331759; name : nina_study; nickName : ninadayup; gender : 0; city : 沈阳; registDate : 2008/8/16 20:21:00; signinLast : 24; lastSignin : 3个月前; selfIntroduction : [[[]]]
+2016-11-20 16:37:33,085 HJSpider.py[line:201] INFO:  获取的用户uid为：2331759  消耗时间：1.7862293720245361
+2016-11-20 16:37:34,719 ListenUsers.py[line:355] DEBUG:  用户: uid : 4285333; name : qiaohai; nickName : qiaohai; gender : 0; city : 青岛; registDate : 2009/12/20 8:39:00; signinLast : 40; lastSignin : 3年前; selfIntroduction : [[[]]]
+2016-11-20 16:37:34,719 HJSpider.py[line:201] INFO:  获取的用户uid为：4285333  消耗时间：1.633227825164795
+2016-11-20 16:37:36,874 ListenUsers.py[line:355] DEBUG:  用户: uid : 13209843; name : sedfvvvv; nickName : ; gender : -1; city : 重庆; registDate : 2012/6/1 9:43:00; signinLast : 0; lastSignin : 4年前; selfIntroduction : [[[]]]
+2016-11-20 16:37:36,875 HJSpider.py[line:201] INFO:  获取的用户uid为：13209843  消耗时间：1.9193651676177979
+2016-11-20 16:37:38,419 ListenUsers.py[line:355] DEBUG:  用户: uid : 10761698; name : caoromglin; nickName : ; gender : -1; city : 上海; registDate : 2011/11/3 20:28:00; signinLast : 0; lastSignin : 2年前; selfIntroduction : [[[]]]
+2016-11-20 16:37:38,420 HJSpider.py[line:201] INFO:  获取的用户uid为：10761698  消耗时间：1.5445096492767334
+2016-11-20 16:37:38,808 ListenItems.py[line:211] DEBUG:  节目: name : haizeiwang; title : 海贼王; itemImgUrl : http://i1.w.hjfile.cn/bulo/menu/p9780.jpg; introduction : 海贼王讲述了主人公蒙其·D·路飞为了当上“海贼王”而踏上“伟大航道”与其伙伴的冒险故事。该动画自开播以来一直保持着极高的人气，可谓是日本的国民级动画。现在这部人气作品强势登陆听写酷。一起来听写这部已伴随我们走过15个年头的神作吧。; type : 娱乐; type : 动漫; difficult : 中高级; updateRate : 已经完结; averageComsume : 326; averageScore : 70.36%; 
+2016-11-20 16:37:38,815 HJSpider.py[line:180] INFO:  ******************************访问节目页面：http://ting.hujiang.com/haizeiwang/page1/
+2016-11-20 16:37:39,186 ListenArticles.py[line:151] DEBUG:  文章: uid : 161034901400; type : 万花筒; title : 【动漫】 海贼王 第586话 （1）; commentCount : 0; averageScore : 76; timeLast : 75; publishTime : 2013/3/22 9:00:10; contributorId : 3740518; difficultLevel : 中高级级别; rewards : 7; tags : ['娱乐', '动漫', '海贼王', '听力']; 
+2016-11-20 16:37:39,186 HJSpider.py[line:191] INFO:  **********正在访问文章的UID是：161034901400  贡献者为：3740518
+2016-11-20 16:37:41,764 ListenUsers.py[line:355] DEBUG:  用户: uid : 3740518; name : 火之岚; nickName : 杰尼; gender : 1; city : 重庆; registDate : 2009/7/5 17:18:00; signinLast : 1160; lastSignin : 2天前; selfIntroduction : [[[]]]
+2016-11-20 16:37:41,765 HJSpider.py[line:201] INFO:  获取的用户uid为：3740518  消耗时间：2.578167200088501
+2016-11-20 16:37:41,765 ListenUsers.py[line:391] WARNING:  用户数量超出限制！

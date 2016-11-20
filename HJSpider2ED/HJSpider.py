@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 from views.ListenUsers import ListenUsers
 from views.ListenArticles import ListenArticles
 from views.ListenItems import ListenItems
+from models.models import Models
+from sqlalchemy.ext.declarative import declarative_base
 from util import Utils
 import requests
 import time
@@ -63,14 +65,32 @@ class Spider(object):
             self.logger.error('各种限制请使用整型或是整型字符串！')
             exit(-1)
 
+        # 获取用户信息间隔
+        # 在网站返回"访问太频繁"的消息后，时间间隔乘2
+        self.tooFrequent = int(self.config.get('SPIDER', 'tooFrequent'))
+        self.timeIntervalBase = float(self.config.get('SPIDER', 'timeIntervalBase'))
+        # 等待时间缓慢增长，但是快速减少，但是要保证tooFrequent至少为0
+        self.frequentAdd = int(self.config.get('SPIDER', 'frequentAdd'))
+        self.frequentReduce = int(self.config.get('SPIDER', 'frequentReduce'))
+        # 用户页面失败访问最大次数
+        self.failedToVisitCountLimit = int(self.config.get('SPIDER', 'failedToVisitCountLimit'))
+
         # 节目对象
         self.items = ListenItems(self.mysql_session, self.listenItems_Max)
         # 文章对象
         self.articles = ListenArticles(self.mysql_session, self.listenArticlesMax)
         # 用户对象
-        self.users = ListenUsers(self.mysql_session, self.userLimit_Max, self.user_name, self.user_pass)
+        self.users = ListenUsers(
+                self.mysql_session, self.userLimit_Max,
+                self.user_name, self.user_pass,
+                self.tooFrequent, self.timeIntervalBase
+        )
 
         self.isOverLimited = False
+
+        # clear database
+        model = Models(declarative_base(), self.engin)
+        model.clearAllData()
 
     # 日志初始化
     def loggerInit(self):
@@ -148,7 +168,7 @@ class Spider(object):
             url = self.getPagesHasItems(16)
             if url is None:
                 break
-            self.logger.info('访问此语种页面：' + url)
+            self.logger.info('*' * 50 + '访问此语种页面：' + url)
 
             # loop: 存储节目信息， 获取某节目包含文章的页面soup对象
             self.items.appendFromUrl(url)
@@ -157,23 +177,24 @@ class Spider(object):
                 if itemRet is None:
                     break
                 itemUrl, itemSoup = itemRet
-                self.logger.info('访问节目页面：' + itemUrl)
+                self.logger.info('*' * 30 + '访问节目页面：' + itemUrl)
 
                 # loop: 存储文章信息， 获取该文章的uid
                 self.articles.appendFromUrl(itemUrl, itemSoup)
+                articleEachItemCount = 0
                 while True:
                     articleRet = self.articles.getOneArticlePageSoup()
                     if articleRet is None:
                         break
 
                     articleUid, contributorId = articleRet
-                    self.logger.info('正在访问文章的UID是：%s  贡献者为：%s' % (articleUid, contributorId))
+                    self.logger.info('*' * 10 + '正在访问文章的UID是：%s  贡献者为：%s' % (articleUid, contributorId))
 
                     # loop: 存储用户信息， 获取该用户的uid
                     self.users.appendFromUid(articleUid)
                     self.users.appendUidPriority(contributorId)
                     while True:
-                        userRet = self.users.getOneUserUid()
+                        userRet = self.users.getOneUserUid(self.frequentAdd, self.frequentReduce)
                         if userRet is None:
                             break
                         userUid, timeDelta = userRet
@@ -184,6 +205,11 @@ class Spider(object):
                             break
 
                     if self.isOverLimited is True or self.articles.articleIsOverLimited() is True:
+                        self.isOverLimited = True
+                        break
+
+                    articleEachItemCount += 1
+                    if articleEachItemCount == self.listenArticlesEachItem_Max:
                         self.isOverLimited = True
                         break
 
@@ -207,6 +233,18 @@ if __name__ == "__main__":
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
     print('耗时：' + str(timeDelta) + ' 秒')
+    print('共%s个节目； 共%s篇文章； \n共访问%s个用户, 其中成功获取%s个用户, 失败%s个用户, 剩余为隐私用户.' % (
+            str(spider.items.getItemsSize()),
+            str(spider.articles.getArticleSize()),
+            str(spider.users.getAllUserSize()),
+            str(spider.users.getUserSize()),
+            str(spider.users.getFailUserSize())
+            )
+    )
+
+    failArray = spider.users.getFailUsers()
+    if len(failArray) > 0:
+        print('失败的用户为: ' + str(failArray))
 
 
     # body = requests.get('http://bulo.hujiang.com/u/54071261/', headers=headers, allow_redirects=False)

@@ -2,7 +2,7 @@ from .models import Article
 from datetime import datetime
 
 # 处理多个包含多篇文章的页面
-class ListenArticle(object,):
+class ListenArticle(object):
 
     def __init__(self, url):
         # 文章地址

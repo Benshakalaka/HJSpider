@@ -135,6 +135,7 @@ class ListenArticles(object):
 
             elif re.compile(r'贡献').search(text):
                 contributorId = li.find('a')['href'].split('/')[1][1:]
+                article.contributorId = contributorId
 
             # 登陆后才能下载
             #elif re.compile(r'下载').search(text):
