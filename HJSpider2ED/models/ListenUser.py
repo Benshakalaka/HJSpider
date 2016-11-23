@@ -41,7 +41,7 @@ class ListenUser(object):
         # 沪龄(用注册时间代替)
         #self.yearLast = ''
         # 注册时间
-        self.registDate = ''
+        self.registDate = '1970/1/1 0:0:0'
         # 签到天数
         self.signinLast = 0
         # 最后登陆

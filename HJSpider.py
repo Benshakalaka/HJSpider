@@ -192,11 +192,10 @@ class Spider(object):
 
         try:
             session = requests.session()
+            loginRespond = session.get(loginUrl, headers=headers)
         except Exception as e:
             self.logger.fatal('用户登陆失败')
             exit(-1)
-
-        loginRespond = session.get(loginUrl, headers=headers)
 
         # loginRespond = 'jQuery183047967693999433547_1474096807628({"Code":0,"Message":"Ok","Data":{"ticket":"9fd38eff61fdf0c1c957abac7deac419","UserTag":{"GroupId":5000,"CategoryId":5001},"UserId":23868324,"UserName":"我了个去去啊","Cookie":"","Data":{"IsValidate":true},"BindMobileRequired":false,"Mobile":"151****5812"},"Success":false})'
         loginResJsonStr = loginRespond.text.split('(')[1][:-1]

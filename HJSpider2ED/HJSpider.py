@@ -228,17 +228,18 @@ class Spider(object):
 if __name__ == "__main__":
     timeStart = time.time()
     # 使用那个账号登陆（一个编号对应一个账号）
-    spider = Spider(userCode='321')
+    spider = Spider(userCode='322')
     res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
     print('耗时：' + str(timeDelta) + ' 秒')
-    print('共%s个节目； 共%s篇文章； \n共访问%s个用户, 其中成功获取%s个用户, 失败%s个用户, 剩余为隐私用户.' % (
+    print('共%s个节目； 共%s篇文章； \n共访问%s个用户, 其中成功获取%s个用户（%s个用户设置为隐私）, 失败%s个用户' % (
             str(spider.items.getItemsSize()),
             str(spider.articles.getArticleSize()),
             str(spider.users.getAllUserSize()),
             str(spider.users.getUserSize()),
-            str(spider.users.getFailUserSize())
+            str(spider.users.getPrivateUserSize()),
+            str(spider.users.getAllUserSize() - spider.users.getUserSize())
             )
     )
 
