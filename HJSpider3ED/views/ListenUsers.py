@@ -14,8 +14,17 @@ class ListenUsers(object):
     input: 某文章的uid
     output: 用户的uid
     '''
-    def __init__(self, mysql_session, limit, loginUser, loginPass, tooFrequent=0, timeIntervalBase=0.5, failedToVisitCountLimit=5):
-        # 此模块日志
+    def __init__(self, mysql_session, limit, loginUser='', loginPass='', timeIntervalBase=0.5, failedToVisitCountLimit=5, isLogin=True):
+        '''
+        :param mysql_session:               数据库会话       required
+        :param limit:                       用户数量限制     required
+        :param loginUser:                   若要登陆，则需要传入用户名，密码
+        :param loginPass:
+        :param timeIntervalBase:            普通状态下每次sleep值， 或是 timeIntervalBase * 2 ** ? 的基数
+        :param failedToVisitCountLimit:     用户页面访问失败后，重试的次数
+        :param isLogin:                     是否需要用户登陆去访问网页
+        :return:
+        '''
         self.logger = logging.getLogger('hjspider.user')
 
         # 传入的要访问的文章uid
@@ -50,7 +59,7 @@ class ListenUsers(object):
 
         try:
             # 获取信息所需的登陆session
-            self.session = Utils.userLogin(loginUser, loginPass)
+            self.session = Utils.userLogin(loginUser, loginPass) if isLogin is True else None
         except Exception:
             self.logger.error('登陆失败!')
             exit(-1)
@@ -58,7 +67,7 @@ class ListenUsers(object):
         self.mysql_session = mysql_session
 
         # 在网站返回"访问太频繁"的消息后，时间间隔乘2
-        self.tooFrequent = int(tooFrequent)
+        self.tooFrequent = 0
         self.timeIntervalBase = float(timeIntervalBase)
 
     # 获取下一次的文章uid（可能因为没访问完而不变，也有可能访问完了变化）

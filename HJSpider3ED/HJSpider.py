@@ -67,7 +67,6 @@ class Spider(object):
 
         # 获取用户信息间隔
         # 在网站返回"访问太频繁"的消息后，时间间隔乘2
-        self.tooFrequent = int(self.config.get('SPIDER', 'tooFrequent'))
         self.timeIntervalBase = float(self.config.get('SPIDER', 'timeIntervalBase'))
         # 等待时间缓慢增长，但是快速减少，但是要保证tooFrequent至少为0
         self.frequentAdd = int(self.config.get('SPIDER', 'frequentAdd'))
@@ -83,7 +82,7 @@ class Spider(object):
         self.users = ListenUsers(
                 self.mysql_session, self.userLimit_Max,
                 self.user_name, self.user_pass,
-                self.tooFrequent, self.timeIntervalBase
+                self.timeIntervalBase
         )
 
         self.isOverLimited = False
