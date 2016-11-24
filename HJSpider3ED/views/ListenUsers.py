@@ -7,6 +7,7 @@ import logging
 import re
 import json
 import time
+import datetime
 
 class ListenUsers(object):
     '''
@@ -23,8 +24,6 @@ class ListenUsers(object):
         self.fromUidsIndex = 0
         # 以访问的用户（包括私有用户）
         self.userUids = set()
-        # 私有用户数量
-        self.privateUids = 0
         # 访问用户数量限制
         self.limit = limit
         # 判断是否已超出限制
@@ -161,6 +160,8 @@ class ListenUsers(object):
                 except Exception:
                     return None
 
+        # 获取到uid即将此uid放入set，以后不会在访问
+        self.userUids.add(userUid)
         getUserInfoStart = time.time()
 
         # 沉睡间隔
@@ -202,12 +203,53 @@ class ListenUsers(object):
             self.logger.warning('提示: ' + responseText)
 
             if responseText[0:2] == '用户':
-                # 若为私有，则存储进userAll
-                self.privateUids += 1
-                self.userUids.add(uid)
+                # 若为私有，需要换种访问信息的方式
+                user.isPrivate = 1
+
+                # 如下jsonp可用于获取部分信息
+                # encodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23%20%E4%B8%8B%E5%8D%888:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
+                # decodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23 下午8:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
+                queryParams = {}
+                nt = datetime.datetime.now()
+                currHour = int(datetime.datetime.now().hour)
+                verTime = nt.strftime('%Y/%m/%d {half}%I:%M:%S').format(half=('上午' if currHour < 12 else '下午'))
+                queryParams['ver'] = verTime
+                queryParams['userId'] = uid
+                timeStamp = ''.join(str(time.time()).split('.'))[:13]
+                queryParams['callback'] = 'jQuery17202552129787287378_' + str(timeStamp)
+                queryParams['_'] = str(timeStamp)
+                info_url = Utils.urlCreate(Utils.userHost + '/service/GetUserFace.ashx?', queryParams)
+
+                try:
+                    infoRespond = requests.get(info_url, headers=Utils.headers)
+                except Exception:
+                    self.logger.error('隐私用户信息获取失败: ' + uid)
+                    return None
+
+                infoRespondStr = infoRespond.text.split('(', maxsplit=1)[1][:-1]
+                infoRespondJson = json.loads(infoRespondStr)
+
+                user.name = infoRespondJson['UserName'] if 'UserName' in infoRespondJson else ''
+                user.nickName = infoRespondJson['NickName'][1:-1] if 'NickName' in infoRespondJson else ''
+                user.signature = infoRespondJson['UserSign'] if 'UserSign' in infoRespondJson else ''
+                user.city = infoRespondJson['city'] if 'city' in infoRespondJson else ''
+                user.signinLast = infoRespondJson['PunchCount'] if 'PunchCount' in infoRespondJson else ''
+                gender = infoRespondJson['Gender'] if 'PunchCount' in infoRespondJson else ''
+                if gender == '1' or gender == '0':
+                    user.gender = '男' if gender == '1' else '女'
+
+                try:
+                    user.save(self.mysql_session)
+                except Exception:
+                    self.logger.error('存储隐私用户信息失败')
+                    raise Exception
+
                 if self.tooFrequent > 0:
                     self.tooFrequent -= frequentReduce
                 self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
+
+                self.logger.debug(user)
+                return user
             else:
                 # 某用户页面访问次数限制
                 if self.lastUserVisitInfo[0] == uid:
@@ -223,8 +265,6 @@ class ListenUsers(object):
                 else:
                     # 记录失败的访问用户
                     self.failedToVisit.append(uid)
-                    # 避免再次访问
-                    self.userUids.add(uid)
 
 
                 # 如果第一次遇到这种情况，最好睡眠时间快速增长，之后缓慢增长
@@ -233,9 +273,8 @@ class ListenUsers(object):
                 else:
                     self.tooFrequent += frequentAdd
 
+                return None
 
-
-            return None
 
         # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
         if self.tooFrequent > 0:
@@ -351,7 +390,6 @@ class ListenUsers(object):
             self.logger.error('存储用户信息失败')
             raise Exception
 
-        self.userUids.add(uid)
         self.logger.debug(user)
         return user
 
@@ -365,17 +403,13 @@ class ListenUsers(object):
             return
         self.uidsPriority.append(uid)
 
-    # 获取已访问用户数量（不包括设置未隐私的用户、不包含多次访问失败的用户）
+    # 获取已访问用户数量（不包含多次访问失败的用户）
     def getUserSize(self):
-        return len(self.userUids) - self.privateUids - len(self.failedToVisit)
+        return len(self.userUids) - len(self.failedToVisit)
 
     # 获取总共访问的用户数量
     def getAllUserSize(self):
         return len(self.userUids)
-
-    # 获取失败的用户数量
-    def getFailUserSize(self):
-        return len(self.failedToVisit)
 
     # 获取失败的用户数组
     def getFailUsers(self):

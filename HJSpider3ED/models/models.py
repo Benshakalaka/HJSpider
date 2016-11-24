@@ -20,6 +20,7 @@ class User(Base):
     registDate = Column(DateTime)
     lastSignin = Column(DateTime, index=True)
     signlast = Column(Integer)
+    isPrivate = Column(SmallInteger)
 
 # 节目
 class Item(Base):
@@ -106,8 +107,8 @@ class Models(object):
 
 if __name__ == '__main__':
     models = Models(Base, Engin)
-    # models.dropAll()
-    # models.createAll()
+    models.dropAll()
+    models.createAll()
     # models.clearAllData()
 
 

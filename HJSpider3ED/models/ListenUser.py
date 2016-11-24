@@ -41,13 +41,15 @@ class ListenUser(object):
         # 沪龄(用注册时间代替)
         #self.yearLast = ''
         # 注册时间
-        self.registDate = ''
+        self.registDate = '1970/1/1 0:0:0'
         # 签到天数
         self.signinLast = 0
         # 最后登陆
         self.lastSignin = ''
         # 自我介绍
         self.selfIntroduction = ''
+        # 是否为用户主页设置为隐私
+        self.isPrivate = 0
         # 性别, 0为female，1为male
         object.__setattr__(self, 'gender', -1)
 
@@ -72,7 +74,7 @@ class ListenUser(object):
                     signature=self.signature, introduction=self.selfIntroduction, city=self.city,
                     registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
                     lastSignin=Utils.chinese2datetime(self.lastSignin),
-                    signlast=self.signinLast)
+                    signlast=self.signinLast, isPrivate=self.isPrivate)
 
         try:
             session.add(user)

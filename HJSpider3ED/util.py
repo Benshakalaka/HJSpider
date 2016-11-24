@@ -50,6 +50,9 @@ class Utils(object):
     # 将['x年前', 'x个月前', 'x天前', 'x小时前', 'x分钟前']转为datetime类型
     @staticmethod
     def chinese2datetime(string):
+        if string == '':
+            return datetime.strptime('1970/1/1 0:0:0', '%Y/%m/%d %H:%M:%S')
+
         timeValue = int(re.compile(r'(\d+)').search(string).group(1))
         timeObj = None
 
@@ -120,7 +123,7 @@ class Utils(object):
             raise Exception
 
         # loginRespond = 'jQuery183047967693999433547_1474096807628({"Code":0,"Message":"Ok","Data":{"ticket":"9fd38eff61fdf0c1c957abac7deac419","UserTag":{"GroupId":5000,"CategoryId":5001},"UserId":23868324,"UserName":"我了个去去啊","Cookie":"","Data":{"IsValidate":true},"BindMobileRequired":false,"Mobile":"151****5812"},"Success":false})'
-        loginResJsonStr = loginRespond.text.split('(')[1][:-1]
+        loginResJsonStr = loginRespond.text.split('(', maxsplit=1)[1][:-1]
         loginResJson = json.loads(loginResJsonStr)
         loginTicket = loginResJson['Data']['ticket']
 
