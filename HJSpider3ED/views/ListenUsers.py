@@ -56,6 +56,11 @@ class ListenUsers(object):
         self.failedToVisitCountLimit = failedToVisitCountLimit
         # 访问失败的用户数组（不是设为隐私的用户，隐私用户自动放弃，可有些不是隐私却访问不到，这种要收集起来）
         self.failedToVisit = []
+        # 是否需要登陆
+        self.isLogin = isLogin
+        if isLogin is True and loginUser == '' and loginPass == '':
+            self.logger.error('username or password is needed !')
+            exit(-1)
 
         try:
             # 获取信息所需的登陆session
@@ -170,9 +175,30 @@ class ListenUsers(object):
                     return None
 
         # 获取到uid即将此uid放入set，以后不会在访问
+        # 不用担心在某uid被加入优先队列后会有重复id出现在currentUsersSoupList中，因为优先队列永远是优先访问的
         self.userUids.add(userUid)
-        getUserInfoStart = time.time()
 
+        deltaInfoGet = 0
+        if self.isLogin is True:
+            getUserInfoStart = time.time()
+
+            try:
+                lastUserInfo = self.getUserInfo(userUid, frequentAdd, frequentReduce)
+                self.lastUserInfo = lastUserInfo if lastUserInfo is not None else self.lastUserInfo
+            except Exception:
+                raise Exception
+
+            getUserInfoEnd = time.time()
+            deltaInfoGet = getUserInfoEnd - getUserInfoStart
+
+        if self.getUserSize() == self.limit:
+            self.isOverLimited = True
+
+        return userUid, deltaInfoGet
+
+
+    # 获取用户信息
+    def getUserInfo(self, uid, frequentAdd=1, frequentReduce=2):
         # 沉睡间隔
         t2s = self.time2sleep
         if t2s >= 2.0:
@@ -180,25 +206,7 @@ class ListenUsers(object):
 
         time.sleep(t2s)
 
-        try:
-            lastUserInfo = self.getUserInfo(userUid, frequentAdd, frequentReduce)
-            self.lastUserInfo = lastUserInfo if lastUserInfo is not None else self.lastUserInfo
-        except Exception:
-            raise Exception
-
-        getUserInfoEnd = time.time()
-
-        if self.getUserSize() == self.limit:
-            self.isOverLimited = True
-
-        return userUid, getUserInfoEnd - getUserInfoStart
-
-
-    # 获取用户信息
-    def getUserInfo(self, uid, frequentAdd=1, frequentReduce=2):
         full_url = Utils.userHost + '/u/' + uid + '/'
-        user = ListenUser(full_url)
-
         try:
             content = self.session.get(full_url, headers=Utils.headers, allow_redirects=False)
         except Exception:
@@ -212,46 +220,7 @@ class ListenUsers(object):
             self.logger.warning('提示: ' + responseText)
 
             if responseText[0:2] == '用户':
-                # 若为私有，需要换种访问信息的方式
-                user.isPrivate = 1
-
-                # 如下jsonp可用于获取部分信息
-                # encodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23%20%E4%B8%8B%E5%8D%888:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
-                # decodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23 下午8:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
-                queryParams = {}
-                nt = datetime.datetime.now()
-                currHour = int(datetime.datetime.now().hour)
-                verTime = nt.strftime('%Y/%m/%d {half}%I:%M:%S').format(half=('上午' if currHour < 12 else '下午'))
-                queryParams['ver'] = verTime
-                queryParams['userId'] = uid
-                timeStamp = ''.join(str(time.time()).split('.'))[:13]
-                queryParams['callback'] = 'jQuery17202552129787287378_' + str(timeStamp)
-                queryParams['_'] = str(timeStamp)
-                info_url = Utils.urlCreate(Utils.userHost + '/service/GetUserFace.ashx?', queryParams)
-
-                try:
-                    infoRespond = requests.get(info_url, headers=Utils.headers)
-                except Exception:
-                    self.logger.error('隐私用户信息获取失败: ' + uid)
-                    return None
-
-                infoRespondStr = infoRespond.text.split('(', maxsplit=1)[1][:-1]
-                infoRespondJson = json.loads(infoRespondStr)
-
-                user.name = infoRespondJson['UserName'] if 'UserName' in infoRespondJson else ''
-                user.nickName = infoRespondJson['NickName'][1:-1] if 'NickName' in infoRespondJson else ''
-                user.signature = infoRespondJson['UserSign'] if 'UserSign' in infoRespondJson else ''
-                user.city = infoRespondJson['city'] if 'city' in infoRespondJson else ''
-                user.signinLast = infoRespondJson['PunchCount'] if 'PunchCount' in infoRespondJson else ''
-                gender = infoRespondJson['Gender'] if 'PunchCount' in infoRespondJson else ''
-                if gender == '1' or gender == '0':
-                    user.gender = '男' if gender == '1' else '女'
-
-                try:
-                    user.save(self.mysql_session)
-                except Exception:
-                    self.logger.error('存储隐私用户信息失败')
-                    raise Exception
+                user = self.getPrivateUserInfo(uid)
 
                 if self.tooFrequent > 0:
                     self.tooFrequent -= frequentReduce
@@ -275,7 +244,6 @@ class ListenUsers(object):
                     # 记录失败的访问用户
                     self.failedToVisit.append(uid)
 
-
                 # 如果第一次遇到这种情况，最好睡眠时间快速增长，之后缓慢增长
                 if self.tooFrequent == 0:
                     self.tooFrequent = 4
@@ -284,11 +252,19 @@ class ListenUsers(object):
 
                 return None
 
-
         # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
         if self.tooFrequent > 0:
             self.tooFrequent -= frequentReduce
         self.tooFrequent = 0 if self.tooFrequent < 0 else self.tooFrequent
+
+        user = self.getNormalUserInof(uid, content)
+        self.logger.debug(user)
+        return user
+
+    # 获取普通用户信息
+    def getNormalUserInof(self, uid, content):
+        full_url = Utils.userHost + '/u/' + uid + '/'
+        user = ListenUser(full_url)
 
         try:
             soup = BeautifulSoup(content.text, "lxml")
@@ -399,7 +375,52 @@ class ListenUsers(object):
             self.logger.error('存储用户信息失败')
             raise Exception
 
-        self.logger.debug(user)
+        return user
+
+    # 获取隐私用户信息
+    def getPrivateUserInfo(self, uid):
+        user = ListenUser(Utils.userHost + '/u/' + uid + '/')
+        # 若为私有，需要换种访问信息的方式
+        user.isPrivate = 1
+
+        # 如下jsonp可用于获取部分信息
+        # encodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23%20%E4%B8%8B%E5%8D%888:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
+        # decodeUri后：http://bulo.hujiang.com/service/GetUserFace.ashx?ver=2016/11/23 下午8:29:28&userId=5326257&callback=jQuery17202552129787287378_1479904148908&_=1479904168992
+        queryParams = {}
+        nt = datetime.datetime.now()
+        currHour = int(datetime.datetime.now().hour)
+        verTime = nt.strftime('%Y/%m/%d {half}%I:%M:%S').format(half=('上午' if currHour < 12 else '下午'))
+        queryParams['ver'] = verTime
+        queryParams['userId'] = uid
+        timeStamp = ''.join(str(time.time()).split('.'))[:13]
+        queryParams['callback'] = 'jQuery17202552129787287378_' + str(timeStamp)
+        queryParams['_'] = str(timeStamp)
+        info_url = Utils.urlCreate(Utils.userHost + '/service/GetUserFace.ashx?', queryParams)
+
+        try:
+            infoRespond = requests.get(info_url, headers=Utils.headers)
+        except Exception:
+            self.logger.error('隐私用户信息获取失败: ' + uid)
+            return None
+
+        infoRespondStr = infoRespond.text.split('(', maxsplit=1)[1][:-1]
+        infoRespondJson = json.loads(infoRespondStr)
+
+        user.name = infoRespondJson['UserName'] if 'UserName' in infoRespondJson else ''
+        user.nickName = infoRespondJson['NickName'][1:-1] if 'NickName' in infoRespondJson else ''
+        user.signature = infoRespondJson['UserSign'] if 'UserSign' in infoRespondJson else ''
+        user.city = infoRespondJson['city'] if 'city' in infoRespondJson else ''
+        user.signinLast = infoRespondJson['PunchCount'] if 'PunchCount' in infoRespondJson else ''
+        gender = infoRespondJson['Gender'] if 'PunchCount' in infoRespondJson else ''
+        if gender == '1' or gender == '0':
+            user.gender = '男' if gender == '1' else '女'
+
+        try:
+            user.save(self.mysql_session)
+        except Exception:
+            self.logger.error('存储隐私用户信息失败')
+            raise Exception
+
         return user
 
     # 因为某种原因添加进来的uid，需要优先访问

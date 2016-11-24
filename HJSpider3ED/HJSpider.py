@@ -20,7 +20,7 @@ import configparser
 
 class Spider(object):
     # 初始化
-    def __init__(self, userCode):
+    def __init__(self, userCode='', isLogin=True):
         self.config = configparser.ConfigParser()
         self.config_privacy = configparser.ConfigParser()
         # 用户名密码配置文件username,password两个属性
@@ -46,8 +46,10 @@ class Spider(object):
         self.start_url = self.config.get('SPIDER', 'startUrl')
         self.currentTotalPageCounts = 0
         self.currentPageIndex = 1
-        self.user_name = self.config_privacy.get(userCode, 'username')
-        self.user_pass = self.config_privacy.get(userCode, 'password')
+
+        # 是否需要登陆
+        self.isLogin = isLogin
+
 
         # 日志初始化
         self.loggerInit()
@@ -79,11 +81,20 @@ class Spider(object):
         # 文章对象
         self.articles = ListenArticles(self.mysql_session, self.listenArticlesMax)
         # 用户对象
-        self.users = ListenUsers(
+        if isLogin is True:
+            self.user_name = self.config_privacy.get(userCode, 'username')
+            self.user_pass = self.config_privacy.get(userCode, 'password')
+            self.users = ListenUsers(
                 self.mysql_session, self.userLimit_Max,
                 self.user_name, self.user_pass,
                 self.timeIntervalBase
-        )
+            )
+        else:
+            self.users = ListenUsers(
+                self.mysql_session, self.userLimit_Max,
+                timeIntervalBase=self.timeIntervalBase,
+                isLogin=False
+            )
 
         self.isOverLimited = False
 
@@ -227,7 +238,8 @@ class Spider(object):
 if __name__ == "__main__":
     timeStart = time.time()
     # 使用那个账号登陆（一个编号对应一个账号）
-    spider = Spider(userCode='322')
+    # spider = Spider(userCode='322')
+    spider = Spider(isLogin=False)
     res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
