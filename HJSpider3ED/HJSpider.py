@@ -14,13 +14,11 @@ import logging
 import logging.config
 import configparser
 
-# 两个问题
-# 1. 数据集合是否要限制大小？(listenArticles, usersAll, listenItemsDict)
-# 2. 302页面如和再处理？
+
 
 class Spider(object):
     # 初始化
-    def __init__(self, userCode='', isLogin=True):
+    def __init__(self, userCode='', isLogin=True, userQueue=None):
         self.config = configparser.ConfigParser()
         self.config_privacy = configparser.ConfigParser()
         # 用户名密码配置文件username,password两个属性
@@ -50,6 +48,10 @@ class Spider(object):
         # 是否需要登陆
         self.isLogin = isLogin
 
+        # 多线程使用的userQueue，此线程用于存储另外几个线程趴下来的用户信息实例
+        self.userQueue = userQueue
+        # 已经存储进数据库的数量
+        self.userSavedCount = 0
 
         # 日志初始化
         self.loggerInit()
@@ -171,8 +173,8 @@ class Spider(object):
         return fullUrl
 
 
-    # run
-    def run(self):
+    # 获取uid, main runner
+    def getUserUids(self):
         # loop: 获取某语种的包含节目的页面
         while True:
             url = self.getPagesHasItems(16)
@@ -230,8 +232,32 @@ class Spider(object):
             if self.isOverLimited is True:
                 break
 
+        while self.userSavedCount <= self.users.getUserSize():
+            self.UserInfoSave()
+
         logging.shutdown()
         return None
+
+
+    # 存储用户信息进入mysql
+    def UserInfoSave(self):
+        # 那么数据库存储用户的模式就要改变
+        # 依旧在爬取： 非阻塞获取user信息，存储进数据库
+        # 如果因为数量限制而停止爬取了： 阻塞直到所有信息都获取且存入数据库
+        if self.isOverLimited is True:
+            user = self.userQueue.get(block=True)
+        else:
+            try:
+                user = self.userQueue.get_nowait()
+            except:
+                user = None
+
+        if user is None:
+            return
+
+        self.mysql_session.add(user)
+        self.mysql_session.commit()
+        self.userSavedCount += 1
 
 
 
@@ -240,7 +266,7 @@ if __name__ == "__main__":
     # 使用那个账号登陆（一个编号对应一个账号）
     # spider = Spider(userCode='322')
     spider = Spider(isLogin=False)
-    res = spider.run()
+    res = spider.getUserUids()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
     print('耗时：' + str(timeDelta) + ' 秒')
@@ -256,9 +282,4 @@ if __name__ == "__main__":
     failArray = spider.users.getFailUsers()
     if len(failArray) > 0:
         print('失败的用户为: ' + str(failArray))
-
-
-    # body = requests.get('http://bulo.hujiang.com/u/54071261/', headers=headers, allow_redirects=False)
-
-
 

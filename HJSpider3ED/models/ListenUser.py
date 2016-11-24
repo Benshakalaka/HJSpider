@@ -66,21 +66,31 @@ class ListenUser(object):
         else:
             object.__setattr__(self, key, value)
 
-    def save(self, session):
-        if session.query(User).get(self.uid) is not None:
-            return
+    # def save(self, session):
+    #     if session.query(User).get(self.uid) is not None:
+    #         return
+    #
+    #     user = User(user_id=self.uid, gender=self.gender, nickName=self.nickName, name=self.name,
+    #                 signature=self.signature, introduction=self.selfIntroduction, city=self.city,
+    #                 registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
+    #                 lastSignin=Utils.chinese2datetime(self.lastSignin),
+    #                 signlast=self.signinLast, isPrivate=self.isPrivate)
+    #
+    #     try:
+    #         session.add(user)
+    #         session.commit()
+    #     except Exception:
+    #         raise Exception
 
+
+    def save(self, userQueue):
         user = User(user_id=self.uid, gender=self.gender, nickName=self.nickName, name=self.name,
-                    signature=self.signature, introduction=self.selfIntroduction, city=self.city,
-                    registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
-                    lastSignin=Utils.chinese2datetime(self.lastSignin),
-                    signlast=self.signinLast, isPrivate=self.isPrivate)
+            signature=self.signature, introduction=self.selfIntroduction, city=self.city,
+            registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
+            lastSignin=Utils.chinese2datetime(self.lastSignin),
+            signlast=self.signinLast, isPrivate=self.isPrivate)
 
-        try:
-            session.add(user)
-            session.commit()
-        except Exception:
-            raise Exception
+        userQueue.put(user)
 
     def __str__(self):
         infoShow = '用户: '
