@@ -8,6 +8,7 @@ from views.ListenItems import ListenItems
 from models.models import Models
 from sqlalchemy.ext.declarative import declarative_base
 from util import Utils
+from threading import Thread
 import requests
 import time
 import logging
@@ -16,9 +17,11 @@ import configparser
 
 
 
-class Spider(object):
+class Spider(Thread):
     # 初始化
-    def __init__(self, userCode='', isLogin=True, userQueue=None):
+    def __init__(self, userCode='', isLogin=True, userQueue=None, uidQueue=None):
+        super(Spider, self).__init__()
+
         self.config = configparser.ConfigParser()
         self.config_privacy = configparser.ConfigParser()
         # 用户名密码配置文件username,password两个属性
@@ -52,9 +55,11 @@ class Spider(object):
         self.userQueue = userQueue
         # 已经存储进数据库的数量
         self.userSavedCount = 0
+        # 存储uid多线程使用
+        self.uidQueue = uidQueue
 
         # 日志初始化
-        self.loggerInit()
+        # self.loggerInit()
 
         try:
             # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
@@ -104,37 +109,39 @@ class Spider(object):
         model = Models(declarative_base(), self.engin)
         model.clearAllData()
 
-    # 日志初始化
-    def loggerInit(self):
-        # 日志配置
-        # 一般在简单的小脚本中才会用logging.basicConfig，因为稍大些每个模块的logger就需要分开
-        # basicConfig配置后，会默认添加一个StreamHandler的，且获取的名为root的logger
-        # 可参考 http://www.jb51.net/article/52022.htm
-        # 输出到控制台的handler
-        CHnadler = logging.StreamHandler()
-        # 消息级别为WARNING及以上（级别分别是： NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL）
-        CHnadler.setLevel(logging.INFO)
-        # 输出到文件的handler
-        FHandler = logging.FileHandler(filename='hjspider.log',
-                                       mode='w',
-                                       encoding='UTF-8')
-        # 消息级别为DEBUG
-        FHandler.setLevel(logging.DEBUG)
-        # 设置格式
-        formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s:  %(message)s')
-        # 设置格式
-        CHnadler.setFormatter(formatter)
-        FHandler.setFormatter(formatter)
+        self.logger = logging.getLogger('hjspider.productor')
 
-        # 获取一个hjspider的logger（每个模块的logger都可以有一个名字，如果不指定则为root）
-        self.logger = logging.getLogger('hjspider')
-        # 将handler附加在这个logger上（handler可以理解为消息先传到logger，然后在传给每个handler处理）
-        self.logger.addHandler(CHnadler)
-        self.logger.addHandler(FHandler)
-        # 既然消息是传到handler的，那么如果这个logger的level就和handler的level息息相关
-        # 比如logger的level为info（默认）, 那么即使handler的level设置为debug，也不可能得到debug的消息
-        # 每个handler的level在logger指定的level的基础上继续进行筛选
-        self.logger.setLevel(logging.DEBUG)
+    # 日志初始化
+    # def loggerInit(self):
+    #     # 日志配置
+    #     # 一般在简单的小脚本中才会用logging.basicConfig，因为稍大些每个模块的logger就需要分开
+    #     # basicConfig配置后，会默认添加一个StreamHandler的，且获取的名为root的logger
+    #     # 可参考 http://www.jb51.net/article/52022.htm
+    #     # 输出到控制台的handler
+    #     CHnadler = logging.StreamHandler()
+    #     # 消息级别为WARNING及以上（级别分别是： NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL）
+    #     CHnadler.setLevel(logging.INFO)
+    #     # 输出到文件的handler
+    #     FHandler = logging.FileHandler(filename='hjspider.log',
+    #                                    mode='w',
+    #                                    encoding='UTF-8')
+    #     # 消息级别为DEBUG
+    #     FHandler.setLevel(logging.DEBUG)
+    #     # 设置格式
+    #     formatter = logging.Formatter('%(thread)d %(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s:  %(message)s')
+    #     # 设置格式
+    #     CHnadler.setFormatter(formatter)
+    #     FHandler.setFormatter(formatter)
+    #
+    #     # 获取一个hjspider的logger（每个模块的logger都可以有一个名字，如果不指定则为root）
+    #     self.logger = logging.getLogger('hjspider')
+    #     # 将handler附加在这个logger上（handler可以理解为消息先传到logger，然后在传给每个handler处理）
+    #     self.logger.addHandler(CHnadler)
+    #     self.logger.addHandler(FHandler)
+    #     # 既然消息是传到handler的，那么如果这个logger的level就和handler的level息息相关
+    #     # 比如logger的level为info（默认）, 那么即使handler的level设置为debug，也不可能得到debug的消息
+    #     # 每个handler的level在logger指定的level的基础上继续进行筛选
+    #     self.logger.setLevel(logging.DEBUG)
 
 
     # 获取某语种的某页, index可设置起始页，下一次重复调用index将不再可用
@@ -174,7 +181,7 @@ class Spider(object):
 
 
     # 获取uid, main runner
-    def getUserUids(self):
+    def run(self):
         # loop: 获取某语种的包含节目的页面
         while True:
             url = self.getPagesHasItems(16)
@@ -212,6 +219,12 @@ class Spider(object):
                         userUid, timeDelta = userRet
                         self.logger.info('获取的用户uid为：%s  消耗时间：%s' % (str(userUid), str(timeDelta)))
 
+                        self.uidQueue.put(userUid)
+
+                        # 用户数量为 8 的倍数的时候调用一次
+                        if self.users.getUserSize() & 7 == 0:
+                            self.UserInfoSave()
+
                         if self.users.userIsOverLimited() is True:
                             self.isOverLimited = True
                             break
@@ -232,11 +245,14 @@ class Spider(object):
             if self.isOverLimited is True:
                 break
 
-        while self.userSavedCount <= self.users.getUserSize():
+        self.uidQueue.put(None)
+
+        while self.userSavedCount < self.users.getUserSize():
             self.UserInfoSave()
+            self.logger.info('信息录入成功')
 
         logging.shutdown()
-        return None
+        return
 
 
     # 存储用户信息进入mysql
@@ -266,7 +282,7 @@ if __name__ == "__main__":
     # 使用那个账号登陆（一个编号对应一个账号）
     # spider = Spider(userCode='322')
     spider = Spider(isLogin=False)
-    res = spider.getUserUids()
+    res = spider.run()
     timeEnd = time.time()
     timeDelta = timeEnd - timeStart
     print('耗时：' + str(timeDelta) + ' 秒')

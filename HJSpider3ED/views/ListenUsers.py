@@ -2,6 +2,7 @@ from models.ListenUser import ListenUser
 from util import Utils
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, unquote
+from threading import current_thread
 import requests
 import logging
 import re
@@ -25,7 +26,9 @@ class ListenUsers(object):
         :param isLogin:                     是否需要用户登陆去访问网页
         :return:
         '''
-        self.logger = logging.getLogger('hjspider.user')
+
+        loggerName = 'hjspider.' + str(current_thread())
+        self.logger = logging.getLogger(loggerName)
 
         # 传入的要访问的文章uid
         self.fromUids = []
