@@ -1,6 +1,7 @@
 from .models import User
 from util import Utils
 from datetime import datetime
+from queue import Queue
 
 # 处理多个用户
 class ListenUser(object):
@@ -66,24 +67,24 @@ class ListenUser(object):
         else:
             object.__setattr__(self, key, value)
 
-    # def save(self, session):
-    #     if session.query(User).get(self.uid) is not None:
-    #         return
-    #
-    #     user = User(user_id=self.uid, gender=self.gender, nickName=self.nickName, name=self.name,
-    #                 signature=self.signature, introduction=self.selfIntroduction, city=self.city,
-    #                 registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
-    #                 lastSignin=Utils.chinese2datetime(self.lastSignin),
-    #                 signlast=self.signinLast, isPrivate=self.isPrivate)
-    #
-    #     try:
-    #         session.add(user)
-    #         session.commit()
-    #     except Exception:
-    #         raise Exception
+    def save_immediate(self, session):
+        if session.query(User).get(self.uid) is not None:
+            return
+
+        user = User(user_id=self.uid, gender=self.gender, nickName=self.nickName, name=self.name,
+                    signature=self.signature, introduction=self.selfIntroduction, city=self.city,
+                    registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
+                    lastSignin=Utils.chinese2datetime(self.lastSignin),
+                    signlast=self.signinLast, isPrivate=self.isPrivate)
+
+        try:
+            session.add(user)
+            session.commit()
+        except Exception:
+            raise Exception
 
 
-    def save(self, userQueue):
+    def save_delay(self, userQueue):
         user = User(user_id=self.uid, gender=self.gender, nickName=self.nickName, name=self.name,
             signature=self.signature, introduction=self.selfIntroduction, city=self.city,
             registDate=datetime.strptime(self.registDate, '%Y/%m/%d %H:%M:%S'),
@@ -91,6 +92,10 @@ class ListenUser(object):
             signlast=self.signinLast, isPrivate=self.isPrivate)
 
         userQueue.put(user)
+
+    def save(self, SessionOrQueue):
+        # 如果传入的是队列实例，则表示是多线程的，要存到队列中，否则存到数据库中
+        self.save_delay(SessionOrQueue) if isinstance(SessionOrQueue, Queue) else self.save_immediate(SessionOrQueue)
 
     def __str__(self):
         infoShow = '用户: '

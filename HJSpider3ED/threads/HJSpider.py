@@ -12,20 +12,16 @@ from threading import Thread
 import requests
 import time
 import logging
-import logging.config
 import configparser
 
 
 
 class Spider(Thread):
     # 初始化
-    def __init__(self, userCode='', isLogin=True, userQueue=None, uidQueue=None):
+    def __init__(self, user_name='', password='', isLogin=True, userQueue=None, uidQueue=None):
         super(Spider, self).__init__()
 
         self.config = configparser.ConfigParser()
-        self.config_privacy = configparser.ConfigParser()
-        # 用户名密码配置文件username,password两个属性
-        self.config_privacy.read('config/ConfigUser.conf', encoding='utf-8')
         self.config.read('config/ConfigHJ.conf', encoding='utf-8')
 
         #数据库配置
@@ -51,15 +47,15 @@ class Spider(Thread):
         # 是否需要登陆
         self.isLogin = isLogin
 
-        # 多线程使用的userQueue，此线程用于存储另外几个线程趴下来的用户信息实例
+        # 多线程使用的userQueue，此队列用于存储另外几个线程趴下来的用户信息实例，让此线程来存储
         self.userQueue = userQueue
         # 已经存储进数据库的数量
         self.userSavedCount = 0
-        # 存储uid多线程使用
+        # 此队列用于存储此线程趴下来的uid， 供其他几个线程去爬取详细数据
         self.uidQueue = uidQueue
 
         # 日志初始化
-        # self.loggerInit()
+        self.logger = logging.getLogger('hjspider.spider')
 
         try:
             # 统计几个节目, 0表示无限制(因为我通过判断是否==限制数量来进行超出判断，所以0可以拿来当作无限大)
@@ -89,11 +85,9 @@ class Spider(Thread):
         self.articles = ListenArticles(self.mysql_session, self.listenArticlesMax)
         # 用户对象
         if isLogin is True:
-            self.user_name = self.config_privacy.get(userCode, 'username')
-            self.user_pass = self.config_privacy.get(userCode, 'password')
             self.users = ListenUsers(
                 self.mysql_session, self.userLimit_Max,
-                self.user_name, self.user_pass,
+                user_name, password,
                 self.timeIntervalBase
             )
         else:
@@ -108,40 +102,6 @@ class Spider(Thread):
         # clear database
         model = Models(declarative_base(), self.engin)
         model.clearAllData()
-
-        self.logger = logging.getLogger('hjspider.productor')
-
-    # 日志初始化
-    # def loggerInit(self):
-    #     # 日志配置
-    #     # 一般在简单的小脚本中才会用logging.basicConfig，因为稍大些每个模块的logger就需要分开
-    #     # basicConfig配置后，会默认添加一个StreamHandler的，且获取的名为root的logger
-    #     # 可参考 http://www.jb51.net/article/52022.htm
-    #     # 输出到控制台的handler
-    #     CHnadler = logging.StreamHandler()
-    #     # 消息级别为WARNING及以上（级别分别是： NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL）
-    #     CHnadler.setLevel(logging.INFO)
-    #     # 输出到文件的handler
-    #     FHandler = logging.FileHandler(filename='hjspider.log',
-    #                                    mode='w',
-    #                                    encoding='UTF-8')
-    #     # 消息级别为DEBUG
-    #     FHandler.setLevel(logging.DEBUG)
-    #     # 设置格式
-    #     formatter = logging.Formatter('%(thread)d %(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s:  %(message)s')
-    #     # 设置格式
-    #     CHnadler.setFormatter(formatter)
-    #     FHandler.setFormatter(formatter)
-    #
-    #     # 获取一个hjspider的logger（每个模块的logger都可以有一个名字，如果不指定则为root）
-    #     self.logger = logging.getLogger('hjspider')
-    #     # 将handler附加在这个logger上（handler可以理解为消息先传到logger，然后在传给每个handler处理）
-    #     self.logger.addHandler(CHnadler)
-    #     self.logger.addHandler(FHandler)
-    #     # 既然消息是传到handler的，那么如果这个logger的level就和handler的level息息相关
-    #     # 比如logger的level为info（默认）, 那么即使handler的level设置为debug，也不可能得到debug的消息
-    #     # 每个handler的level在logger指定的level的基础上继续进行筛选
-    #     self.logger.setLevel(logging.DEBUG)
 
 
     # 获取某语种的某页, index可设置起始页，下一次重复调用index将不再可用
@@ -217,13 +177,17 @@ class Spider(Thread):
                         if userRet is None:
                             break
                         userUid, timeDelta = userRet
-                        self.logger.info('获取的用户uid为：%s  消耗时间：%s' % (str(userUid), str(timeDelta)))
 
-                        self.uidQueue.put(userUid)
+                        if self.isLogin is False:
+                            self.logger.info('获取的用户uid为：%s ' % str(userUid))
 
-                        # 用户数量为 8 的倍数的时候调用一次
-                        if self.users.getUserSize() & 7 == 0:
-                            self.UserInfoSave()
+                            self.uidQueue.put(userUid, block=True)
+
+                            # 用户数量为 8 的倍数的时候调用一次
+                            if self.users.getUserSize() & 7 == 0 :
+                                self.UserInfoSave()
+                        else:
+                            self.logger.info('获取的用户uid为：%s ; 消耗时间为: %s' % (str(userUid), str(timeDelta)))
 
                         if self.users.userIsOverLimited() is True:
                             self.isOverLimited = True
@@ -245,35 +209,54 @@ class Spider(Thread):
             if self.isOverLimited is True:
                 break
 
-        self.uidQueue.put(None)
+        if self.isLogin is False:
+            # 达到限制或爬取结束后，队列中插入一个None，用以通知详细信息获取线程
+            self.uidQueue.put(None, block=True)
 
-        while self.userSavedCount < self.users.getUserSize():
-            self.UserInfoSave()
-            self.logger.info('信息录入成功')
+            while self.userSavedCount < self.users.getUserSize():
+                self.UserInfoSave()
+                self.logger.info('目前已存储%d个用户；共有%d个用户；' % (self.userSavedCount, self.users.getUserSize()))
 
-        logging.shutdown()
+        self.logger.info('Productor : 此线程结束')
         return
 
 
     # 存储用户信息进入mysql
+    # 依旧在爬取： 非阻塞获取user信息，存储进数据库
+    # 如果因为数量限制而停止爬取了： 阻塞直到有信息且存入数据库
     def UserInfoSave(self):
-        # 那么数据库存储用户的模式就要改变
-        # 依旧在爬取： 非阻塞获取user信息，存储进数据库
-        # 如果因为数量限制而停止爬取了： 阻塞直到所有信息都获取且存入数据库
+        # 同时获取多个继而commit
+        commitAmount = 0
         if self.isOverLimited is True:
             user = self.userQueue.get(block=True)
+            # 每次最多20个， 多了出错rollback太伤
+            commitAmount = qsize = min(self.userQueue.qsize(), 19)
+            users = [user]
+            while qsize > 0:
+                users.append(self.userQueue.get(block=True))
+                qsize -= 1
+            commitAmount += 1
+            self.mysql_session.add_all(users)
+
         else:
             try:
                 user = self.userQueue.get_nowait()
+                commitAmount = 1
             except:
                 user = None
 
-        if user is None:
-            return
+            if user is not None:
+                self.mysql_session.add(user)
 
-        self.mysql_session.add(user)
-        self.mysql_session.commit()
-        self.userSavedCount += 1
+        try:
+            self.mysql_session.commit()
+        except:
+            self.mysql_session.rollback()
+            self.logger.fatal('数据库持久化失败')
+            exit(-1)
+
+        self.userSavedCount += commitAmount
+        self.logger.info('此次添加 %d 个用户' % commitAmount)
 
 
 

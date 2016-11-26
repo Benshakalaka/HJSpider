@@ -253,6 +253,8 @@ class ListenUsers(object):
                 else:
                     self.tooFrequent += frequentAdd
 
+                self.logger.warning('太频繁了，我想把它塞回去，长度是 %d' % self.getPriorityLength())
+
                 return None
 
         # 如果此时的返回不是过于频繁，那么等待时间即可缩小一倍
@@ -432,9 +434,15 @@ class ListenUsers(object):
         if uid in self.uidsPriority:
             return
         # 不添加已访问过的用户
-        if uid in self.userUids:
+        # 由于在取得uid后就将此uid添加进了userUids集合中，若在之后访问过程中遇到过于频繁错误，那么
+        #
+        if uid in self.userUids and self.lastUserVisitInfo[0] != uid:
             return
         self.uidsPriority.append(uid)
+
+    # 获取当前优先队列中uid的数量
+    def getPriorityLength(self):
+        return len(self.uidsPriority)
 
     # 获取已访问用户数量（不包含多次访问失败的用户）
     def getUserSize(self):
